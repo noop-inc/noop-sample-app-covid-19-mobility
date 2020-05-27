@@ -1,2 +1,2 @@
-# covid-19-dashboard
-COVID-19 dashboard running on Noop
+# mobility-dashboard
+Mobility dashboard running on Noop
