@@ -2,6 +2,8 @@ from urllib.request import urlopen
 from urllib.error import URLError, HTTPError
 import csv
 import time
+import json
+import os
 
 def download_dataset(url, name):
 	
@@ -28,6 +30,7 @@ def download_dataset(url, name):
 		f.write(response.read())
 
 def source_dataset():
+
 	country_codes = {
 		'Albania': 'AL',
 		'Iceland': 'IS',
@@ -122,15 +125,19 @@ def source_dataset():
 		'country'
 	}
 
-	data = [['source', 'geoType', 'region', 'regionCode', 'mobilityType', 'date', 'value']]
-
-	apple_url = 'https://covid19-static.cdn-apple.com/covid19-mobility-data/2008HotfixDev43/v3/en-us/applemobilitytrends-2020-05-25.csv'
+	apple_url = 'https://covid19-static.cdn-apple.com/covid19-mobility-data/2009HotfixDev11/v3/en-us/applemobilitytrends-2020-05-27.csv'
 	google_url = 'https://www.gstatic.com/covid19/mobility/Global_Mobility_Report.csv'
 
 	download_dataset(apple_url, 'apple')
 	download_dataset(google_url, 'google')
 
+	data = []
+
 	with open('/tmp/google.csv', 'r') as g:
+		
+		google_meta = {'country': {'sourceName': 'google', 'sourceType': 'country', 'regions': {}}, 'state': {'sourceName': 'google', 'sourceType': 'state', 'regions': {}}}
+		google_data = {}
+
 		reader = csv.DictReader(g)
 
 		for row in reader:
@@ -151,17 +158,44 @@ def source_dataset():
 
 					if row['country_region'] not in country_codes:
 						country_codes[region] = region_code
+
 				elif valid_state:
 					geo_type = 'state'
 					region = row['sub_region_1']
 					region_code = state_abbrs[region]
 				
+				if region not in google_meta[geo_type]['regions']:
+					google_meta[geo_type]['regions'][region] = {'regionCode': region_code, 'mobilityTypes': []}
+				
+				if region not in google_data:
+					google_data[region] = {}
+				
 				for data_type in google_types:
 					if row[data_type] != '':
-						data.append(['google', geo_type, region, region_code,
-									google_types[data_type], row['date'], row[data_type]])
+
+						if google_types[data_type] not in google_data[region]:
+							google_data[region][google_types[data_type]] = {'sourceName': region, 'sourceType': google_types[data_type], 'dates': {row['date']: row[data_type]}}
+
+						elif google_types[data_type] in google_data[region]:
+							google_data[region][google_types[data_type]]['dates'][row['date']] = row[data_type]
+
+						if google_types[data_type] not in google_meta[geo_type]['regions'][region]['mobilityTypes']:
+							google_meta[geo_type]['regions'][region]['mobilityTypes'].append(google_types[data_type])
+
+		for key in google_meta:
+			data.append(google_meta[key])
+
+		for key in google_data:
+			for sub_key in google_data[key]:
+				data.append(google_data[key][sub_key])
+
+	os.remove('/tmp/google.csv')
 
 	with open('/tmp/apple.csv', 'r') as a:
+
+		apple_meta = {'country': {'sourceName': 'apple', 'sourceType': 'country', 'regions': {}}, 'state': {'sourceName': 'apple', 'sourceType': 'state', 'regions': {}}}
+		apple_data = []
+
 		reader = csv.DictReader(a)
 
 		for row in reader:
@@ -189,12 +223,26 @@ def source_dataset():
 					geo_type = 'state'
 					region_code = state_abbrs[region]
 				
+				if region not in apple_meta[geo_type]['regions']:
+					apple_meta[geo_type]['regions'][region] = {'regionCode': region_code, 'mobilityTypes': [data_type]}
+				elif region in apple_meta[geo_type]['regions']:
+					apple_meta[geo_type]['regions'][region]['mobilityTypes'].append(data_type)
+
+				apple_datum = {'sourceName': region, 'sourceType': data_type, 'dates': {}}
+
 				for date in row:
 					if date not in apple_non_date_fields and row[date] != '':
-						data.append(['apple', geo_type, region, region_code,
-									data_type, date, row[date]])
-
-		with open('/tmp/data.csv', 'w', encoding='utf-8') as c:
-			writer = csv.writer(c)
-			writer.writerows(data)
+						apple_datum['dates'][date] = row[date]
 			
+				apple_data.append(apple_datum)
+
+		for key in apple_meta:
+			data.append(apple_meta[key])
+		
+		for datum in apple_data:
+			data.append(datum)
+
+	os.remove('/tmp/apple.csv')
+	
+	with open('/tmp/data.json', 'w', encoding='utf-8') as d:
+		d.write(json.dumps(data, ensure_ascii = False))
