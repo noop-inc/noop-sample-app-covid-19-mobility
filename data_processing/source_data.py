@@ -257,6 +257,3 @@ def source_dataset():
 
     with open('/tmp/data.json', 'w', encoding='utf-8') as d:
         d.write(json.dumps(data, ensure_ascii=False))
-
-
-source_dataset()
