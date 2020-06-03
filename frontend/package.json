@@ -1,13 +1,21 @@
 {
     "name": "frontend",
-    "version": "0.1.0",
-    "private": true,
+    "description": "",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/rearc-data/mobility-dashboard.git"
+    },
+    "license": "ISC",
+    "version": "1.0.0",
     "scripts": {
+        "start": "node server.js",
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build"
     },
     "dependencies": {
+        "@rearc/noop-log": "^1.0.2",
         "core-js": "^3.6.5",
+        "express": "^4.17.1",
         "vue": "^2.6.11",
         "vue-router": "^3.2.0",
         "vuex": "^3.4.0"

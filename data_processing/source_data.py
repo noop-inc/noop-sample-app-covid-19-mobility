@@ -127,7 +127,7 @@ def source_dataset():
         'country'
     }
 
-    apple_url = 'https://covid19-static.cdn-apple.com/covid19-mobility-data/2009HotfixDev14/v3/en-us/applemobilitytrends-2020-05-30.csv'
+    apple_url = 'https://covid19-static.cdn-apple.com/covid19-mobility-data/2009HotfixDev16/v3/en-us/applemobilitytrends-2020-06-01.csv'
     google_url = 'https://www.gstatic.com/covid19/mobility/Global_Mobility_Report.csv'
 
     download_dataset(apple_url, 'apple')
