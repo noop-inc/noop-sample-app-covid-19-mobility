@@ -1,16 +1,20 @@
 {
     "name": "backend",
+    "version": "1.0.0",
     "description": "Node.js Backend",
+    "scripts": {
+        "start": "node app.js"
+    },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/rearc-data/mobility-dashboard.git"
     },
-    "license": "ISC",
-    "version": "1.0.0",
     "author": "Rearc",
-    "scripts": {
-        "start": "node server.js"
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/rearc-data/mobility-dashboard/issues"
     },
+    "homepage": "https://github.com/rearc-data/mobility-dashboard#readme",
     "dependencies": {
         "@rearc/noop-log": "^1.0.2",
         "aws-sdk": "^2.687.0",

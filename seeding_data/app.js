@@ -1,8 +1,16 @@
 const http = require("http");
+const AWS = require("aws-sdk");
 
-const TableName = require("./aws").table;
-const dynamodb = require("./aws").dynamodb;
-const documentClient = require("./aws").documentClient;
+const endpoint = process.env.DB_ENDPOINT;
+const TableName = process.env.DB_TABLENAME;
+
+AWS.config.update({ endpoint: endpoint });
+
+const dynamodb = new AWS.DynamoDB();
+
+const documentClient = new AWS.DynamoDB.DocumentClient({
+    service: dynamodb,
+});
 
 const uploadData = async (params) => {
     await documentClient.put(params, (err, data) => {
@@ -48,7 +56,7 @@ const getData = () => {
     });
 };
 
-const checkSeedStatus = () => {
+const init = () => {
     dynamodb.describeTable({ TableName }, async (err, data) => {
         if (err) {
             console.error(
@@ -64,4 +72,4 @@ const checkSeedStatus = () => {
     });
 };
 
-module.exports = checkSeedStatus;
+init();

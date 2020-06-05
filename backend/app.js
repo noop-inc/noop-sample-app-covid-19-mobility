@@ -1,7 +1,20 @@
 const express = require("express");
+const app = express();
 const router = express.Router();
-const documentClient = require("../config/aws").documentClient;
-const TableName = require("../config/aws").table;
+const AWS = require("aws-sdk");
+const logger = require("@rearc/noop-log");
+const endpoint = process.env.DB_ENDPOINT;
+const TableName = process.env.DB_TABLENAME;
+
+app.use(logger.requestLogger);
+
+AWS.config.update({ endpoint: endpoint });
+
+const dynamodb = new AWS.DynamoDB();
+
+const documentClient = new AWS.DynamoDB.DocumentClient({
+    service: dynamodb
+});
 
 router.get("/:name/:type", (req, res) => {
     const name = req.params.name;
@@ -23,4 +36,7 @@ router.get("/:name/:type", (req, res) => {
     });
 });
 
-module.exports = router;
+app.use(express.json());
+app.use("/api/", router);
+
+app.listen(80);

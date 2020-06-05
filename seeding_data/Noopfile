@@ -1,7 +1,6 @@
-COMPONENT backend service
-ROUTE -m GET /api/*
+COMPONENT seeding task
 
-RESOURCE db dynamodb
+RESOURCE db dynamodb -p hashKeyName=name -p hashKeyType=S -p rangeKeyName=type -p rangeKeyType=S
 ENV DB_ENDPOINT $.resources.db.endpoint
 ENV DB_TABLENAME $.resources.db.tableName
 
@@ -10,3 +9,4 @@ COPY package*.json  ./
 RUN npm install
 COPY app.js .
 ENTRYPOINT npm start
+LIFECYCLE postdeploy
