@@ -2,15 +2,11 @@ COMPONENT frontend service
 ROUTE *
 
 FROM node:alpine as build
-COPY package*.json  ./
+COPY /package*.json  ./
 RUN npm install
 COPY . .
 RUN npm run build
 
-FROM node:alpine
-COPY package*.json  ./
-RUN npm install
-COPY --from=build /dist ./dist
-COPY --from=build server.js ./
-
-ENTRYPOINT npm start
+FROM nginx:alpine
+COPY --from=build /dist /usr/share/nginx/html
+ENTRYPOINT ["nginx", "-g", "daemon off;"]

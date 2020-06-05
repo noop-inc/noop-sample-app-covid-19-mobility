@@ -1,16 +1,16 @@
 const express = require("express");
 const router = express.Router();
-const documentClient = require("../../config/aws").documentClient;
-const TableName = require("../../config/aws").table;
+const documentClient = require("../config/aws").documentClient;
+const TableName = require("../config/aws").table;
 
 router.get("/:name/:type", (req, res) => {
-    const sourceName = req.params.name;
-    const sourceType = req.params.type;
+    const name = req.params.name;
+    const type = req.params.type;
     const params = {
         TableName,
         Key: {
-            sourceName,
-            sourceType,
+            name,
+            type,
         },
     };
 

@@ -1,34 +1,8 @@
-from urllib.request import urlopen
-from urllib.error import URLError, HTTPError
 import csv
 import time
 import json
 import os
-
-
-def download_dataset(url, name):
-
-    retries = 5
-    response = None
-
-    for attempt in range(retries):
-        try:
-            response = urlopen(url)
-
-        except HTTPError as e:
-            if attempt == retries:
-                raise Exception('HTTPError: ', e.code, url, name)
-            time.sleep(0.2 * attempt)
-
-        except URLError as e:
-            if attempt == retries:
-                raise Exception('URLError: ', e.reason, url, name)
-            time.sleep(0.2 * attempt)
-        else:
-            break
-
-    with open('/tmp/{}.csv'.format(name), 'wb') as f:
-        f.write(response.read())
+import sys
 
 
 def source_dataset():
@@ -127,18 +101,15 @@ def source_dataset():
         'country'
     }
 
-    apple_url = 'https://covid19-static.cdn-apple.com/covid19-mobility-data/2009HotfixDev16/v3/en-us/applemobilitytrends-2020-06-01.csv'
-    google_url = 'https://www.gstatic.com/covid19/mobility/Global_Mobility_Report.csv'
-
-    download_dataset(apple_url, 'apple')
-    download_dataset(google_url, 'google')
+    apple_filename = 'applemobilitytrends-2020-06-02.csv'
+    google_filename = 'Global_Mobility_Report.csv'
 
     data = []
 
-    with open('/tmp/google.csv', 'r') as g:
+    with open(os.path.join(sys.path[0], google_filename), 'r') as g:
 
-        google_meta = {'country': {'sourceName': 'google', 'sourceType': 'country', 'regions': {
-        }}, 'state': {'sourceName': 'google', 'sourceType': 'state', 'regions': {}}}
+        google_meta = {'country': {'name': 'Google', 'type': 'countries', 'regions': {
+        }}, 'state': {'name': 'Google', 'type': 'states', 'regions': {}}}
         google_data = {}
 
         reader = csv.DictReader(g)
@@ -169,7 +140,7 @@ def source_dataset():
 
                 if region not in google_meta[geo_type]['regions']:
                     google_meta[geo_type]['regions'][region] = {
-                        'regionCode': region_code, 'mobilityTypes': []}
+                        'regionCode': region_code, 'mobility': []}
 
                 if region not in google_data:
                     google_data[region] = {}
@@ -179,14 +150,14 @@ def source_dataset():
 
                         if google_types[data_type] not in google_data[region]:
                             google_data[region][google_types[data_type]] = {
-                                'sourceName': region, 'sourceType': google_types[data_type], 'dates': {row['date']: int(row[data_type])}}
+                                'name': region, 'type': google_types[data_type], 'dates': {row['date']: int(row[data_type])}}
 
                         elif google_types[data_type] in google_data[region]:
                             google_data[region][google_types[data_type]
                                                 ]['dates'][row['date']] = int(row[data_type])
 
-                        if google_types[data_type] not in google_meta[geo_type]['regions'][region]['mobilityTypes']:
-                            google_meta[geo_type]['regions'][region]['mobilityTypes'].append(
+                        if google_types[data_type] not in google_meta[geo_type]['regions'][region]['mobility']:
+                            google_meta[geo_type]['regions'][region]['mobility'].append(
                                 google_types[data_type])
 
         for key in google_meta:
@@ -196,12 +167,12 @@ def source_dataset():
             for sub_key in google_data[key]:
                 data.append(google_data[key][sub_key])
 
-    os.remove('/tmp/google.csv')
+    os.remove(os.path.join(sys.path[0], google_filename))
 
-    with open('/tmp/apple.csv', 'r') as a:
+    with open(os.path.join(sys.path[0], apple_filename), 'r') as a:
 
-        apple_meta = {'country': {'sourceName': 'apple', 'sourceType': 'country', 'regions': {
-        }}, 'state': {'sourceName': 'apple', 'sourceType': 'state', 'regions': {}}}
+        apple_meta = {'country': {'name': 'Apple', 'type': 'countries', 'regions': {
+        }}, 'state': {'name': 'Apple', 'type': 'states', 'regions': {}}}
         apple_data = []
 
         reader = csv.DictReader(a)
@@ -233,13 +204,13 @@ def source_dataset():
 
                 if region not in apple_meta[geo_type]['regions']:
                     apple_meta[geo_type]['regions'][region] = {
-                        'regionCode': region_code, 'mobilityTypes': [data_type]}
+                        'regionCode': region_code, 'mobility': [data_type]}
                 elif region in apple_meta[geo_type]['regions']:
-                    apple_meta[geo_type]['regions'][region]['mobilityTypes'].append(
+                    apple_meta[geo_type]['regions'][region]['mobility'].append(
                         data_type)
 
-                apple_datum = {'sourceName': region,
-                               'sourceType': data_type, 'dates': {}}
+                apple_datum = {'name': region,
+                               'type': data_type, 'dates': {}}
 
                 for date in row:
                     if date not in apple_non_date_fields and row[date] != '':
@@ -253,7 +224,11 @@ def source_dataset():
         for datum in apple_data:
             data.append(datum)
 
-    os.remove('/tmp/apple.csv')
+    os.remove(os.path.join(sys.path[0], apple_filename))
 
-    with open('/tmp/data.json', 'w', encoding='utf-8') as d:
+    with open(os.path.join(sys.path[0], 'data.json'), 'w', encoding='utf-8') as d:
         d.write(json.dumps(data, ensure_ascii=False))
+
+
+if __name__ == "__main__":
+    source_dataset()
