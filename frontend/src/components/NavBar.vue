@@ -1,6 +1,6 @@
 <template>
     <div class="navbar-container">
-        <b-navbar toggleable="sm" type="dark" variant="dark">
+        <b-navbar toggleable="sm" type="dark" variant="info">
             <b-navbar-brand href="#">Mobility Dashboard</b-navbar-brand>
             <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
             <b-collapse id="nav-collapse" is-nav>

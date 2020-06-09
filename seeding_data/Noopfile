@@ -1,10 +1,11 @@
 COMPONENT seeding task
 
 RESOURCE db dynamodb -p hashKeyName=name -p hashKeyType=S -p rangeKeyName=type -p rangeKeyType=S
-ENV DB_ENDPOINT $.resources.db.endpoint
-ENV DB_TABLENAME $.resources.db.tableName
 
 FROM node:alpine
+ENV NODE_ENV development
+ENV DB_ENDPOINT $.resources.db.endpoint
+ENV DB_TABLENAME $.resources.db.tableName
 COPY package*.json  ./
 RUN npm install
 COPY app.js .

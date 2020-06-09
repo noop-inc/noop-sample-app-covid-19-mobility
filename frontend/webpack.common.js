@@ -4,21 +4,22 @@ const CopyPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-    mode: "development",
-    entry: "./src/app.js",
+    entry: path.resolve(__dirname, "src", "app.js"),
     output: {
         path: path.resolve(__dirname, "dist"),
         filename: "bundle.js",
+        pathinfo: false,
     },
     module: {
         rules: [
             {
                 test: /\.vue$/,
+                include: path.resolve(__dirname, "src"),
                 use: "vue-loader",
             },
             {
                 test: /\.js$/,
-                exclude: /(node_modules)/,
+                include: path.resolve(__dirname, "src"),
                 use: {
                     loader: "babel-loader",
                     query: {
@@ -28,6 +29,7 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
+                include: path.resolve(__dirname, "src"),
                 use: [
                     MiniCssExtractPlugin.loader,
                     "css-loader",
