@@ -2,9 +2,9 @@ COMPONENT data service
 ROUTE -m GET /data -p
 
 FROM python:alpine AS build
-COPY app.py ./
+COPY index.py ./
 COPY datasets/*.csv datasets/
-RUN python app.py
+RUN python index.py
 
 FROM nginx:alpine
 COPY --from=build data.json /usr/share/nginx/json/data

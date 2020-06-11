@@ -1,10 +1,14 @@
+const path = require("path");
 const merge = require("webpack-merge");
 const common = require("./webpack.common.js");
 
 module.exports = merge(common, {
     mode: "development",
-    watch: true,
     devServer: {
+        compress: true,
+        contentBase: path.join(__dirname, "dist"),
+        hot: true,
+        open: true,
         proxy: [
             {
                 context: ["/api", "data"],
@@ -12,5 +16,6 @@ module.exports = merge(common, {
                 secure: false,
             },
         ],
+        publicPath: "/",
     },
 });

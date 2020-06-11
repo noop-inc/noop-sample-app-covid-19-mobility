@@ -2,8 +2,8 @@ const express = require("express");
 const app = express();
 const router = express.Router();
 const AWS = require("aws-sdk");
-const winston = require("winston");
-const expressWinston = require("express-winston");
+const compression = require("compression");
+const morgan = require("morgan");
 
 const endpoint = process.env.DB_ENDPOINT;
 const TableName = process.env.DB_TABLENAME;
@@ -36,12 +36,8 @@ router.get("/:name/:type", (req, res) => {
     });
 });
 
+app.use(compression());
 app.use(express.json());
-app.use(
-    expressWinston.logger({
-        transports: [new winston.transports.Console()],
-        expressFormat: true,
-    })
-);
+app.use(morgan("tiny"));
 app.use("/api/", router);
 app.listen(80);

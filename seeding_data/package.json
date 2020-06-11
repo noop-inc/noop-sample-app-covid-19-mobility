@@ -4,7 +4,7 @@
   "description": "Seeding Data to DynamoDB",
   "main": "index.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/rearc-data/mobility-dashboard#readme",
   "dependencies": {
-    "aws-sdk": "^2.691.0"
+    "aws-sdk": "^2.694.0"
   }
 }
