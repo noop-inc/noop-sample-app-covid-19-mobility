@@ -1,22 +1,22 @@
 {
-  "name": "seeding",
-  "version": "1.0.0",
-  "description": "Seeding Data to DynamoDB",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rearc-data/mobility-dashboard.git"
-  },
-  "author": "Rearc",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/rearc-data/mobility-dashboard/issues"
-  },
-  "homepage": "https://github.com/rearc-data/mobility-dashboard#readme",
-  "dependencies": {
-    "aws-sdk": "^2.694.0"
-  }
+    "name": "seeding",
+    "version": "1.0.0",
+    "description": "Seeding Data to DynamoDB",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/rearc-data/mobility-dashboard.git"
+    },
+    "author": "Rearc",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/rearc-data/mobility-dashboard/issues"
+    },
+    "homepage": "https://github.com/rearc-data/mobility-dashboard#readme",
+    "dependencies": {
+        "aws-sdk": "^2.694.0"
+    }
 }

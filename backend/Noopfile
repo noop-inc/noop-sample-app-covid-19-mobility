@@ -3,12 +3,12 @@ ROUTE -m GET /api/*
 
 RESOURCE db dynamodb
 
-FROM node:alpine AS build
+FROM node:12-alpine AS build
 ENV NODE_ENV production
 COPY package*.json ./
 RUN npm install
 
-FROM node:alpine
+FROM node:12-alpine
 ENV NODE_ENV production
 ENV DB_ENDPOINT $.resources.db.endpoint
 ENV DB_TABLENAME $.resources.db.tableName

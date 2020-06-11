@@ -40,4 +40,5 @@ app.use(compression());
 app.use(express.json());
 app.use(morgan("tiny"));
 app.use("/api/", router);
-app.listen(80);
+const port = process.env.PORT || 80;
+app.listen(port, () => console.log(`Server is running on port ${port}`));

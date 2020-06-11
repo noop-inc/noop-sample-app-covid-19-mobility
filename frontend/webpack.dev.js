@@ -16,6 +16,5 @@ module.exports = merge(common, {
                 secure: false,
             },
         ],
-        publicPath: "/",
     },
 });

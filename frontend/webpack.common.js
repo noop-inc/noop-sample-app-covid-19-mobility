@@ -1,14 +1,14 @@
 const path = require("path");
 const { VueLoaderPlugin } = require("vue-loader");
-const CopyPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+var HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
     entry: path.resolve(__dirname, "src", "main.js"),
     output: {
         path: path.resolve(__dirname, "dist"),
-        filename: "bundle.js",
-        pathinfo: false,
+        filename: "[name].js",
     },
     module: {
         rules: [
@@ -28,7 +28,7 @@ module.exports = {
                 },
             },
             {
-                test: /\.scss$/,
+                test: /\.(s*)css$/,
                 include: path.resolve(__dirname, "src"),
                 use: [
                     {
@@ -47,15 +47,37 @@ module.exports = {
                     },
                 ],
             },
+            {
+                test: /\.png$/,
+                include: path.resolve(__dirname, "public"),
+                loader: "file-loader",
+                options: {
+                    outputPath: "assets",
+                },
+            },
         ],
     },
     plugins: [
+        new CopyPlugin({
+            patterns: [
+                {
+                    from: path.resolve(__dirname, "public", "favicon.png"),
+                    to: path.resolve(__dirname, "dist"),
+                },
+            ],
+        }),
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, "public", "index.html"),
+        }),
         new VueLoaderPlugin(),
         new MiniCssExtractPlugin({
-            filename: "bundle.css",
-        }),
-        new CopyPlugin({
-            patterns: [{ from: "public" }],
+            filename: "[name].css",
         }),
     ],
+    optimization: {
+        splitChunks: {
+            name: "vendors",
+            chunks: "all",
+        },
+    },
 };

@@ -1,12 +1,12 @@
-COMPONENT data service
+COMPONENT dataProcessing service
 ROUTE -m GET /data -p
 
-FROM python:alpine AS build
+FROM python:3-alpine AS build
 COPY index.py ./
 COPY datasets/*.csv datasets/
 RUN python index.py
 
-FROM nginx:alpine
+FROM nginx:1-alpine
 COPY --from=build data.json /usr/share/nginx/json/data
 COPY nginx.conf /etc/nginx
 ENTRYPOINT ["nginx", "-g", "daemon off;"]

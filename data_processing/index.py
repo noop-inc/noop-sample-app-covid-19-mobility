@@ -141,7 +141,7 @@ def source_dataset():
 
                 if region not in google_regions[geo_type]['data']:
                     google_regions[geo_type]['data'][region] = {'region': region,
-                                                                   'regionCode': region_code, 'values': []}
+                                                                'regionCode': region_code, 'values': []}
 
                 if region not in google_data:
                     google_data[region] = {}
@@ -175,7 +175,8 @@ def source_dataset():
 
     with open(os.path.join(sys.path[0], apple_filename), 'r') as a:
 
-        apple_meta = {'country': {'name': 'Apple', 'type': 'countries', 'data': None}, 'state': {'name': 'Apple', 'type': 'states', 'data': None}}
+        apple_meta = {'country': {'name': 'Apple', 'type': 'countries', 'data': None}, 'state': {
+            'name': 'Apple', 'type': 'states', 'data': None}}
         apple_regions = {'country': {'data': {}}, 'state': {'data': {}}}
         apple_data = []
 
@@ -208,7 +209,7 @@ def source_dataset():
 
                 if region not in apple_regions[geo_type]['data']:
                     apple_regions[geo_type]['data'][region] = {'region': region,
-                                                                  'regionCode': region_code, 'values': [data_type]}
+                                                               'regionCode': region_code, 'values': [data_type]}
                 elif region in apple_regions[geo_type]['data']:
                     apple_regions[geo_type]['data'][region]['values'].append(
                         data_type)
