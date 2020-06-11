@@ -1,12 +1,10 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import createLogger from "vuex/dist/logger";
 import Axios from "axios";
 
 Vue.use(Vuex);
 
-const getApiUtil = (name, type) =>
-    Axios.get(`http://localapp/api/${name}/${type}`);
+const getApiUtil = (name, type) => Axios.get(`/api/${name}/${type}`);
 
 const state = {
     meta: {},
@@ -43,10 +41,24 @@ const actions = {
     },
 };
 
-export default new Vuex.Store({
-    plugins: [createLogger()],
-    state,
-    getters,
-    mutations,
-    actions,
-});
+const createStore = () => {
+    if (process.env.NODE_ENV !== "production") {
+        const createLogger = require("vuex/dist/logger");
+        return {
+            plugins: [createLogger()],
+            state,
+            getters,
+            mutations,
+            actions,
+        };
+    } else {
+        return {
+            state,
+            getters,
+            mutations,
+            actions,
+        };
+    }
+};
+
+export default new Vuex.Store(createStore());

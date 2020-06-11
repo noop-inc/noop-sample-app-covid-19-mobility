@@ -1,17 +1,19 @@
 COMPONENT frontend service
 ROUTE -m GET *
 
-FROM node:alpine as build
+FROM node:alpine AS build1
 ENV NODE_ENV production
-
 COPY package*.json  ./
-RUN npm --production=false install
+RUN npm install
+
+FROM node:alpine AS build2
+ENV NODE_ENV production
+COPY --from=build1 . .
 COPY webpack*.js ./
 COPY /public ./public
 COPY /src ./src
-
-RUN if [ "$NODE_ENV" = "production" ] ; then npm run build ; else npm run dev ; fi
+RUN npm run build
 
 FROM nginx:alpine
-COPY --from=build /dist /usr/share/nginx/html
+COPY --from=build2 /dist /usr/share/nginx/html
 ENTRYPOINT ["nginx", "-g", "daemon off;"]

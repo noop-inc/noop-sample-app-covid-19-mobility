@@ -5,7 +5,7 @@
 </template>
 
 <script>
-debugger
+
 export default {
 
     created() {

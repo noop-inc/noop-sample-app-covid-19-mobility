@@ -31,7 +31,12 @@ module.exports = {
                 test: /\.scss$/,
                 include: path.resolve(__dirname, "src"),
                 use: [
-                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            hmr: process.env.NODE_ENV !== "production",
+                        },
+                    },
                     "css-loader",
                     "sass-loader",
                     {

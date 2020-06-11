@@ -1,4 +1,5 @@
 .DS_Store
 **/node_modules
 /frontend/dist
+/data_processing/data.json
 */__pycache__

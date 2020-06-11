@@ -1,7 +1,7 @@
 COMPONENT data service
 ROUTE -m GET /data -p
 
-FROM python:alpine as build
+FROM python:alpine AS build
 COPY app.py ./
 COPY datasets/*.csv datasets/
 RUN python app.py
