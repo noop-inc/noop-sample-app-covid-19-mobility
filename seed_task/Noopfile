@@ -1,0 +1,17 @@
+COMPONENT seedTask task
+
+RESOURCE mobilityDB dynamodb -p hashKeyName=name -p hashKeyType=S -p rangeKeyName=type -p rangeKeyType=S
+
+FROM node:12-alpine AS build
+ENV NODE_ENV production
+ENV DB_ENDPOINT $.resources.mobilityDB.endpoint
+ENV DB_TABLENAME $.resources.mobilityDB.tableName
+COPY package*.json  ./
+RUN npm install
+
+FROM node:12-alpine
+ENV NODE_ENV production
+COPY --from=build . .
+COPY index.js .
+ENTRYPOINT npm start
+LIFECYCLE postdeploy

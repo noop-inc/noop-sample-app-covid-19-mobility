@@ -1,4 +1,4 @@
-COMPONENT data service
+COMPONENT processData service
 ROUTE -m GET /data -p
 
 FROM python:3-alpine AS build
