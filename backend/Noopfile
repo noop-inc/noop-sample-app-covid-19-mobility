@@ -1,4 +1,4 @@
-COMPONENT backend service
+COMPONENT server service
 ROUTE -m GET /api/*
 
 RESOURCE db dynamodb

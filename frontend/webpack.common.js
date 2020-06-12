@@ -2,7 +2,6 @@ const path = require("path");
 const { VueLoaderPlugin } = require("vue-loader");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
-const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
     entry: path.resolve(__dirname, "src", "main.js"),
@@ -34,7 +33,8 @@ module.exports = {
                     {
                         loader: MiniCssExtractPlugin.loader,
                         options: {
-                            hmr: process.env.NODE_ENV !== "production",
+                            hmr:
+                                process.env.WEBPACK_DEV_SERVER === "true",
                         },
                     },
                     "css-loader",
@@ -47,27 +47,16 @@ module.exports = {
                     },
                 ],
             },
-            {
-                test: /\.png$/,
-                include: path.resolve(__dirname, "public"),
-                loader: "file-loader",
-                options: {
-                    outputPath: "assets",
-                },
-            },
         ],
     },
     plugins: [
-        new CopyPlugin({
-            patterns: [
-                {
-                    from: path.resolve(__dirname, "public", "favicon.png"),
-                    to: path.resolve(__dirname, "dist"),
-                },
-            ],
-        }),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, "public", "index.html"),
+            favicon: path.resolve(__dirname, "public", "favicon.png"),
+            meta: {
+                viewport:
+                    "width=device-width, initial-scale=1, shrink-to-fit=no",
+            },
         }),
         new VueLoaderPlugin(),
         new MiniCssExtractPlugin({

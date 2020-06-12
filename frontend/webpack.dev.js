@@ -5,13 +5,11 @@ const common = require("./webpack.common.js");
 module.exports = merge(common, {
     mode: "development",
     devServer: {
-        compress: true,
-        contentBase: path.join(__dirname, "dist"),
         hot: true,
-        open: true,
+        open: "Google Chrome",
         proxy: [
             {
-                context: ["/api", "data"],
+                context: ["/api", "/data"],
                 target: "https://localnoop.app:1234",
                 secure: false,
             },

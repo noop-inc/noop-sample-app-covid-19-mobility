@@ -1,4 +1,4 @@
-COMPONENT seedingData task
+COMPONENT seeding task
 
 RESOURCE db dynamodb -p hashKeyName=name -p hashKeyType=S -p rangeKeyName=type -p rangeKeyType=S
 
