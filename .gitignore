@@ -1,5 +1,5 @@
 .DS_Store
-**/node_modules
-/frontend/dist
-/data_processing/data.json
+*/node_modules
+/client/dist
+/data/data*.json*
 */__pycache__

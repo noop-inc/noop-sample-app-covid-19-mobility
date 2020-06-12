@@ -3,6 +3,8 @@ import time
 import json
 import os
 import sys
+import gzip
+import shutil
 
 
 def source_dataset():
@@ -238,6 +240,9 @@ def source_dataset():
     with open(os.path.join(sys.path[0], 'data.json'), 'w', encoding='utf-8') as d:
         d.write(json.dumps(data, ensure_ascii=False))
 
+    with open(os.path.join(sys.path[0], 'data.json'), 'rb') as d:
+        with gzip.open(os.path.join(sys.path[0], 'data.json.gz'), 'wb') as g:
+            shutil.copyfileobj(d, g)
 
 if __name__ == "__main__":
     source_dataset()
