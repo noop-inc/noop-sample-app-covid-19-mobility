@@ -1,18 +1,16 @@
 const path = require("path");
 const merge = require("webpack-merge");
 const common = require("./webpack.common.js");
+const webpack = require("webpack");
 
 module.exports = merge(common, {
-    mode: "development",
-    devServer: {
-        hot: true,
-        open: "Google Chrome",
-        proxy: [
-            {
-                context: ["/api", "/data"],
-                target: "https://localnoop.app:1234",
-                secure: false,
-            },
-        ],
+    entry: [
+        path.resolve(__dirname, "src", "main.js"),
+        "webpack-hot-middleware/client",
+    ],
+    output: {
+        publicPath: "/",
     },
+    mode: "development",
+    plugins: [new webpack.HotModuleReplacementPlugin()],
 });

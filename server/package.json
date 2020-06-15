@@ -3,7 +3,8 @@
     "version": "1.0.0",
     "description": "Node.js Backend",
     "scripts": {
-        "start": "node server.js"
+        "start": "node server.js",
+        "dev": "nodemon --inspect server.js"
     },
     "repository": {
         "type": "git",
@@ -16,10 +17,12 @@
     },
     "homepage": "https://github.com/rearc-data/mobility-dashboard#readme",
     "dependencies": {
-        "aws-sdk": "^2.696.0",
+        "aws-sdk": "^2.697.0",
         "compression": "^1.7.4",
         "express": "^4.17.1",
         "morgan": "^1.10.0"
     },
-    "devDependencies": {}
+    "devDependencies": {
+        "nodemon": "^2.0.4"
+    }
 }

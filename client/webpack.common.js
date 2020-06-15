@@ -4,10 +4,10 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-    entry: path.resolve(__dirname, "src", "main.js"),
     output: {
         path: path.resolve(__dirname, "dist"),
         filename: "[name].js",
+        publicPath: "/",
     },
     module: {
         rules: [
@@ -33,8 +33,7 @@ module.exports = {
                     {
                         loader: MiniCssExtractPlugin.loader,
                         options: {
-                            hmr:
-                                process.env.WEBPACK_DEV_SERVER === "true",
+                            hmr: process.env.NODE_ENV !== "production",
                         },
                     },
                     "css-loader",
