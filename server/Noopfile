@@ -10,8 +10,8 @@ RUN npm install
 
 FROM node:12-alpine
 ENV NODE_ENV production
-ENV DB_ENDPOINT $.resources.mobilityDB.endpoint
-ENV DB_TABLENAME $.resources.mobilityDB.tableName
+ENV DYNAMO_TABLE $.resources.mobilityDB.tableName
+ENV DYNAMO_ENDPOINT $.resources.mobilityDB.endpoint
 COPY --from=build .  .
 COPY server.js .
 

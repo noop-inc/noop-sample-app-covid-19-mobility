@@ -5,10 +5,10 @@ const AWS = require("aws-sdk");
 const compression = require("compression");
 const morgan = require("morgan");
 
-const endpoint = process.env.DB_ENDPOINT;
-const TableName = process.env.DB_TABLENAME;
+const TableName = process.env.DYNAMO_TABLE;
+const Endpoint = process.env.DYNAMO_ENDPOINT;
 
-AWS.config.update({ endpoint: endpoint });
+AWS.config.update({ endpoint: Endpoint });
 
 const dynamodb = new AWS.DynamoDB();
 const documentClient = new AWS.DynamoDB.DocumentClient({
@@ -36,7 +36,7 @@ router.get("/:name/:type", (req, res) => {
     });
 });
 
-app.use(compression());
+app.use(compression({ level: 9 }));
 app.use(express.json());
 app.use(morgan("tiny"));
 app.use("/api/", router);

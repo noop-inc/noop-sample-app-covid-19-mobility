@@ -1,10 +1,10 @@
-const http = require("http");
 const AWS = require("aws-sdk");
+const axios = require("axios");
 
-const endpoint = process.env.DB_ENDPOINT;
-const TableName = process.env.DB_TABLENAME;
+const TableName = process.env.DYNAMO_TABLE;
+const Endpoint = process.env.DYNAMO_ENDPOINT;
 
-AWS.config.update({ endpoint: endpoint });
+AWS.config.update({ endpoint: Endpoint });
 
 const dynamodb = new AWS.DynamoDB();
 
@@ -41,19 +41,16 @@ const formatData = async (data) => {
 };
 
 const getData = () => {
-    http.get("http://localapp/data", (res) => {
-        let data = "";
-        res.on("data", (chunk) => {
-            data += chunk;
-        });
-
-        res.on("end", async () => {
-            await formatData(JSON.parse(data));
+    axios.defaults.headers.common["Accept-Encoding"] = "gzip, deflate, br";
+    axios
+        .get("http://localapp/data")
+        .then(async ({ data }) => {
+            await formatData(data);
             return true;
+        })
+        .catch((err) => {
+            console.error(`Error: ${err.message}`);
         });
-    }).on("error", (err) => {
-        console.error("Error " + err.message);
-    });
 };
 
 const init = () => {

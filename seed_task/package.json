@@ -17,6 +17,7 @@
     },
     "homepage": "https://github.com/rearc-data/mobility-dashboard#readme",
     "dependencies": {
-        "aws-sdk": "^2.694.0"
+        "aws-sdk": "^2.696.0",
+        "axios": "^0.19.2"
     }
 }
