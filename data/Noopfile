@@ -3,7 +3,7 @@ ROUTE -m GET /data -p
 
 FROM python:3-alpine AS build
 COPY index.py ./
-COPY datasets/*.csv datasets/
+COPY datasets/*.csv.gz datasets/
 RUN python index.py
 
 FROM nginx:1-alpine

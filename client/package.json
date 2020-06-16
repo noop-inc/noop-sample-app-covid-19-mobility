@@ -45,6 +45,7 @@
         "compression": "^1.7.4",
         "express": "^4.17.1",
         "http-proxy-middleware": "^1.0.4",
+        "style-loader": "^1.2.1",
         "webpack-dev-middleware": "^3.7.2",
         "webpack-hot-middleware": "^2.25.0"
     }
