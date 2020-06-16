@@ -103,10 +103,13 @@ def source_dataset():
         'country'
     }
 
-    apple_filename = 'datasets/applemobilitytrends-2020-06-02.csv'
+    data = []
+
     google_filename = 'datasets/Global_Mobility_Report.csv'
 
-    data = []
+    with gzip.open(os.path.join(sys.path[0], google_filename + '.gz'), 'rb') as g:
+        with open(os.path.join(sys.path[0], google_filename), 'wb') as c:
+            shutil.copyfileobj(g, c)
 
     with open(os.path.join(sys.path[0], google_filename), 'r') as g:
 
@@ -175,6 +178,12 @@ def source_dataset():
             for sub_key in google_data[key]:
                 data.append(google_data[key][sub_key])
 
+    apple_filename = 'datasets/applemobilitytrends-2020-06-14.csv'
+
+    with gzip.open(os.path.join(sys.path[0], apple_filename + '.gz'), 'rb') as g:
+        with open(os.path.join(sys.path[0], apple_filename), 'wb') as c:
+            shutil.copyfileobj(g, c)
+
     with open(os.path.join(sys.path[0], apple_filename), 'r') as a:
 
         apple_meta = {'country': {'name': 'Apple', 'type': 'countries', 'data': None}, 'state': {
@@ -241,8 +250,9 @@ def source_dataset():
         d.write(json.dumps(data, ensure_ascii=False))
 
     with open(os.path.join(sys.path[0], 'data.json'), 'rb') as d:
-        with gzip.open(os.path.join(sys.path[0], 'data.json.gz'), 'wb') as g:
+        with gzip.open(os.path.join(sys.path[0], 'data.json.gz'), 'wb', 9) as g:
             shutil.copyfileobj(d, g)
+
 
 if __name__ == "__main__":
     source_dataset()
