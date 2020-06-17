@@ -34,7 +34,7 @@ app.get("/api/:name/:type", (req, res) => {
         } else if (data.Item) {
             return res.json(data.Item);
         } else {
-            return res.status(404).json({ error: "data could not be found" });
+            return res.status(404).json({ error: "Data could not be found" });
         }
     });
 });
