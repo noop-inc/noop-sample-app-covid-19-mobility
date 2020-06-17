@@ -1,5 +1,5 @@
 const path = require("path");
-const { VueLoaderPlugin } = require("vue-loader");
+const VueLoaderPlugin = require("vue-loader/lib/plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
@@ -22,7 +22,7 @@ module.exports = {
                 use: {
                     loader: "babel-loader",
                     query: {
-                        presets: ["@babel/preset-env"],
+                        presets: ["@vue/babel-preset-jsx"],
                     },
                 },
             },
@@ -46,6 +46,7 @@ module.exports = {
         ],
     },
     plugins: [
+        new VueLoaderPlugin(),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, "public", "index.html"),
             favicon: path.resolve(__dirname, "public", "favicon.png"),
@@ -54,7 +55,6 @@ module.exports = {
                     "width=device-width, initial-scale=1, shrink-to-fit=no",
             },
         }),
-        new VueLoaderPlugin(),
         new MiniCssExtractPlugin({
             filename: "[name].css",
         }),

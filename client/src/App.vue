@@ -1,18 +1,17 @@
-<template>
-    <div id="app">
-        <NavBar />
-        <h1>Hello World!</h1>
-        <router-view />
-    </div>
-</template>
-
 <script>
-import NavBar from "./components/NavBar.vue";
-
+import NavBar from "./components/NavBar";
 export default {
     name: "App",
     components: {
         NavBar
+    },
+    render() {
+        return (
+            <div id="app">
+                <NavBar />
+                <router-view />
+            </div>
+        );
     }
 };
 </script>
@@ -20,8 +19,4 @@ export default {
 <style lang="scss">
 @import "~bootstrap";
 @import "~bootstrap-vue";
-
-#app {
-    color: orange;
-}
 </style>
