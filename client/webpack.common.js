@@ -2,6 +2,7 @@ const path = require("path");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const AutoPrefixer = require("autoprefixer");
 
 module.exports = {
     output: {
@@ -38,7 +39,7 @@ module.exports = {
                     {
                         loader: "postcss-loader",
                         query: {
-                            plugins: [require("autoprefixer")],
+                            plugins: [AutoPrefixer],
                         },
                     },
                 ],
