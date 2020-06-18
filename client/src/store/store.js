@@ -2,9 +2,17 @@ import Vue from "vue";
 import Vuex from "vuex";
 import Axios from "axios";
 
+const dev = process.env.NODE_ENV !== "production";
+
+let createLogger;
+
+if (dev) {
+    createLogger = require("vuex/dist/logger");
+}
+
 Vue.use(Vuex);
 
-const getApiUtil = (name, type) => Axios.get(`/api/${name}/${type}`);
+const APIUtil = (name, type) => Axios.get(`/api/${name}/${type}`);
 
 const state = {
     meta: {},
@@ -14,7 +22,6 @@ const state = {
 };
 
 const getters = {
-    isLoading: (state) => state.isLoading,
     getData: (state) => ({ kind, name, type }) => {
         if (name in state[kind]) {
             if (type in state[kind][name]) {
@@ -26,14 +33,24 @@ const getters = {
 };
 
 const actions = {
-    fetchData({ commit, state }, { kind, name, type }) {
+    fetchData({ commit }, { kind, name, type }) {
         commit("setLoading");
-        getApiUtil(name, type)
+        APIUtil(name, type)
             .then((res) => {
-                commit("setData", { kind, data: res.data });
+                dev
+                    ? setTimeout(
+                          () => commit("setData", { kind, data: res.data }),
+                          1500
+                      )
+                    : commit("setData", { kind, data: res.data });
             })
             .catch((err) => {
-                commit("setError", err.response.data);
+                dev
+                    ? setTimeout(
+                          () => commit("setError", err.response.data),
+                          1500
+                      )
+                    : commit("setError", err.response.data);
             });
     },
 };
@@ -61,14 +78,6 @@ const mutations = {
         state.isLoading = false;
     },
 };
-
-const dev = process.env.NODE_ENV !== "production";
-
-let createLogger;
-
-if (dev) {
-    createLogger = require("vuex/dist/logger");
-}
 
 export default new Vuex.Store({
     plugins: dev ? [createLogger()] : [],

@@ -18,6 +18,7 @@
     "homepage": "https://github.com/rearc-data/mobility-dashboard#readme",
     "dependencies": {
         "@babel/core": "^7.10.2",
+        "@babel/preset-env": "^7.10.2",
         "@vue/babel-helper-vue-jsx-merge-props": "^1.0.0",
         "@vue/babel-preset-jsx": "^1.1.2",
         "autoprefixer": "^9.8.0",
@@ -36,6 +37,7 @@
         "vue": "^2.6.11",
         "vue-loader": "^15.9.2",
         "vue-router": "^3.3.4",
+        "vue-spinner": "^1.0.3",
         "vue-template-compiler": "^2.6.11",
         "vuex": "^3.4.0",
         "webpack": "^4.43.0",

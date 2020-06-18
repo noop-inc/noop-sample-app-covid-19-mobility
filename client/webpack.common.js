@@ -14,7 +14,7 @@ module.exports = {
         rules: [
             {
                 test: /\.vue$/,
-                include: path.resolve(__dirname, "src"),
+                // include: path.resolve(__dirname, "src"),
                 use: "vue-loader",
             },
             {
@@ -23,13 +23,13 @@ module.exports = {
                 use: {
                     loader: "babel-loader",
                     query: {
-                        presets: ["@vue/babel-preset-jsx"],
+                        presets: ["@babel/env", "@vue/babel-preset-jsx"],
                     },
                 },
             },
             {
-                test: /\.scss$/,
-                include: path.resolve(__dirname, "src"),
+                test: /\.css|\.scss$/,
+                // include: path.resolve(__dirname, "src"),
                 use: [
                     process.env.NODE_ENV === "production"
                         ? MiniCssExtractPlugin.loader

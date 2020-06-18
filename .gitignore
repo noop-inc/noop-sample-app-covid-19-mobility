@@ -3,3 +3,4 @@
 /client/dist
 /data/data*.json*
 */__pycache__
+/data/datasets/**.csv
