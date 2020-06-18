@@ -1,12 +1,24 @@
-import { BModal, BFormGroup, BFormRadioGroup, BFormSelect } from "bootstrap-vue";
+import {
+    BModal,
+    BFormGroup,
+    BFormRadioGroup,
+    BFormSelect,
+} from "bootstrap-vue";
+import { mapActions, mapState } from "vuex";
 
 export default {
     name: "SelectDataModal",
+    computed: {
+        ...mapState(["isLoading"]),
+    },
     data() {
         return {
             sourceOptions: ["Apple", "Google"],
             selectedSource: null,
-            geoTypeOptions: ["Countries", "United States"],
+            geoTypeOptions: [
+                { value: "countries", text: "Countries" },
+                { value: "states", text: "United States" },
+            ],
             selectedGeoType: null,
             locationOptions: [
                 { value: null, text: "Select a Location", disabled: true },
@@ -16,11 +28,87 @@ export default {
                 { value: null, text: "Select a Data Type", disabled: true },
             ],
             selectedData: null,
+            dataset: null,
         };
     },
-    methods: {},
+    methods: {
+        ...mapActions(["fetchData"]),
+        checkStoreForData() {
+            if (this.selectedSource in this.$store.state.meta) {
+                if (
+                    this.selectedGeoType in
+                    this.$store.state.meta[this.selectedSource]
+                ) {
+                    this.dataset = this.$store.state.meta[this.selectedSource][
+                        this.selectedGeoType
+                    ];
+                } else {
+                    this.fetchData({
+                        kind: "meta",
+                        name: this.selectedSource,
+                        type: this.selectedGeoType,
+                    });
+                }
+            } else {
+                this.fetchData({
+                    kind: "meta",
+                    name: this.selectedSource,
+                    type: this.selectedGeoType,
+                });
+            }
+        }
+    },
+    created() {
+        this.$store.subscribe((mutation, state) => {
+            if (
+                mutation.type === "setData" &&
+                mutation.payload.kind === "meta"
+            ) {
+                const { name, type } = mutation.payload.data;
+                if (
+                    name === this.selectedSource &&
+                    type === this.selectedGeoType
+                ) {
+                    this.dataset = mutation.payload.data;
+                }
+            }
+        });
+        if (this.selectedSource && this.selectedGeoType) {
+            if (!this.dataset) {
+                this.checkStoreForData()
+            }
+            if ((this.dataset.name !== this.selectedSource) || (this.dataset.type !== this.selectedGeoType)) {
+                this.checkStoreForData();
+            }
+        }
+    },
+    updated() {
+        if (this.selectedSource && this.selectedGeoType) {
+            if (this.selectedSource in this.$store.state.meta) {
+                if (
+                    this.selectedGeoType in
+                    this.$store.state.meta[this.selectedSource]
+                ) {
+                    this.dataset = this.$store.state.meta[this.selectedSource][
+                        this.selectedGeoType
+                    ];
+                } else {
+                    this.fetchData({
+                        kind: "meta",
+                        name: this.selectedSource,
+                        type: this.selectedGeoType,
+                    });
+                }
+            } else {
+                this.fetchData({
+                    kind: "meta",
+                    name: this.selectedSource,
+                    type: this.selectedGeoType,
+                });
+            }
+        }
+    },
     render() {
-        console.log(this.$store)
         return (
             <BModal
                 id="select-data-modal"
@@ -55,7 +143,6 @@ export default {
                         disabled={this.dataOptions.length <= 1}
                     />
                 </BFormGroup>
-
             </BModal>
         );
     },

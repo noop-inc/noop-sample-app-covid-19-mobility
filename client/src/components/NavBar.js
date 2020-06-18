@@ -18,7 +18,7 @@ export default {
     render() {
         return (
             <div class="navbar-container">
-                <BNavbar toggleable="sm" type="dark" variant="dark">
+                <BNavbar fixed="top" toggleable="sm" type="dark" variant="dark">
                     <BNavbarBrand href="#">Mobility Dashboard</BNavbarBrand>
                     <BNavbarToggle target="nav-collapse" />
                     <BCollapse id="nav-collapse" is-nav>

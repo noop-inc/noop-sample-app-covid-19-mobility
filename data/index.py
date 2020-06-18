@@ -40,7 +40,7 @@ def source_dataset():
         'Colorado': 'CO',
         'Connecticut': 'CT',
         'Delaware': 'DE',
-        'District of Columbia': 'CD',
+        'District of Columbia': 'DC',
         'Florida': 'FL',
         'Georgia': 'GA',
         'Hawaii': 'HI',
@@ -156,7 +156,7 @@ def source_dataset():
 
                         if google_types[data_type] not in google_data[region]:
                             google_data[region][google_types[data_type]] = {
-                                'name': region, 'type': google_types[data_type], 'data': [{'date': row['date'], 'value': int(row[data_type])}]}
+                                'source': 'Google', 'geo': geo_type, 'name': region, 'type': google_types[data_type], 'data': [{'date': row['date'], 'value': int(row[data_type])}]}
 
                         elif google_types[data_type] in google_data[region]:
                             google_data[region][google_types[data_type]
@@ -197,15 +197,22 @@ def source_dataset():
 
             valid_country = row['geo_type'] == 'country/region' and row['country'] == ''
             valid_state = row['geo_type'] == 'sub-region' and row['country'] == 'United States'
+            valid_dc = row['geo_type'] == 'city' and row['region'] == "Washington DC"
 
-            if valid_country or valid_state:
+            if valid_country or valid_state or valid_dc:
 
                 geo_type = ''
                 region = row['region']
                 region_code = ''
                 data_type = row['transportation_type']
 
-                if valid_country or region in country_codes:
+                if valid_dc:
+                    region = "District of Columbia"
+
+                if (valid_state and region in state_abbrs) or valid_dc:
+                    geo_type = 'state'
+                    region_code = state_abbrs[region]
+                else:
                     geo_type = 'country'
 
                     if region in country_codes:
@@ -214,10 +221,6 @@ def source_dataset():
                         region_code = normalize_apple[region]['code']
                         region = normalize_apple[region]['country']
 
-                else:
-                    geo_type = 'state'
-                    region_code = state_abbrs[region]
-
                 if region not in apple_regions[geo_type]['data']:
                     apple_regions[geo_type]['data'][region] = {'region': region,
                                                                'regionCode': region_code, 'values': [data_type]}
@@ -225,7 +228,7 @@ def source_dataset():
                     apple_regions[geo_type]['data'][region]['values'].append(
                         data_type)
 
-                apple_datum = {'name': region,
+                apple_datum = {'source': 'Apple', 'geo': geo_type, 'name': region,
                                'type': data_type, 'data': []}
 
                 for date in row:
