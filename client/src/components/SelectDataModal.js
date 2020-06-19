@@ -4,12 +4,13 @@ import {
     BFormRadioGroup,
     BFormSelect,
 } from "bootstrap-vue";
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapGetters, mapState } from "vuex";
 
 export default {
     name: "SelectDataModal",
     computed: {
         ...mapState(["isLoading"]),
+        ...mapGetters(["getData"])
     },
     data() {
         return {
@@ -34,36 +35,22 @@ export default {
     methods: {
         ...mapActions(["fetchData"]),
         checkStoreForData() {
-            if (this.selectedSource in this.$store.state.meta) {
-                if (
-                    this.selectedGeoType in
-                    this.$store.state.meta[this.selectedSource]
-                ) {
-                    this.dataset = this.$store.state.meta[this.selectedSource][
-                        this.selectedGeoType
-                    ];
-                } else {
-                    this.fetchData({
-                        kind: "meta",
-                        name: this.selectedSource,
-                        type: this.selectedGeoType,
-                    });
-                }
+            const dataAttr = {
+                kind: "meta",
+                name: this.selectedSource,
+                type: this.selectedGeoType,
+            };
+            const dataset = this.getData(dataAttr);
+            if (dataset) {
+                this.dataset = dataset;
             } else {
-                this.fetchData({
-                    kind: "meta",
-                    name: this.selectedSource,
-                    type: this.selectedGeoType,
-                });
+                this.fetchData(dataAttr);
             }
-        }
+        },
     },
     created() {
         this.$store.subscribe((mutation, state) => {
-            if (
-                mutation.type === "setData" &&
-                mutation.payload.kind === "meta"
-            ) {
+            if (mutation.type === "setData" && mutation.payload.kind === "meta") {
                 const { name, type } = mutation.payload.data;
                 if (
                     name === this.selectedSource &&
@@ -75,9 +62,12 @@ export default {
         });
         if (this.selectedSource && this.selectedGeoType) {
             if (!this.dataset) {
-                this.checkStoreForData()
+                this.checkStoreForData();
             }
-            if ((this.dataset.name !== this.selectedSource) || (this.dataset.type !== this.selectedGeoType)) {
+            if (
+                this.dataset.name !== this.selectedSource ||
+                this.dataset.type !== this.selectedGeoType
+            ) {
                 this.checkStoreForData();
             }
         }
