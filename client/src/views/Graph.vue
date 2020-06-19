@@ -1,52 +1,42 @@
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapGetters, mapState } from "vuex";
 import Spinner from "../components/Spinner";
 
 export default {
     computed: {
-        ...mapState(["isLoading"])
+        ...mapState(["isLoading"]),
+        ...mapGetters(["getDataByParams"]),
+        dataset() {
+            return this.getDataByParams({
+                kind: "mobility",
+                ...this.$route.params
+            });
+        }
     },
     methods: {
-        ...mapActions(["fetchData"])
-    },
-    data() {
-        return {
-            dataset: null
-        };
+        ...mapActions(["fetchData"]),
+        checkDataset() {
+            const { name, type } = this.$route.params;
+            if (
+                !this.dataset ||
+                this.dataset.name !== name ||
+                this.dataset.type !== type
+            ) {
+                this.fetchData({ kind: "mobility", ...this.$route.params });
+            }
+        }
     },
 
     created() {
-        this.$store.subscribe((mutation, state) => {
-            if (
-                mutation.type === "setData" &&
-                mutation.payload.kind === "mobility"
-            ) {
-                const { name, type } = mutation.payload.data;
-                if (
-                    name === this.$route.params.name &&
-                    type === this.$route.params.type
-                ) {
-                    this.dataset = mutation.payload.data;
-                }
-            }
-        });
-        this.fetchData({ kind: "mobility", ...this.$route.params });
+        this.checkDataset();
     },
 
     updated() {
-        if (this.dataset === null) {
-            this.fetchData({ kind: "mobility", ...this.$route.params });
-        }
-        if (
-            this.dataset.name !== this.$route.params.name ||
-            this.dataset.type !== this.$route.params.type
-        ) {
-            this.dataset = null;
-            this.fetchData({ kind: "mobility", ...this.$route.params });
-        }
+        this.checkDataset();
     },
 
     render() {
+        console.log(this.dataset);
         return this.dataset ? (
             <div class="graph">{JSON.stringify(this.dataset)}</div>
         ) : (

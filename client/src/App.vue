@@ -4,6 +4,7 @@ import { BContainer } from "bootstrap-vue";
 export default {
     name: "App",
     render() {
+        console.log(this.$store)
         return (
             <div id="app">
                 <NavBar />
