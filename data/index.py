@@ -9,103 +9,17 @@ import shutil
 
 def source_dataset():
 
-    country_codes = {
-        'Albania': 'AL',
-        'Iceland': 'IS',
-        'Guam': 'GU',
-        'Macao': 'MO',
-        'Morocco': 'MA',
-        'Russia': 'RU',
-        'Ukraine': 'UA',
-        'Virgin Islands': 'VI'
-    }
-
-    normalize_apple = {
-        'Czech Republic': {
-            'code': 'CZ',
-            'country': 'Czechia'
-        },
-        'Republic of Korea': {
-            'code': 'RU',
-            'country': 'South Korea'
-        },
-    }
-
-    state_abbrs = {
-        'Alabama': 'AL',
-        'Alaska': 'AK',
-        'Arizona': 'AZ',
-        'Arkansas': 'AR',
-        'California': 'CA',
-        'Colorado': 'CO',
-        'Connecticut': 'CT',
-        'Delaware': 'DE',
-        'District of Columbia': 'DC',
-        'Florida': 'FL',
-        'Georgia': 'GA',
-        'Hawaii': 'HI',
-        'Idaho': 'ID',
-        'Illinois': 'IL',
-        'Indiana': 'IN',
-        'Iowa': 'IA',
-        'Kansas': 'KS',
-        'Kentucky': 'KY',
-        'Louisiana': 'LA',
-        'Maine': 'ME',
-        'Maryland': 'MD',
-        'Massachusetts': 'MA',
-        'Michigan': 'MI',
-        'Minnesota': 'MN',
-        'Mississippi': 'MS',
-        'Missouri': 'MO',
-        'Montana': 'MT',
-        'Nebraska': 'NE',
-        'Nevada': 'NV',
-        'New Hampshire': 'NH',
-        'New Jersey': 'NJ',
-        'New Mexico': 'NM',
-        'New York': 'NY',
-        'North Carolina': 'NC',
-        'North Dakota': 'ND',
-        'Ohio': 'OH',
-        'Oklahoma': 'OK',
-        'Oregon': 'OR',
-        'Pennsylvania': 'PA',
-        'Rhode Island': 'RI',
-        'South Carolina': 'SC',
-        'South Dakota': 'SD',
-        'Tennessee': 'TN',
-        'Texas': 'TX',
-        'Utah': 'UT',
-        'Vermont': 'VT',
-        'Virginia': 'VA',
-        'Washington': 'WA',
-        'West Virginia': 'WV',
-        'Wisconsin': 'WI',
-        'Wyoming': 'WY'
-    }
-
-    google_types = {
-        'retail_and_recreation_percent_change_from_baseline': 'retailRecreation',
-        'grocery_and_pharmacy_percent_change_from_baseline': 'groceryPharmacy',
-        'parks_percent_change_from_baseline': 'parks',
-        'transit_stations_percent_change_from_baseline': 'transitStations',
-        'workplaces_percent_change_from_baseline': 'workplaces',
-        'residential_percent_change_from_baseline': 'residential'
-    }
-
-    apple_non_date_fields = {
-        'geo_type',
-        'region',
-        'transportation_type',
-        'alternative_name',
-        'sub-region',
-        'country'
-    }
-
     data = []
 
     google_filename = 'datasets/Global_Mobility_Report.csv'
+    google_types = {
+        'retail_and_recreation_percent_change_from_baseline': 'Retail and Recreation',
+        'grocery_and_pharmacy_percent_change_from_baseline': 'Grocery and Pharmacy',
+        'parks_percent_change_from_baseline': 'Parks',
+        'transit_stations_percent_change_from_baseline': 'Transit Stations',
+        'workplaces_percent_change_from_baseline': 'Workplaces',
+        'residential_percent_change_from_baseline': 'Residential'
+    }
 
     with gzip.open(os.path.join(sys.path[0], google_filename + '.gz'), 'rb') as g:
         with open(os.path.join(sys.path[0], google_filename), 'wb') as c:
@@ -113,9 +27,9 @@ def source_dataset():
 
     with open(os.path.join(sys.path[0], google_filename), 'r') as g:
 
-        google_meta = {'country': {'name': 'Google', 'type': 'countries', 'data': None}, 'state': {
-            'name': 'Google', 'type': 'states', 'data': None}}
-        google_regions = {'country': {'data': {}}, 'state': {'data': {}}}
+        google_meta = {'Countries': {'name': 'Google', 'type': 'Countries', 'data': None}, 'States': {
+            'name': 'Google', 'type': 'States', 'data': None}}
+        google_regions = {'Countries': {}, 'States': {}}
         google_data = {}
 
         reader = csv.DictReader(g)
@@ -126,50 +40,41 @@ def source_dataset():
             valid_state = row['country_region'] == 'United States' and row['sub_region_2'] == ''
 
             if valid_country or valid_state:
-
                 geo_type = ''
                 region = ''
-                region_code = ''
 
                 if valid_country:
-                    geo_type = 'country'
+                    geo_type = 'Countries'
                     region = row['country_region']
-                    region_code = row['country_region_code']
+                else:
+                    geo_type = 'States'
+                    region = '{} United States'.format(row['sub_region_1'])
 
-                    if row['country_region'] not in country_codes:
-                        country_codes[region] = region_code
-
-                elif valid_state:
-                    geo_type = 'state'
-                    region = row['sub_region_1']
-                    region_code = state_abbrs[region]
-
-                if region not in google_regions[geo_type]['data']:
-                    google_regions[geo_type]['data'][region] = {'region': region,
-                                                                'regionCode': region_code, 'values': []}
+                if region not in google_regions[geo_type]:
+                    google_regions[geo_type][region] = {
+                        'region': region, 'values': []}
 
                 if region not in google_data:
                     google_data[region] = {}
 
-                for data_type in google_types:
-                    if row[data_type] != '':
+                for data_entry in google_types:
+                    if row[data_entry] != '':
+                        data_type = google_types[data_entry]
+                        value = row[data_entry]
 
-                        if google_types[data_type] not in google_data[region]:
-                            google_data[region][google_types[data_type]] = {
-                                'source': 'Google', 'geo': geo_type, 'name': region, 'type': google_types[data_type], 'data': [{'date': row['date'], 'value': int(row[data_type])}]}
+                        if data_type not in google_data[region]:
+                            google_data[region][data_type] = {'source': 'Google', 'geo': geo_type, 'name': region, 'type': data_type, 'data': [
+                                {'date': row['date'], 'value': int(value)}]}
+                        else:
+                            google_data[region][data_type]['data'].append(
+                                {'date': row['date'], 'value': int(value)})
 
-                        elif google_types[data_type] in google_data[region]:
-                            google_data[region][google_types[data_type]
-                                                ]['data'].append({'date': row['date'], 'value': int(row[data_type])})
+                        if data_type not in google_regions[geo_type][region]['values']:
+                            google_regions[geo_type][region]['values'].append(
+                                data_type)
 
-                        if google_types[data_type] not in google_regions[geo_type]['data'][region]['values']:
-                            google_regions[geo_type]['data'][region]['values'].append(
-                                google_types[data_type])
-
-        google_meta['country']['data'] = sorted(
-            google_regions['country']['data'].values(), key=lambda k: k['region'])
-        google_meta['state']['data'] = sorted(
-            google_regions['state']['data'].values(), key=lambda k: k['region'])
+        google_meta['Countries']['data'] = google_regions['Countries']
+        google_meta['States']['data'] = google_regions['States']
 
         for key in google_meta:
             data.append(google_meta[key])
@@ -179,6 +84,14 @@ def source_dataset():
                 data.append(google_data[key][sub_key])
 
     apple_filename = 'datasets/applemobilitytrends-2020-06-14.csv'
+    apple_non_date_fields = {
+        'geo_type',
+        'region',
+        'transportation_type',
+        'alternative_name',
+        'sub-region',
+        'country'
+    }
 
     with gzip.open(os.path.join(sys.path[0], apple_filename + '.gz'), 'rb') as g:
         with open(os.path.join(sys.path[0], apple_filename), 'wb') as c:
@@ -186,9 +99,9 @@ def source_dataset():
 
     with open(os.path.join(sys.path[0], apple_filename), 'r') as a:
 
-        apple_meta = {'country': {'name': 'Apple', 'type': 'countries', 'data': None}, 'state': {
-            'name': 'Apple', 'type': 'states', 'data': None}}
-        apple_regions = {'country': {'data': {}}, 'state': {'data': {}}}
+        apple_meta = {'Countries': {'name': 'Apple', 'type': 'Countries', 'data': None}, 'States': {
+            'name': 'Apple', 'type': 'States', 'data': None}}
+        apple_regions = {'Countries': {}, 'States': {}}
         apple_data = []
 
         reader = csv.DictReader(a)
@@ -197,51 +110,38 @@ def source_dataset():
 
             valid_country = row['geo_type'] == 'country/region' and row['country'] == ''
             valid_state = row['geo_type'] == 'sub-region' and row['country'] == 'United States'
-            valid_dc = row['geo_type'] == 'city' and row['region'] == "Washington DC"
 
-            if valid_country or valid_state or valid_dc:
+            if valid_country or valid_state:
 
                 geo_type = ''
                 region = row['region']
-                region_code = ''
-                data_type = row['transportation_type']
+                data_type = row['transportation_type'].title()
 
-                if valid_dc:
-                    region = "District of Columbia"
-
-                if (valid_state and region in state_abbrs) or valid_dc:
-                    geo_type = 'state'
-                    region_code = state_abbrs[region]
+                if valid_country:
+                    geo_type = 'Countries'
                 else:
-                    geo_type = 'country'
+                    geo_type = 'States'
+                    region = '{} United States'.format(region)
 
-                    if region in country_codes:
-                        region_code = country_codes[region]
-                    else:
-                        region_code = normalize_apple[region]['code']
-                        region = normalize_apple[region]['country']
-
-                if region not in apple_regions[geo_type]['data']:
-                    apple_regions[geo_type]['data'][region] = {'region': region,
-                                                               'regionCode': region_code, 'values': [data_type]}
-                elif region in apple_regions[geo_type]['data']:
-                    apple_regions[geo_type]['data'][region]['values'].append(
-                        data_type)
+                if region not in apple_regions[geo_type]:
+                    apple_regions[geo_type][region] = {
+                        'region': region, 'values': [data_type]}
+                else:
+                    apple_regions[geo_type][region]['values'].append(data_type)
 
                 apple_datum = {'source': 'Apple', 'geo': geo_type, 'name': region,
                                'type': data_type, 'data': []}
 
                 for date in row:
-                    if date not in apple_non_date_fields and row[date] != '':
+                    value = row[date]
+                    if date not in apple_non_date_fields and value != '':
                         apple_datum['data'].append(
-                            {"date": date, "value": float(row[date])})
+                            {"date": date, "value": float(value)})
 
                 apple_data.append(apple_datum)
 
-        apple_meta['country']['data'] = sorted(
-            apple_regions['country']['data'].values(), key=lambda k: k['region'])
-        apple_meta['state']['data'] = sorted(
-            apple_regions['state']['data'].values(), key=lambda k: k['region'])
+        apple_meta['Countries']['data'] = apple_regions['Countries']
+        apple_meta['States']['data'] = apple_regions['States']
 
         for key in apple_meta:
             data.append(apple_meta[key])

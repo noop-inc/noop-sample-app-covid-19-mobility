@@ -4,39 +4,35 @@ import Spinner from "../components/Spinner";
 
 export default {
     computed: {
-        ...mapState(["isLoading"]),
-        ...mapGetters(["getDataByParams"]),
+        ...mapState("mobility", ["loading", "error"]),
+        ...mapGetters("mobility", ["getMobilityData"]),
         dataset() {
-            return this.getDataByParams({
-                kind: "mobility",
-                ...this.$route.params
-            });
+            return this.getMobilityData(this.$route.params);
         }
     },
     methods: {
-        ...mapActions(["fetchData"]),
-        checkDataset() {
+        ...mapActions("mobility", ["fetchMobilityData"]),
+        checkForMobilityData() {
             const { name, type } = this.$route.params;
             if (
                 !this.dataset ||
                 this.dataset.name !== name ||
                 this.dataset.type !== type
             ) {
-                this.fetchData({ kind: "mobility", ...this.$route.params });
+                this.fetchMobilityData(this.$route.params);
             }
         }
     },
 
     created() {
-        this.checkDataset();
+        this.checkForMobilityData();
     },
 
     updated() {
-        this.checkDataset();
+        this.checkForMobilityData();
     },
 
     render() {
-        console.log(this.dataset);
         return this.dataset ? (
             <div class="graph">{JSON.stringify(this.dataset)}</div>
         ) : (
