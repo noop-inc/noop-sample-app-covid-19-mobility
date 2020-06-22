@@ -15,28 +15,28 @@ const state = () => ({
 });
 
 const getters = {
-    getMetaByParams: (state) => ({ name, type }) => {
+    getMetaData: (state) => ({ name, type }) => {
         if (name in state.data && type in state.data[name]) {
-            return state[data][name][type];
+            return state.data[name][type];
         }
         return null;
     },
 };
 
 const actions = {
-    getMetaData({ commit }, { name, type }) {
+    fetchMetaData({ commit }, { name, type }) {
         commit(START_META_LOADING);
         APIUtil.getData(name, type)
             .then((res) =>
                 setTimeout(
                     () => commit(RECEIVE_META_DATA, res.data),
-                    dev ? 0 : 1500
+                    dev ? 1500 : 0
                 )
             )
             .catch((err) =>
                 setTimeout(
                     () => commit(SET_META_ERROR, err.response.data),
-                    dev ? 0 : 1500
+                    dev ? 1500 : 0
                 )
             );
     },
@@ -52,8 +52,8 @@ const mutations = {
         } else if (!(data.type in state.data[data.name])) {
             Vue.set(state.data[data.name], data.type, data);
         }
-        if (state.loading) Vue.set(state, loading, false);
-        if (state.error) Vue.set(state, error, null);
+        state.loading = false;
+        state.error = null;
     },
 };
 

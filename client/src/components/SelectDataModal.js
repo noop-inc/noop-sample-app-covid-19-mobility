@@ -9,8 +9,22 @@ import { mapActions, mapGetters, mapState } from "vuex";
 export default {
     name: "SelectDataModal",
     computed: {
-        ...mapState(["isLoading"]),
-        ...mapGetters(["getData"])
+        ...mapState("meta", ["loading", "error"]),
+        ...mapGetters("meta", ["getMetaData"]),
+        dataset() {
+            return this.selectedSource && this.selectedGeoType
+                ? this.getMetaData({
+                      name: this.selectedSource,
+                      type: this.selectedGeoType,
+                  })
+                : null;
+        },
+        ...mapGetters("mobility", ["getMobilityData"]),
+        currentMobility() {
+            return this.$route.name === "Graph"
+                ? this.getMobilityData(this.$route.params)
+                : null;
+        },
     },
     data() {
         return {
@@ -29,76 +43,49 @@ export default {
                 { value: null, text: "Select a Data Type", disabled: true },
             ],
             selectedData: null,
-            dataset: null,
         };
     },
     methods: {
-        ...mapActions(["fetchData"]),
-        checkStoreForData() {
-            const dataAttr = {
-                kind: "meta",
-                name: this.selectedSource,
-                type: this.selectedGeoType,
-            };
-            const dataset = this.getData(dataAttr);
-            if (dataset) {
-                this.dataset = dataset;
-            } else {
-                this.fetchData(dataAttr);
-            }
-        },
-    },
-    created() {
-        this.$store.subscribe((mutation, state) => {
-            if (mutation.type === "setData" && mutation.payload.kind === "meta") {
-                const { name, type } = mutation.payload.data;
-                if (
-                    name === this.selectedSource &&
-                    type === this.selectedGeoType
-                ) {
-                    this.dataset = mutation.payload.data;
-                }
-            }
-        });
-        if (this.selectedSource && this.selectedGeoType) {
-            if (!this.dataset) {
-                this.checkStoreForData();
-            }
+        ...mapActions("meta", ["fetchMetaData"]),
+        checkForMetaData() {
+            const source = this.dataset ? this.dataset.name : null;
+            const geo = this.dataset ? this.dataset.type : null;
+            debugger
             if (
-                this.dataset.name !== this.selectedSource ||
-                this.dataset.type !== this.selectedGeoType
+                this.selectedSource &&
+                this.selectedGeoType &&
+                (this.selectedSource !== source || this.selectedGeoType !== geo)
             ) {
-                this.checkStoreForData();
-            }
-        }
-    },
-    updated() {
-        if (this.selectedSource && this.selectedGeoType) {
-            if (this.selectedSource in this.$store.state.meta) {
-                if (
-                    this.selectedGeoType in
-                    this.$store.state.meta[this.selectedSource]
-                ) {
-                    this.dataset = this.$store.state.meta[this.selectedSource][
-                        this.selectedGeoType
-                    ];
-                } else {
-                    this.fetchData({
-                        kind: "meta",
-                        name: this.selectedSource,
-                        type: this.selectedGeoType,
-                    });
-                }
-            } else {
-                this.fetchData({
-                    kind: "meta",
+                this.fetchMetaData({
                     name: this.selectedSource,
                     type: this.selectedGeoType,
                 });
             }
+        },
+    },
+    created() {
+        this.$root.$on("bv::modal::show", (bvEvent, modalId) => {
+            if (this.currentMobility) {
+                const { source, geo, name, type } = this.currentMobility;
+                this.selectedSource = source;
+                this.selectedGeoType =
+                    geo === "country" ? "countries" : "states";
+                this.selectedLocaton = name;
+                this.selectedData = type;
+            }
+        });
+        this.checkForMetaData();
+    },
+    updated() {
+        if (this.dataset) {
+            this.locationOptions = Object.keys(this.dataset.data);
         }
+        this.checkForMetaData();
     },
     render() {
+        if (this.dataset) {
+            console.log(this.dataset);
+        }
         return (
             <BModal
                 id="select-data-modal"

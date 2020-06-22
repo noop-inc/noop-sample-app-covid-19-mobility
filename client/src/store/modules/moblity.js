@@ -15,28 +15,28 @@ const state = () => ({
 });
 
 const getters = {
-    getMobilityByParams: (state) => ({ name, type }) => {
+    getMobilityData: (state) => ({ name, type }) => {
         if (name in state.data && type in state.data[name]) {
-            return state[data][name][type];
+            return state.data[name][type];
         }
         return null;
     },
 };
 
 const actions = {
-    getMobilityData({ commit }, { name, type }) {
+    fetchMobilityData({ commit }, { name, type }) {
         commit(START_MOBILITY_LOADING);
         APIUtil.getData(name, type)
             .then((res) =>
                 setTimeout(
                     () => commit(RECEIVE_MOBILITY_DATA, res.data),
-                    dev ? 0 : 1500
+                    dev ? 1500 : 0
                 )
             )
             .catch((err) =>
                 setTimeout(
                     () => commit(SET_MOBILITY_ERROR, err.response.data),
-                    dev ? 0 : 1500
+                    dev ? 1500 : 0
                 )
             );
     },
@@ -52,8 +52,8 @@ const mutations = {
         } else if (!(data.type in state.data[data.name])) {
             Vue.set(state.data[data.name], data.type, data);
         }
-        if (state.loading) Vue.set(state, loading, false);
-        if (state.error) Vue.set(state, error, null);
+        state.loading = false;
+        state.error = null;
     },
 };
 

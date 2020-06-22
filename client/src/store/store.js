@@ -3,6 +3,8 @@ import Vuex from "vuex";
 import meta from "./modules/meta";
 import mobility from "./modules/moblity";
 
+Vue.use(Vuex);
+
 const dev = process.env.NODE_ENV !== "production";
 
 let createLogger;
@@ -10,8 +12,6 @@ let createLogger;
 if (dev) {
     createLogger = require("vuex/dist/logger");
 }
-
-Vue.use(Vuex);
 
 // const APIUtil = (name, type) => Axios.get(`/api/${name}/${type}`);
 
