@@ -31,15 +31,15 @@ export default {
             sourceOptions: ["Apple", "Google"],
             selectedSource: null,
             geoTypeOptions: [
-                { value: "countries", text: "Countries" },
-                { value: "states", text: "United States" },
+                "Countries",
+                { value: "States", text: "United States" },
             ],
             selectedGeoType: null,
-            locationOptions: [
+            locationDefault: [
                 { value: null, text: "Select a Location", disabled: true },
             ],
             selectedLocaton: null,
-            dataOptions: [
+            dataDefault: [
                 { value: null, text: "Select a Data Type", disabled: true },
             ],
             selectedData: null,
@@ -50,12 +50,15 @@ export default {
         checkForMetaData() {
             const source = this.dataset ? this.dataset.name : null;
             const geo = this.dataset ? this.dataset.type : null;
-            debugger
             if (
                 this.selectedSource &&
                 this.selectedGeoType &&
                 (this.selectedSource !== source || this.selectedGeoType !== geo)
             ) {
+                // this.locationOptions = [this.locationOptions[0]];
+                // this.dataOptions = [this.dataOptions.slice[0]];
+                Object.assign(this.selectedLocaton, null);
+                Object.assign(this.selectedData, null);
                 this.fetchMetaData({
                     name: this.selectedSource,
                     type: this.selectedGeoType,
@@ -64,12 +67,11 @@ export default {
         },
     },
     created() {
-        this.$root.$on("bv::modal::show", (bvEvent, modalId) => {
+        this.$root.$on("bv::modal::show", () => {
             if (this.currentMobility) {
                 const { source, geo, name, type } = this.currentMobility;
                 this.selectedSource = source;
-                this.selectedGeoType =
-                    geo === "country" ? "countries" : "states";
+                this.selectedGeoType = geo;
                 this.selectedLocaton = name;
                 this.selectedData = type;
             }
@@ -77,12 +79,12 @@ export default {
         this.checkForMetaData();
     },
     updated() {
-        if (this.dataset) {
-            this.locationOptions = Object.keys(this.dataset.data);
-        }
+
         this.checkForMetaData();
+        
     },
     render() {
+        debugger
         if (this.dataset) {
             console.log(this.dataset);
         }
@@ -108,16 +110,16 @@ export default {
                 <BFormGroup>
                     <BFormSelect
                         vModel={this.selectedLocaton}
-                        options={this.locationOptions}
-                        disabled={this.locationOptions.length <= 1}
+                        options={this.dataset ? [...this.locationDefault, ...Array.from(Object.keys(this.dataset.data)).sort()] : this.locationDefault}
+                        disabled={!this.dataset}
                     />
                 </BFormGroup>
 
                 <BFormGroup>
                     <BFormSelect
                         vModel={this.selectedData}
-                        options={this.dataOptions}
-                        disabled={this.dataOptions.length <= 1}
+                        options={this.dataset && this.selectedLocaton ? [...this.dataDefault, ...Array.from(this.dataset.data[this.selectedLocaton]).sort()] : this.dataDefault}
+                        disabled={!this.dataset || !this.selectedLocaton}
                     />
                 </BFormGroup>
             </BModal>

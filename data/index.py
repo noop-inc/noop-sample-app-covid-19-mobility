@@ -51,8 +51,7 @@ def source_dataset():
                     region = '{} United States'.format(row['sub_region_1'])
 
                 if region not in google_regions[geo_type]:
-                    google_regions[geo_type][region] = {
-                        'region': region, 'values': []}
+                    google_regions[geo_type][region] = []
 
                 if region not in google_data:
                     google_data[region] = {}
@@ -69,9 +68,8 @@ def source_dataset():
                             google_data[region][data_type]['data'].append(
                                 {'date': row['date'], 'value': int(value)})
 
-                        if data_type not in google_regions[geo_type][region]['values']:
-                            google_regions[geo_type][region]['values'].append(
-                                data_type)
+                        if data_type not in google_regions[geo_type][region]:
+                            google_regions[geo_type][region].append(data_type)
 
         google_meta['Countries']['data'] = google_regions['Countries']
         google_meta['States']['data'] = google_regions['States']
@@ -124,10 +122,9 @@ def source_dataset():
                     region = '{} United States'.format(region)
 
                 if region not in apple_regions[geo_type]:
-                    apple_regions[geo_type][region] = {
-                        'region': region, 'values': [data_type]}
+                    apple_regions[geo_type][region] = [data_type]
                 else:
-                    apple_regions[geo_type][region]['values'].append(data_type)
+                    apple_regions[geo_type][region].append(data_type)
 
                 apple_datum = {'source': 'Apple', 'geo': geo_type, 'name': region,
                                'type': data_type, 'data': []}
