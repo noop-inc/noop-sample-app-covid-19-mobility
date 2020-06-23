@@ -3,8 +3,7 @@ import {
     BModal,
     BFormGroup,
     BFormRadioGroup,
-    BFormSelect,
-    BForm
+    BFormSelect
 } from "bootstrap-vue";
 import { mapActions, mapGetters, mapState } from "vuex";
 import Spinner from "./Spinner.vue";
@@ -134,7 +133,7 @@ export default {
                     )
                 }
             >
-                <BForm class="selected-data-form position-relative">
+                <section class="selected-data-form">
                     <BFormGroup label="Select a Data Source:">
                         <BFormRadioGroup
                             id="select-source-radio-group"
@@ -171,7 +170,7 @@ export default {
                     {this.loading ? (
                         <Spinner color="light" class="select-data-spinner" />
                     ) : null}
-                </BForm>
+                </section>
             </BModal>
         );
     }
@@ -179,6 +178,9 @@ export default {
 </script>
 
 <style lang="scss">
+.selected-data-form {
+    position: relative;
+}
 .select-data-spinner-backdrop {
     opacity: 0.5;
     position: fixed;
