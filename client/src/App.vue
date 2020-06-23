@@ -4,7 +4,6 @@ import { BContainer } from "bootstrap-vue";
 export default {
     name: "App",
     render() {
-        console.log(this.$store)
         return (
             <div id="app">
                 <NavBar />
@@ -21,10 +20,10 @@ export default {
 @import "~bootstrap";
 @import "~bootstrap-vue";
 
-.custom-select{
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+.custom-select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
 #app {

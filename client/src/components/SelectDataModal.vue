@@ -1,0 +1,195 @@
+<script>
+import {
+    BModal,
+    BFormGroup,
+    BFormRadioGroup,
+    BFormSelect,
+    BForm
+} from "bootstrap-vue";
+import { mapActions, mapGetters, mapState } from "vuex";
+import Spinner from "./Spinner.vue";
+
+export default {
+    name: "SelectDataModal",
+    computed: {
+        ...mapState("meta", ["loading", "error"]),
+        ...mapGetters("meta", ["getMetaData"]),
+        dataset() {
+            return this.selectedSource && this.selectedGeoType
+                ? this.getMetaData({
+                      name: this.selectedSource,
+                      type: this.selectedGeoType
+                  })
+                : null;
+        },
+        ...mapGetters("mobility", ["getMobilityData"]),
+        currentMobility() {
+            return this.$route.name === "Graph"
+                ? this.getMobilityData(this.$route.params)
+                : null;
+        }
+    },
+    data() {
+        return {
+            sourceOptions: ["Apple", "Google"],
+            selectedSource: null,
+            geoTypeOptions: [
+                "Countries",
+                { value: "States", text: "United States" }
+            ],
+            selectedGeoType: null,
+            locationDefault: [
+                { value: null, text: "Select a Location", disabled: true }
+            ],
+            selectedLocaton: null,
+            dataDefault: [
+                { value: null, text: "Select a Data Type", disabled: true }
+            ],
+            selectedData: null
+        };
+    },
+    methods: {
+        ...mapActions("meta", ["fetchMetaData"]),
+        checkForMetaData() {
+            const source = this.dataset ? this.dataset.name : null;
+            const geo = this.dataset ? this.dataset.type : null;
+            if (
+                this.selectedSource &&
+                this.selectedGeoType &&
+                (this.selectedSource !== source || this.selectedGeoType !== geo)
+            ) {
+                this.fetchMetaData({
+                    name: this.selectedSource,
+                    type: this.selectedGeoType
+                });
+            }
+        },
+        locationOptions() {
+            if (this.dataset) {
+                return [
+                    ...this.locationDefault,
+                    ...Array.from(Object.keys(this.dataset.data)).sort()
+                ];
+            } else {
+                return this.locationDefault;
+            }
+        },
+        dataOptions() {
+            if (this.dataset && this.selectedLocaton in this.dataset.data) {
+                return [
+                    ...this.dataDefault,
+                    ...Array.from(
+                        this.dataset.data[this.selectedLocaton]
+                    ).sort()
+                ];
+            } else {
+                return this.dataDefault;
+            }
+        }
+    },
+    created() {
+        this.checkForMetaData();
+    },
+    mounted() {
+        this.$refs.selectDataModal.$on("show", () => {
+            this.$emit("modal-visible");
+        });
+        this.$on("modal-visible", () => {
+            if (this.currentMobility) {
+                const { source, geo, name, type } = this.currentMobility;
+                [
+                    this.selectedSource,
+                    this.selectedGeoType,
+                    this.selectedLocaton,
+                    this.selectedData
+                ] = [source, geo, name, type];
+            }
+        });
+    },
+    updated() {
+        if (this.dataset) {
+            if (!(this.selectedLocaton in this.dataset.data)) {
+                this.selectedLocaton = null;
+                this.selectedData = null;
+            } else if (
+                !this.dataset.data[this.selectedLocaton].includes(
+                    this.selectedData
+                )
+            ) {
+                this.selectedData = null;
+            }
+        }
+
+        this.checkForMetaData();
+    },
+    render() {
+        return (
+            <BModal
+                id="select-data-modal"
+                ref="selectDataModal"
+                title="Select Parameters for Mobility Data"
+                onOk={() =>
+                    this.$router.push(
+                        `/${this.selectedLocaton}/${this.selectedData}`
+                    )
+                }
+            >
+                <BForm class="selected-data-form position-relative">
+                    <BFormGroup label="Select a Data Source:">
+                        <BFormRadioGroup
+                            id="select-source-radio-group"
+                            vModel={this.selectedSource}
+                            options={this.sourceOptions}
+                            disabled={this.loading}
+                        ></BFormRadioGroup>
+                    </BFormGroup>
+                    <BFormGroup label="Select a Region Type:">
+                        <BFormRadioGroup
+                            id="select-geo-type-radio-group"
+                            vModel={this.selectedGeoType}
+                            options={this.geoTypeOptions}
+                            disabled={this.loading}
+                        ></BFormRadioGroup>
+                    </BFormGroup>
+                    <BFormGroup>
+                        <BFormSelect
+                            vModel={this.selectedLocaton}
+                            options={this.locationOptions()}
+                            disabled={!this.dataset}
+                        />
+                    </BFormGroup>
+                    <BFormGroup>
+                        <BFormSelect
+                            vModel={this.selectedData}
+                            options={this.dataOptions()}
+                            disabled={!this.dataset || !this.selectedLocaton}
+                        />
+                    </BFormGroup>
+                    {this.loading ? (
+                        <div class="select-data-spinner-backdrop" />
+                    ) : null}
+                    {this.loading ? (
+                        <Spinner color="light" class="select-data-spinner" />
+                    ) : null}
+                </BForm>
+            </BModal>
+        );
+    }
+};
+</script>
+
+<style lang="scss">
+.select-data-spinner-backdrop {
+    opacity: 0.5;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #000;
+}
+.select-data-spinner {
+    position: absolute;
+    top: 0;
+}
+</style>

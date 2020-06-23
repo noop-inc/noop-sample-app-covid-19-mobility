@@ -48,7 +48,7 @@ def source_dataset():
                     region = row['country_region']
                 else:
                     geo_type = 'States'
-                    region = '{} United States'.format(row['sub_region_1'])
+                    region = '{}, United States'.format(row['sub_region_1'])
 
                 if region not in google_regions[geo_type]:
                     google_regions[geo_type][region] = []
@@ -119,7 +119,7 @@ def source_dataset():
                     geo_type = 'Countries'
                 else:
                     geo_type = 'States'
-                    region = '{} United States'.format(region)
+                    region = '{}, United States'.format(region)
 
                 if region not in apple_regions[geo_type]:
                     apple_regions[geo_type][region] = [data_type]
