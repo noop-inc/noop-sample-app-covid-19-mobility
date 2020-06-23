@@ -1,6 +1,6 @@
 <script>
 import { mapActions, mapGetters, mapState } from "vuex";
-import Spinner from "../components/Spinner";
+import Spinner from "../components/Spinner.vue";
 
 export default {
     computed: {

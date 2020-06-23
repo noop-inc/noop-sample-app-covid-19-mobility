@@ -30,13 +30,13 @@ const actions = {
             .then((res) =>
                 setTimeout(
                     () => commit(RECEIVE_META_DATA, res.data),
-                    dev ? 1500 : 0
+                    dev ? 1000 : 0
                 )
             )
             .catch((err) =>
                 setTimeout(
                     () => commit(SET_META_ERROR, err.response.data),
-                    dev ? 1500 : 0
+                    dev ? 1000 : 0
                 )
             );
     },

@@ -1,6 +1,6 @@
 import IconGitHub from "./icons/IconGitHub";
 import IconRearc from "./icons/IconRearc";
-import SelectDataModal from "./SelectDataModal";
+import SelectDataModal from "./SelectDataModal.vue";
 import {
     BNavbar,
     BNavbarBrand,
