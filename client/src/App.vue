@@ -27,13 +27,14 @@ export default {
 }
 
 #app {
-    background-color: var(--light);
+    background-color: var(--secondary);
     height: calc(100vh);
     width: 100vw;
 }
 
 .router-container {
-    padding-top: 56px;
+    padding-top: 71px;
+    padding-bottom: 15px;
     height: calc(100vh);
 }
 </style>
