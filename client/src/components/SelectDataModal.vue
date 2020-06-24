@@ -23,7 +23,7 @@ export default {
         },
         ...mapGetters("mobility", ["getMobilityData"]),
         currentMobility() {
-            return this.$route.name === "Graph"
+            return this.$route.name === "Data"
                 ? this.getMobilityData(this.$route.params)
                 : null;
         }
@@ -37,13 +37,7 @@ export default {
                 { value: "States", text: "United States" }
             ],
             selectedGeoType: null,
-            locationDefault: [
-                { value: null, text: "Select a Location", disabled: true }
-            ],
             selectedLocaton: null,
-            dataDefault: [
-                { value: null, text: "Select a Data Type", disabled: true }
-            ],
             selectedData: null
         };
     },
@@ -64,26 +58,48 @@ export default {
             }
         },
         locationOptions() {
+            const locationDefault = {
+                value: this.dataset ? null : this.selectedLocaton,
+                text: "Select a Location",
+                disabled: true
+            };
             if (this.dataset) {
                 return [
-                    ...this.locationDefault,
+                    locationDefault,
                     ...Array.from(Object.keys(this.dataset.data)).sort()
                 ];
             } else {
-                return this.locationDefault;
+                return [locationDefault];
             }
         },
         dataOptions() {
+            const dataDefault = {
+                value: this.dataset ? null : this.selectedData,
+                text: "Select a Data Type",
+                disabled: true
+            };
             if (this.dataset && this.selectedLocaton in this.dataset.data) {
                 return [
-                    ...this.dataDefault,
+                    dataDefault,
                     ...Array.from(
                         this.dataset.data[this.selectedLocaton]
                     ).sort()
                 ];
             } else {
-                return this.dataDefault;
+                return [dataDefault];
             }
+        },
+        formatSelectedLocation() {
+            if (!this.dataset) {
+                return null;
+            }
+            return this.selectedLocaton;
+        },
+        formatSelectedData() {
+            if (!this.dataset) {
+                return null;
+            }
+            return this.selectedData;
         }
     },
     created() {

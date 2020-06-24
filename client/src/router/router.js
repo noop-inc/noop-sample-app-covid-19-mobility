@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import Graph from "../views/Graph.vue";
+import Data from "../views/Data.vue";
 
 Vue.use(VueRouter);
 
@@ -13,8 +13,8 @@ const routes = [
     },
     {
         path: "/:name/:type",
-        name: "Graph",
-        component: Graph,
+        name: "Data",
+        component: Data,
     },
 ];
 
