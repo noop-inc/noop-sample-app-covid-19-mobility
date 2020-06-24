@@ -1,6 +1,7 @@
 <script>
 import { mapActions, mapGetters, mapState } from "vuex";
 import Spinner from "../components/Spinner.vue";
+import Graph from "../components/Graph.vue";
 
 export default {
     computed: {
@@ -21,6 +22,17 @@ export default {
             ) {
                 this.fetchMobilityData(this.$route.params);
             }
+        },
+        formatData() {
+            if (this.dataset) {
+                const data = [];
+                for (const datum of this.dataset.data) {
+                    data.push({ x: datum.date, y: datum.value });
+                }
+                return {datasets: [{ data, fill: false }]};
+            } else {
+                return null;
+            }
         }
     },
 
@@ -34,10 +46,21 @@ export default {
 
     render() {
         return this.dataset ? (
-            <div class="graph">{JSON.stringify(this.dataset)}</div>
+            <section class="graph-container">
+                <Graph chartData={this.formatData()} options={{maintainAspectRatio: false, responsive: true, scales: {xAxes: [{type: "time"}]}, legend: false}}/>
+            </section>
         ) : (
             <Spinner />
         );
     }
 };
 </script>
+
+<style lang="scss">
+.graph-container {
+    height: 100%;
+    position: relative;
+}
+</style>
+
+// <div class="graph">{JSON.stringify(this.dataset)}</div>
