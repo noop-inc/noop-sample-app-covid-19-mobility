@@ -14,7 +14,6 @@ export default {
         }
     },
     mounted() {
-        debugger
         this.renderChart(this.chartData, this.options);
     }
     // render() {

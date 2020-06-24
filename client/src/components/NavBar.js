@@ -19,7 +19,7 @@ export default {
         return (
             <div class="navbar-container">
                 <BNavbar fixed="top" toggleable="sm" type="dark" variant="dark">
-                    <BNavbarBrand href="#">Mobility Dashboard</BNavbarBrand>
+                    <BNavbarBrand href="#">Mobility Data Dashboard</BNavbarBrand>
                     <BNavbarToggle target="nav-collapse" />
                     <BCollapse id="nav-collapse" is-nav>
                         <BNavbarNav>
