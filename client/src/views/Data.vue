@@ -4,7 +4,7 @@ import Spinner from "../components/Spinner.vue";
 import Graph from "../components/Graph";
 import RawData from "../components/RawData";
 import colors from "../util/colors";
-import { BTab, BTabs, BCard } from "bootstrap-vue";
+import { BTab, BTabs, BCard, BContainer } from "bootstrap-vue";
 
 export default {
     name: "DataContainer",
@@ -14,6 +14,11 @@ export default {
         dataset() {
             return this.getMobilityData(this.$route.params);
         }
+    },
+    data() {
+        return {
+            headerHeight: 19
+        };
     },
     methods: {
         ...mapActions("mobility", ["fetchMobilityData"]),
@@ -68,35 +73,53 @@ export default {
             } else {
                 return null;
             }
+        },
+        setHeaderHeight() {
+            if (this.$refs.chartHeader.clientHeight) {
+                this.headerHeight = this.$refs.chartHeader.clientHeight;
+            } else if (this.$refs.rawDataHeader.clientHeight) {
+                this.headerHeight = this.$refs.rawDataHeader.clientHeight;
+            } else {
+                this.headerHeight = 19;
+            }
         }
     },
     created() {
         this.checkForMobilityData();
     },
-
+    mounted() {
+        window.addEventListener("resize", this.setHeaderHeight);
+    },
     updated() {
         this.checkForMobilityData();
+        this.setHeaderHeight();
     },
-
+    beforeDestroy() {
+        window.removeEventListener("resize", this.setHeaderHeight);
+    },
     render() {
         return (
             <BCard no-body>
                 <BTabs card vertical pills active-nav-item-class="bg-dark">
                     <BTab title="Chart" active>
-                        <section class="data-content-container border rounded">
+                        <h6 ref="chartHeader" class="data-content-header">
+                            {this.dataset
+                                ? `${this.dataset.type} data for ${this.dataset.name} during the COVID-19 Pandemic`
+                                : null}
+                        </h6>
+                        <section
+                            style={`height: calc(100vh - ${136 +
+                                this.headerHeight}px);`}
+                            class="data-content-container border rounded"
+                        >
                             {this.dataset ? (
                                 <Graph
                                     styles={{ height: `100%` }}
                                     chartData={this.formatData()}
                                     options={{
-                                        title: {
-                                            display: true,
-                                            text: `${this.dataset.type} data for ${this.dataset.name} during the COVID-19 Pandemic`,
-                                            fontStyle: "normal",
-                                            fontSize: 16
-                                        },
                                         maintainAspectRatio: false,
                                         responsive: true,
+                                        animation: false,
                                         scales: {
                                             xAxes: [
                                                 {
@@ -110,7 +133,7 @@ export default {
                                                 {
                                                     ticks: {
                                                         maxTicksLimit: 8,
-                                                        stepSize: 20
+                                                        stepSize: 10
                                                     }
                                                 }
                                             ]
@@ -124,7 +147,16 @@ export default {
                         </section>
                     </BTab>
                     <BTab title="Data">
-                        <section class="data-content-container border rounded">
+                        <h6 ref="rawDataHeader" class="data-content-header">
+                            {this.dataset
+                                ? `${this.dataset.type} data for ${this.dataset.name} during the COVID-19 Pandemic`
+                                : null}
+                        </h6>
+                        <section
+                            class="data-content-container border rounded"
+                            style={`height: calc(100vh - ${136 +
+                                this.headerHeight}px);`}
+                        >
                             {this.dataset ? (
                                 <RawData dataset={this.dataset} />
                             ) : (
@@ -140,8 +172,13 @@ export default {
 </script>
 
 <style lang="scss">
+.card-header {
+    padding: 12px;
+}
+.data-content-header {
+    min-height: 19px;
+}
 .data-content-container {
-    height: calc(100vh - 126px);
-    overflow: scroll;
+    overflow-y: scroll;
 }
 </style>

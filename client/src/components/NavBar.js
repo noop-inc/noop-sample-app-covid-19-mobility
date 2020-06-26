@@ -42,7 +42,7 @@ export default {
                             </BNavItem>
                             <BNavItem
                                 align="center"
-                                href="https://github.com/rearc-data/mobility-dashboard"
+                                href="https://github.com/noop-cloud/mobility-dashboard"
                                 target="_blank"
                             >
                                 <IconGitHub class="d-inline-block align-top" />
