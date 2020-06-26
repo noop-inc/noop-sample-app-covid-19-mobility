@@ -19,7 +19,7 @@ export default {
     },
     data() {
         return {
-            headerHeight: 24
+            headerHeight: 19
         };
     },
     methods: {
@@ -67,8 +67,8 @@ export default {
                             borderColor: colors.primary + "40",
                             backgroundColor: colors.primary + "40",
                             pointBorderColor: pointColor,
-                            pointRadius: 4,
-                            pointHoverRadius: 8,
+                            pointRadius: 3,
+                            pointHoverRadius: 6,
                             pointHoverBorderColor: pointHover,
                             pointBackgroundColor: pointColor,
                             fill: "start"
@@ -130,8 +130,8 @@ export default {
                 this.headerHeight = this.$refs.rawDataHeader.clientHeight;
             } else if (this.$refs.tableHeader.clientHeight) {
                 this.headerHeight = this.$refs.tableHeader.clientHeight;
-            } else if (this.headerHeight !== 24) {
-                this.headerHeight = 24;
+            } else if (this.headerHeight !== 19) {
+                this.headerHeight = 19;
             }
         }
     },
@@ -153,11 +153,11 @@ export default {
             <BCard no-body>
                 <BTabs card vertical pills no-fade>
                     <BTab title="Chart" active>
-                        <h5 ref="chartHeader" class="data-content-header">
+                        <h6 ref="chartHeader" class="data-content-header">
                             {this.dataset
                                 ? `${this.dataset.type} data for ${this.dataset.name} during the COVID-19 Pandemic`
                                 : null}
-                        </h5>
+                        </h6>
                         <section
                             style={`height: calc(100vh - ${136 +
                                 this.headerHeight}px);`}
@@ -178,11 +178,11 @@ export default {
                         </section>
                     </BTab>
                     <BTab title="Table">
-                        <h5 ref="tableHeader" class="data-content-header">
+                        <h6 ref="tableHeader" class="data-content-header">
                             {this.dataset
                                 ? `${this.dataset.type} data for ${this.dataset.name} during the COVID-19 Pandemic`
                                 : null}
-                        </h5>
+                        </h6>
                         <section
                             class="data-content-container border rounded"
                             style={`height: calc(100vh - ${136 +
@@ -199,11 +199,11 @@ export default {
                         </section>
                     </BTab>
                     <BTab title="JSON">
-                        <h5 ref="rawDataHeader" class="data-content-header">
+                        <h6 ref="rawDataHeader" class="data-content-header">
                             {this.dataset
                                 ? `${this.dataset.type} data for ${this.dataset.name} during the COVID-19 Pandemic`
                                 : null}
-                        </h5>
+                        </h6>
                         <section
                             class="data-content-container border rounded"
                             style={`height: calc(100vh - ${136 +
