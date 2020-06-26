@@ -1,5 +1,6 @@
 <script>
 import { mapActions, mapGetters, mapState } from "vuex";
+import moment from "moment";
 import Spinner from "../components/Spinner.vue";
 import Graph from "../components/Graph";
 import Table from "../components/Table.vue";
@@ -78,6 +79,50 @@ export default {
                 return null;
             }
         },
+        formatOptions() {
+            return {
+                maintainAspectRatio: false,
+                responsive: true,
+                animation: false,
+                scales: {
+                    xAxes: [
+                        {
+                            type: "time",
+                            time: {
+                                unit: "month"
+                            }
+                        }
+                    ],
+                    yAxes: [
+                        {
+                            ticks: {
+                                maxTicksLimit: 8,
+                                stepSize: 10
+                            },
+                            scaleLabel: {
+                                display: true,
+                                labelString: `Percent of Offset from Baseline (${
+                                    this.dataset.source === "Apple" ? "10" : ""
+                                }0%)`,
+                                fontSize: 14
+                            }
+                        }
+                    ]
+                },
+                legend: false,
+                tooltips: {
+                    xPadding: 8,
+                    yPadding: 8,
+                    bodyFontSize: 14,
+                    titleFontSize: 14,
+                    callbacks: {
+                        title: tooltipItem =>
+                            moment(tooltipItem[0].xLabel).format("ll"),
+                        label: tooltipItem => `${tooltipItem.yLabel}%`
+                    }
+                }
+            };
+        },
         setHeaderHeight() {
             if (this.$refs.chartHeader.clientHeight) {
                 this.headerHeight = this.$refs.chartHeader.clientHeight;
@@ -125,6 +170,7 @@ export default {
                                 <Graph
                                     styles={{ height: `100%` }}
                                     chartData={this.formatData()}
+                                    chartOptions={this.formatOptions()}
                                 />
                             ) : (
                                 <Spinner />
@@ -146,7 +192,7 @@ export default {
                                 <div class="spinner-backdrop" />
                             )}
                             {this.dataset ? (
-                                <Table dataset={this.dataset.data} />
+                                <Table dataset={this.dataset} />
                             ) : (
                                 <Spinner />
                             )}

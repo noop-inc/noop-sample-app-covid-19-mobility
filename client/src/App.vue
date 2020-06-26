@@ -31,7 +31,7 @@ button:disabled,
 }
 
 #app {
-    background-color: var(--secondary);
+    background-color: var(--dark);
     height: calc(100vh);
     width: 100vw;
 }

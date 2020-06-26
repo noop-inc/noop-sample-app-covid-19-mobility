@@ -5,7 +5,7 @@ export default {
     name: "Table",
     props: {
         dataset: {
-            type: Array,
+            type: Object,
             default: null
         }
     },
@@ -19,7 +19,11 @@ export default {
                 },
                 {
                     key: "value",
-                    label: "Percent of Baseline Offset"
+                    label: this.dataset
+                        ? `Percent of Offset from Baseline (${
+                              this.dataset.source === "Apple" ? "10" : ""
+                          }0%)`
+                        : null
                 }
             ]
         };
@@ -29,20 +33,20 @@ export default {
             if (this.dataset) {
                 const data = [
                     {
-                        date: moment(this.dataset[0].date).format(
+                        date: moment(this.dataset.data[0].date).format(
                             "MMMM Do, YYYY"
                         ),
-                        value: `${this.dataset[0].value}%`,
+                        value: `${this.dataset.data[0].value}%`,
                         _rowVariant: "warning"
                     }
                 ];
 
-                for (let i = 1; i < this.dataset.length; i++) {
-                    const datum = this.dataset[i];
+                for (let i = 1; i < this.dataset.data.length; i++) {
+                    const datum = this.dataset.data[i];
                     let color;
-                    if (datum.value > this.dataset[i - 1].value) {
+                    if (datum.value > this.dataset.data[i - 1].value) {
                         color = "success";
-                    } else if (datum.value < this.dataset[i - 1].value) {
+                    } else if (datum.value < this.dataset.data[i - 1].value) {
                         color = "danger";
                     } else {
                         color = "warning";
