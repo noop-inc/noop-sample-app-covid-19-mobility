@@ -1,4 +1,5 @@
 export default {
+    name: "GitHubIcon",
     render() {
         return (
             <svg

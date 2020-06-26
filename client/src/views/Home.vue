@@ -1,7 +1,8 @@
-<template>
-    <div class="home">
-    </div>
-</template>
-
-<style lang="scss">
-</style>
+<script>
+export default {
+    name: "Home",
+    render() {
+        return <div>Home Page</div>;
+    }
+};
+</script>

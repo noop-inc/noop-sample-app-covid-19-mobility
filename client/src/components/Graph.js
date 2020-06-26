@@ -1,23 +1,22 @@
-<script>
 import { Line, mixins } from "vue-chartjs";
 export default {
+    name: "Graph",
     extends: Line,
     mixins: [mixins.reactiveProp],
     props: {
         chartData: {
             type: Object,
-            default: null
+            default: null,
         },
         options: {
             type: Object,
-            default: null
-        }
+            default: null,
+        },
     },
     mounted() {
         this.renderChart(this.chartData, this.options);
+    },
+    updated() {
+        this.renderChart(this.chartData, this.options);
     }
-    // render() {
-    //     return <div class="graph">{JSON.stringify(this.chartData)}</div>;
-    // }
 };
-</script>

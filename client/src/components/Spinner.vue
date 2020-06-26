@@ -2,6 +2,7 @@
 import GridLoader from "vue-spinner/src/GridLoader.vue";
 
 export default {
+    name: "LoadingSpinner",
     props: {
         size: {
             type: Number,
