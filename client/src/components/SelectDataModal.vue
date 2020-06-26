@@ -106,9 +106,13 @@ export default {
         },
         handleOk() {
             if (this.selectedLocaton && this.selectedData) {
-                this.$router.push(
-                    `/${this.selectedLocaton}/${this.selectedData}`
-                );
+                this.$router.push({
+                    name: "Data",
+                    params: {
+                        name: this.selectedLocaton,
+                        type: this.selectedData
+                    }
+                });
             }
         }
     },
@@ -128,6 +132,13 @@ export default {
                     this.selectedLocaton,
                     this.selectedData
                 ] = [source, geo, name, type];
+            } else {
+                [
+                    this.selectedSource,
+                    this.selectedGeoType,
+                    this.selectedLocaton,
+                    this.selectedData
+                ] = [null, null, null, null];
             }
         });
     },

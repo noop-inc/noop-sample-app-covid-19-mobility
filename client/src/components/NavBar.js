@@ -21,31 +21,14 @@ export default {
         return (
             <div class="navbar-container">
                 <BNavbar fixed="top" toggleable="sm" type="dark" variant="dark">
-                    <BNavbarBrand
-                        href="#"
-                        onClick={() =>
-                            this.$router.history.current.name !== "Home"
-                                ? this.$router.push("/")
-                                : null
-                        }
-                    >
-                        Mobility Data Dashboard
-                    </BNavbarBrand>
+                    <BNavbarBrand to="/">Mobility Data Dashboard</BNavbarBrand>
                     <BNavbarToggle target="nav-collapse" />
                     <BCollapse id="nav-collapse" is-nav>
                         <BNavbarNav>
                             <BNavItem align="center" VBModal_select-data-modal>
                                 Select Data
                             </BNavItem>
-                            <BNavItem
-                                align="center"
-                                onClick={() =>
-                                    this.$router.history.current.name !== "About"
-                                        ? this.$router.push("/about")
-                                        : null
-                                }
-                                href="#"
-                            >
+                            <BNavItem align="center" to="/about">
                                 About
                             </BNavItem>
                         </BNavbarNav>
