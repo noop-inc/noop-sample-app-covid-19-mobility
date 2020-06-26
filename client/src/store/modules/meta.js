@@ -30,13 +30,13 @@ const actions = {
             .then((res) =>
                 setTimeout(
                     () => commit(RECEIVE_META_DATA, res.data),
-                    dev ? 1000 : 0
+                    dev ? 500 : 0
                 )
             )
             .catch((err) =>
                 setTimeout(
                     () => commit(SET_META_ERROR, err.response.data),
-                    dev ? 1000 : 0
+                    dev ? 500 : 0
                 )
             );
     },
@@ -54,6 +54,9 @@ const mutations = {
         }
         state.loading = false;
         state.error = null;
+    },
+    [SET_META_ERROR](state, data) {
+        state.error = data.error;
     },
 };
 

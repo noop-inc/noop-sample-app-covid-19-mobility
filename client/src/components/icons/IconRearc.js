@@ -1,4 +1,5 @@
 export default {
+    name: "RearcLogo",
     render() {
         return (
             <svg

@@ -46,15 +46,18 @@ export default {
         checkForMetaData() {
             const source = this.dataset ? this.dataset.name : null;
             const geo = this.dataset ? this.dataset.type : null;
-            if (
-                this.selectedSource &&
-                this.selectedGeoType &&
-                (this.selectedSource !== source || this.selectedGeoType !== geo)
-            ) {
-                this.fetchMetaData({
-                    name: this.selectedSource,
-                    type: this.selectedGeoType
-                });
+            if (!this.loading) {
+                if (
+                    this.selectedSource &&
+                    this.selectedGeoType &&
+                    (this.selectedSource !== source ||
+                        this.selectedGeoType !== geo)
+                ) {
+                    this.fetchMetaData({
+                        name: this.selectedSource,
+                        type: this.selectedGeoType
+                    });
+                }
             }
         },
         locationOptions() {
@@ -100,6 +103,13 @@ export default {
                 return null;
             }
             return this.selectedData;
+        },
+        handleOk() {
+            if (this.selectedLocaton && this.selectedData) {
+                this.$router.push(
+                    `/${this.selectedLocaton}/${this.selectedData}`
+                );
+            }
         }
     },
     created() {
@@ -143,11 +153,8 @@ export default {
                 id="select-data-modal"
                 ref="selectDataModal"
                 title="Select Parameters for Mobility Data"
-                onOk={() =>
-                    this.$router.push(
-                        `/${this.selectedLocaton}/${this.selectedData}`
-                    )
-                }
+                ok-disabled={!this.selectedLocaton || !this.selectedData}
+                onOk={this.handleOk}
             >
                 <section class="selected-data-form">
                     <BFormGroup label="Select a Data Source:">

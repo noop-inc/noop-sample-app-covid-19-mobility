@@ -19,10 +19,13 @@ export default {
 <style lang="scss">
 @import "~bootstrap";
 @import "~bootstrap-vue";
+@import "../node_modules/prismjs/themes/prism.css";
+
+button:disabled, .custom-select:disabled {
+    cursor: not-allowed;
+}
 
 .custom-select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
     appearance: none;
 }
 
