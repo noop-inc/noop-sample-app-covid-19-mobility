@@ -163,9 +163,10 @@ export default {
             <BModal
                 id="select-data-modal"
                 ref="selectDataModal"
-                title="Select Parameters for Mobility Data"
+                title="Select Mobility Data to Examine"
                 ok-disabled={!this.selectedLocaton || !this.selectedData}
                 onOk={this.handleOk}
+                no-fade
             >
                 <section class="selected-data-form">
                     <BFormGroup label="Select a Data Source:">
@@ -199,10 +200,10 @@ export default {
                         />
                     </BFormGroup>
                     {this.loading ? (
-                        <div class="select-data-spinner-backdrop" />
+                        <div class="spinner-backdrop" />
                     ) : null}
                     {this.loading ? (
-                        <Spinner color="light" class="select-data-spinner" />
+                        <Spinner class="select-data-spinner" />
                     ) : null}
                 </section>
             </BModal>
@@ -214,15 +215,6 @@ export default {
 <style lang="scss">
 .selected-data-form {
     position: relative;
-}
-.select-data-spinner-backdrop {
-    opacity: 0.5;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #000;
 }
 .select-data-spinner {
     position: absolute;

@@ -2,7 +2,8 @@
 import { mapActions, mapGetters, mapState } from "vuex";
 import Spinner from "../components/Spinner.vue";
 import Graph from "../components/Graph";
-import RawData from "../components/RawData";
+import Table from "../components/Table.vue";
+import RawData from "../components/RawData.vue";
 import colors from "../util/colors";
 import { BTab, BTabs, BCard, BContainer } from "bootstrap-vue";
 
@@ -17,7 +18,7 @@ export default {
     },
     data() {
         return {
-            headerHeight: 19
+            headerHeight: 24
         };
     },
     methods: {
@@ -62,11 +63,14 @@ export default {
                     datasets: [
                         {
                             data,
-                            borderColor: colors.primary + "80",
+                            borderColor: colors.primary + "40",
+                            backgroundColor: colors.primary + "40",
                             pointBorderColor: pointColor,
+                            pointRadius: 4,
+                            pointHoverRadius: 8,
                             pointHoverBorderColor: pointHover,
                             pointBackgroundColor: pointColor,
-                            fill: false
+                            fill: "start"
                         }
                     ]
                 };
@@ -79,8 +83,10 @@ export default {
                 this.headerHeight = this.$refs.chartHeader.clientHeight;
             } else if (this.$refs.rawDataHeader.clientHeight) {
                 this.headerHeight = this.$refs.rawDataHeader.clientHeight;
-            } else {
-                this.headerHeight = 19;
+            } else if (this.$refs.tableHeader.clientHeight) {
+                this.headerHeight = this.$refs.tableHeader.clientHeight;
+            } else if (this.headerHeight !== 24) {
+                this.headerHeight = 24;
             }
         }
     },
@@ -100,63 +106,66 @@ export default {
     render() {
         return (
             <BCard no-body>
-                <BTabs card vertical pills active-nav-item-class="bg-dark">
+                <BTabs card vertical pills no-fade>
                     <BTab title="Chart" active>
-                        <h6 ref="chartHeader" class="data-content-header">
+                        <h5 ref="chartHeader" class="data-content-header">
                             {this.dataset
                                 ? `${this.dataset.type} data for ${this.dataset.name} during the COVID-19 Pandemic`
                                 : null}
-                        </h6>
+                        </h5>
                         <section
                             style={`height: calc(100vh - ${136 +
                                 this.headerHeight}px);`}
                             class="data-content-container border rounded"
                         >
+                            {this.dataset ? null : (
+                                <div class="spinner-backdrop" />
+                            )}
                             {this.dataset ? (
                                 <Graph
                                     styles={{ height: `100%` }}
                                     chartData={this.formatData()}
-                                    options={{
-                                        maintainAspectRatio: false,
-                                        responsive: true,
-                                        animation: false,
-                                        scales: {
-                                            xAxes: [
-                                                {
-                                                    type: "time",
-                                                    time: {
-                                                        unit: "month"
-                                                    }
-                                                }
-                                            ],
-                                            yAxes: [
-                                                {
-                                                    ticks: {
-                                                        maxTicksLimit: 8,
-                                                        stepSize: 10
-                                                    }
-                                                }
-                                            ]
-                                        },
-                                        legend: false
-                                    }}
                                 />
                             ) : (
                                 <Spinner />
                             )}
                         </section>
                     </BTab>
-                    <BTab title="Data">
-                        <h6 ref="rawDataHeader" class="data-content-header">
+                    <BTab title="Table">
+                        <h5 ref="tableHeader" class="data-content-header">
                             {this.dataset
                                 ? `${this.dataset.type} data for ${this.dataset.name} during the COVID-19 Pandemic`
                                 : null}
-                        </h6>
+                        </h5>
                         <section
                             class="data-content-container border rounded"
                             style={`height: calc(100vh - ${136 +
                                 this.headerHeight}px);`}
                         >
+                            {this.dataset ? null : (
+                                <div class="spinner-backdrop" />
+                            )}
+                            {this.dataset ? (
+                                <Table dataset={this.dataset.data} />
+                            ) : (
+                                <Spinner />
+                            )}
+                        </section>
+                    </BTab>
+                    <BTab title="JSON">
+                        <h5 ref="rawDataHeader" class="data-content-header">
+                            {this.dataset
+                                ? `${this.dataset.type} data for ${this.dataset.name} during the COVID-19 Pandemic`
+                                : null}
+                        </h5>
+                        <section
+                            class="data-content-container border rounded"
+                            style={`height: calc(100vh - ${136 +
+                                this.headerHeight}px);`}
+                        >
+                            {this.dataset ? null : (
+                                <div class="spinner-backdrop" />
+                            )}
                             {this.dataset ? (
                                 <RawData dataset={this.dataset} />
                             ) : (
@@ -176,7 +185,7 @@ export default {
     padding: 12px;
 }
 .data-content-header {
-    min-height: 19px;
+    min-height: 24px;
 }
 .data-content-container {
     overflow-y: scroll;
