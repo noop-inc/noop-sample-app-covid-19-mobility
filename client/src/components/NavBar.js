@@ -17,10 +17,9 @@ export default {
         BModal: VBModal,
     },
     render() {
-        console.log(this.$router);
         return (
             <div class="navbar-container">
-                <BNavbar fixed="top" toggleable="sm" type="dark" variant="dark">
+                <BNavbar fixed="top" toggleable="sm" type="dark" variant="primary">
                     <BNavbarBrand to="/">Mobility Data Dashboard</BNavbarBrand>
                     <BNavbarToggle target="nav-collapse" />
                     <BCollapse id="nav-collapse" is-nav>

@@ -21,7 +21,8 @@ export default {
 @import "~bootstrap-vue";
 @import "../node_modules/prismjs/themes/prism.css";
 
-button:disabled, .custom-select:disabled {
+button:disabled,
+.custom-select:disabled {
     cursor: not-allowed;
 }
 
@@ -39,5 +40,15 @@ button:disabled, .custom-select:disabled {
     padding-top: 71px;
     padding-bottom: 15px;
     height: calc(100vh);
+}
+
+.spinner-backdrop {
+    opacity: 0.5;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #000;
 }
 </style>

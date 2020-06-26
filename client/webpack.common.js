@@ -3,6 +3,7 @@ const VueLoaderPlugin = require("vue-loader/lib/plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const AutoPrefixer = require("autoprefixer");
+const MomentLocalesPlugin = require("moment-locales-webpack-plugin");
 
 module.exports = {
     output: {
@@ -47,6 +48,7 @@ module.exports = {
         ],
     },
     plugins: [
+        new MomentLocalesPlugin(),
         new VueLoaderPlugin(),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, "public", "index.html"),
