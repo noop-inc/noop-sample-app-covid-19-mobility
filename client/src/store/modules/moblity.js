@@ -1,4 +1,4 @@
-import * as APIUtil from "../../util/api";
+import { getData } from "../../util/api";
 import Vue from "vue";
 import {
     START_MOBILITY_LOADING,
@@ -21,22 +21,41 @@ const getters = {
         }
         return null;
     },
+    getRandomData: (state) => () => {
+        if (Object.keys(state.data).length) {
+            const randomLocation = Object.keys(state.data)[
+                Math.floor(Math.random() * Object.keys(state.data).length)
+            ];
+            const randomData = Object.keys(state.data[randomLocation])[
+                Math.floor(
+                    Math.random() *
+                        Object.keys(state.data[randomLocation]).length
+                )
+            ];
+            const { name, type, source, geo } = state.data[randomLocation][
+                randomData
+            ];
+            return { source, geo, location: name, data: type };
+        } else {
+            return null;
+        }
+    },
 };
 
 const actions = {
     fetchMobilityData({ commit }, { name, type }) {
         commit(START_MOBILITY_LOADING);
-        APIUtil.getData(name, type)
+        getData(name, type)
             .then((res) =>
                 setTimeout(
                     () => commit(RECEIVE_MOBILITY_DATA, res.data),
-                    dev ? 500 : 0
+                    dev ? 200 : 0
                 )
             )
             .catch((err) =>
                 setTimeout(
                     () => commit(SET_MOBILITY_ERROR, err.response.data),
-                    dev ? 500 : 0
+                    dev ? 200 : 0
                 )
             );
     },

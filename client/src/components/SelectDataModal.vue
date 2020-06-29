@@ -11,6 +11,12 @@ import Spinner from "./Spinner.vue";
 export default {
     name: "SelectDataModal",
     computed: {
+        ...mapState("home", {
+            homeSource: state => state.source,
+            homeGeo: state => state.geo,
+            homeLocation: state => state.location,
+            homeData: state => state.data
+        }),
         ...mapState("meta", ["loading", "error"]),
         ...mapGetters("meta", ["getMetaData"]),
         dataset() {
@@ -124,7 +130,19 @@ export default {
             this.$emit("modal-visible");
         });
         this.$on("modal-visible", () => {
-            if (this.currentMobility) {
+            if (this.$route.name === "Home") {
+                [
+                    this.selectedSource,
+                    this.selectedGeoType,
+                    this.selectedLocaton,
+                    this.selectedData
+                ] = [
+                    this.homeSource,
+                    this.homeGeo,
+                    this.homeLocation,
+                    this.homeData
+                ];
+            } else if (this.currentMobility) {
                 const { source, geo, name, type } = this.currentMobility;
                 [
                     this.selectedSource,
@@ -199,9 +217,7 @@ export default {
                             disabled={!this.dataset || !this.selectedLocaton}
                         />
                     </BFormGroup>
-                    {this.loading ? (
-                        <div class="spinner-backdrop" />
-                    ) : null}
+                    {this.loading ? <div class="spinner-backdrop" /> : null}
                     {this.loading ? (
                         <Spinner class="select-data-spinner" />
                     ) : null}

@@ -1,5 +1,6 @@
 import IconGitHub from "./icons/IconGitHub";
 import IconRearc from "./icons/IconRearc";
+import IconInfo from "./icons/IconInfo";
 import SelectDataModal from "./SelectDataModal.vue";
 import {
     BNavbar,
@@ -19,7 +20,12 @@ export default {
     render() {
         return (
             <div class="navbar-container">
-                <BNavbar fixed="top" toggleable="sm" type="dark" variant="primary">
+                <BNavbar
+                    fixed="top"
+                    toggleable="sm"
+                    type="dark"
+                    variant="primary"
+                >
                     <BNavbarBrand to="/">Mobility Data Dashboard</BNavbarBrand>
                     <BNavbarToggle target="nav-collapse" />
                     <BCollapse id="nav-collapse" is-nav>
@@ -45,6 +51,9 @@ export default {
                                 target="_blank"
                             >
                                 <IconGitHub class="d-inline-block align-top" />
+                            </BNavItem>
+                            <BNavItem align="center" href="" target="_blank">
+                                <IconInfo class="d-inline-block align-top" />
                             </BNavItem>
                         </BNavbarNav>
                     </BCollapse>
