@@ -6,7 +6,7 @@ import Graph from "./Graph";
 import Table from "./Table.vue";
 import RawData from "./RawData.vue";
 import colors from "../util/colors";
-import { BTab, BTabs, BCard, BContainer } from "bootstrap-vue";
+import { BTab, BTabs, BCard, BContainer, BLink } from "bootstrap-vue";
 
 export default {
     name: "DataContainer",
@@ -139,11 +139,33 @@ export default {
             <BCard no-body>
                 <BTabs card vertical pills no-fade>
                     <BTab title="Chart" active>
-                        <h6 ref="chartHeader" class="data-content-header">
-                            {this.dataset
-                                ? `${this.dataset.type} data for ${this.dataset.name} during the COVID-19 Pandemic`
-                                : null}
-                        </h6>
+                        {this.$route.name !== "Data" && this.dataset ? (
+                            <BLink
+                                class="data-content-link"
+                                to={{
+                                    name: "Data",
+                                    params: {
+                                        name: this.dataset.name,
+                                        type: this.dataset.type
+                                    }
+                                }}
+                            >
+                                <h6
+                                    ref="chartHeader"
+                                    class="data-content-header"
+                                >
+                                    {this.dataset
+                                        ? `${this.dataset.type} mobility data for ${this.dataset.name} during the COVID-19 Pandemic`
+                                        : null}
+                                </h6>
+                            </BLink>
+                        ) : (
+                            <h6 ref="chartHeader" class="data-content-header">
+                                {this.dataset
+                                    ? `${this.dataset.type} mobility data for ${this.dataset.name} during the COVID-19 Pandemic`
+                                    : null}
+                            </h6>
+                        )}
                         <section
                             style={`height: calc(100vh - ${136 +
                                 this.headerHeight}px);`}
@@ -164,11 +186,33 @@ export default {
                         </section>
                     </BTab>
                     <BTab title="Table">
-                        <h6 ref="tableHeader" class="data-content-header">
-                            {this.dataset
-                                ? `${this.dataset.type} data for ${this.dataset.name} during the COVID-19 Pandemic`
-                                : null}
-                        </h6>
+                        {this.$route.name !== "Data" && this.dataset ? (
+                            <BLink
+                                class="data-content-link"
+                                to={{
+                                    name: "Data",
+                                    params: {
+                                        name: this.dataset.name,
+                                        type: this.dataset.type
+                                    }
+                                }}
+                            >
+                                <h6
+                                    ref="tableHeader"
+                                    class="data-content-header"
+                                >
+                                    {this.dataset
+                                        ? `${this.dataset.type} mobility data for ${this.dataset.name} during the COVID-19 Pandemic`
+                                        : null}
+                                </h6>
+                            </BLink>
+                        ) : (
+                            <h6 ref="tableHeader" class="data-content-header">
+                                {this.dataset
+                                    ? `${this.dataset.type} mobility data for ${this.dataset.name} during the COVID-19 Pandemic`
+                                    : null}
+                            </h6>
+                        )}
                         <section
                             class="data-content-container border rounded"
                             style={`height: calc(100vh - ${136 +
@@ -185,11 +229,33 @@ export default {
                         </section>
                     </BTab>
                     <BTab title="JSON">
-                        <h6 ref="rawDataHeader" class="data-content-header">
-                            {this.dataset
-                                ? `${this.dataset.type} data for ${this.dataset.name} during the COVID-19 Pandemic`
-                                : null}
-                        </h6>
+                        {this.$route.name !== "Data" && this.dataset ? (
+                            <BLink
+                                class="data-content-link"
+                                to={{
+                                    name: "Data",
+                                    params: {
+                                        name: this.dataset.name,
+                                        type: this.dataset.type
+                                    }
+                                }}
+                            >
+                                <h6
+                                    ref="rawDataHeader"
+                                    class="data-content-header"
+                                >
+                                    {this.dataset
+                                        ? `${this.dataset.type} mobility data for ${this.dataset.name} during the COVID-19 Pandemic`
+                                        : null}
+                                </h6>
+                            </BLink>
+                        ) : (
+                            <h6 ref="rawDataHeader" class="data-content-header">
+                                {this.dataset
+                                    ? `${this.dataset.type} mobility data for ${this.dataset.name} during the COVID-19 Pandemic`
+                                    : null}
+                            </h6>
+                        )}
                         <section
                             class="data-content-container border rounded"
                             style={`height: calc(100vh - ${136 +
@@ -215,6 +281,10 @@ export default {
 <style lang="scss">
 .card-header {
     padding: 12px;
+}
+.data-content-link,
+.data-content-link:hover {
+    color: var(--dark);
 }
 .data-content-header {
     min-height: 19px;
