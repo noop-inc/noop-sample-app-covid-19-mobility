@@ -185,6 +185,7 @@ export default {
                 ok-disabled={!this.selectedLocaton || !this.selectedData}
                 onOk={this.handleOk}
                 no-fade
+                ok-only
             >
                 <section class="selected-data-form">
                     <BFormGroup label="Select a Data Source:">

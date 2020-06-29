@@ -35,7 +35,6 @@ export default {
 
 <style lang="scss">
 .raw-data-container {
-    background-color: var(--white);
     margin-bottom: 0;
     padding: 12px;
 }
@@ -50,10 +49,10 @@ export default {
         color: var(--secondary);
     }
     .token.property {
-        color: var(--cyan);
+        color: var(--blue);
     }
     .token.string {
-        color: var(--orange);
+        color: var(--red);
     }
     .token.number {
         color: var(--green);
