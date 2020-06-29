@@ -49,10 +49,10 @@ export default {
         color: var(--secondary);
     }
     .token.property {
-        color: var(--blue);
+        color: var(--cyan);
     }
     .token.string {
-        color: var(--red);
+        color: var(--orange);
     }
     .token.number {
         color: var(--green);

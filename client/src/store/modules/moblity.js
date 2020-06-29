@@ -76,6 +76,7 @@ const mutations = {
     },
     [SET_MOBILITY_ERROR](state, data) {
         state.error = data.error;
+        state.loading = false;
     },
 };
 

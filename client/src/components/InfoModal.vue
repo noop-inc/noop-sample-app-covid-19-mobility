@@ -3,9 +3,6 @@ import { BModal } from "bootstrap-vue";
 
 export default {
     name: "InfoModal",
-    mounted() {
-        this.$refs.infoModal.show();
-    },
     render() {
         return (
             <BModal
