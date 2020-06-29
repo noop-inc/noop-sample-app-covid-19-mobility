@@ -10,32 +10,42 @@ const dynamodb = new AWS.DynamoDB();
 const documentClient = new AWS.DynamoDB.DocumentClient({
     service: dynamodb,
 });
-
 router.get("/random", (req, res) => {
+    const name = ["Apple", "Google"][Math.floor(Math.random() * 2)];
+    const type = ["Countries", "States"][Math.floor(Math.random() * 2)];
     const params = {
         TableName,
-        ProjectionExpression: "#nm, #tp",
-        FilterExpression: "#nm <> Apple and #nm <> Google",
-        ExpressionAttributeNames: {
-            "#nm": "name",
-            "#tp": "type",
+        Key: {
+            name,
+            type,
         },
     };
-    documentClient.scan(params, (err, data) => {
+    documentClient.get(params, (err, data) => {
         if (err) {
             return res.status(400).json({ error: err });
-        } else if (data.Items) {
-            const randomNum = Math.floor(Math.random() * data.Items.length);
+        } else if (data.Item) {
+            const meta = data.Item;
+
+            const name = Object.keys(meta.data)[
+                Math.floor(Math.random() * Object.keys(meta.data).length)
+            ];
+            const type =
+                meta.data[name][
+                    Math.floor(Math.random() * meta.data[name].length)
+                ];
+
             const params = {
                 TableName,
-                Key: data.Items[randomNum],
+                Key: {
+                    name,
+                    type,
+                },
             };
-
             documentClient.get(params, (err, data) => {
                 if (err) {
                     return res.status(400).json({ error: err });
                 } else if (data.Item) {
-                    return res.json(data.Item);
+                    return res.json({ meta, mobility: data.Item });
                 } else {
                     return res
                         .status(404)

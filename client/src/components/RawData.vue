@@ -6,8 +6,8 @@ export default {
     props: {
         dataset: {
             type: Object,
-            default: null,
-        },
+            default: null
+        }
     },
     methods: {
         formatRawData() {
@@ -15,7 +15,7 @@ export default {
                 JSON.stringify(this.dataset, null, 4),
                 Prism.languages.json
             );
-        },
+        }
     },
     mounted() {
         this.$refs.code.innerHTML = this.formatRawData();
@@ -29,33 +29,34 @@ export default {
                 <code class="language-json" ref="code" />
             </pre>
         ) : null;
-    },
+    }
 };
 </script>
 
 <style lang="scss">
-    .raw-data-container {
-        background-color: var(--dark);
-        margin-bottom: 0;
-        padding: 12px;
-    }
+.raw-data-container {
+    background-color: var(--white);
+    margin-bottom: 0;
+    padding: 12px;
+}
 
-    .language-json {
-        .token {
-            text-shadow: 0 -0.1em 0.2em black;
-            background: none;
-        }
-        .token.punctuation, .token.operator {
-            color: var(--light);
-        }
-        .token.property {
-            color: #86c1b9;
-        }
-        .token.string {
-            color: #dc9656;
-        }
-        .token.number {
-            color: #a1b56c;
-        }
+.language-json {
+    .token {
+        text-shadow: 0 -0.1em 0.2em white;
+        background: none;
     }
+    .token.punctuation,
+    .token.operator {
+        color: var(--secondary);
+    }
+    .token.property {
+        color: var(--cyan);
+    }
+    .token.string {
+        color: var(--orange);
+    }
+    .token.number {
+        color: var(--green);
+    }
+}
 </style>

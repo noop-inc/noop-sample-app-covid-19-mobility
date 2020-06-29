@@ -1,4 +1,4 @@
-import * as APIUtil from "../../util/api";
+import { getData } from "../../util/api";
 import Vue from "vue";
 import {
     START_META_LOADING,
@@ -26,17 +26,17 @@ const getters = {
 const actions = {
     fetchMetaData({ commit }, { name, type }) {
         commit(START_META_LOADING);
-        APIUtil.getData(name, type)
+        getData(name, type)
             .then((res) =>
                 setTimeout(
                     () => commit(RECEIVE_META_DATA, res.data),
-                    dev ? 500 : 0
+                    dev ? 200 : 0
                 )
             )
             .catch((err) =>
                 setTimeout(
                     () => commit(SET_META_ERROR, err.response.data),
-                    dev ? 500 : 0
+                    dev ? 200 : 0
                 )
             );
     },
