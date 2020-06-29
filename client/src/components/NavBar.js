@@ -2,6 +2,7 @@ import IconGitHub from "./icons/IconGitHub";
 import IconRearc from "./icons/IconRearc";
 import IconInfo from "./icons/IconInfo";
 import SelectDataModal from "./SelectDataModal.vue";
+import InfoModal from "./InfoModal.vue";
 import {
     BNavbar,
     BNavbarBrand,
@@ -33,9 +34,6 @@ export default {
                             <BNavItem align="center" VBModal_select-data-modal>
                                 Select Data
                             </BNavItem>
-                            <BNavItem align="center" to="/about">
-                                About
-                            </BNavItem>
                         </BNavbarNav>
                         <BNavbarNav class="ml-auto">
                             <BNavItem
@@ -52,13 +50,14 @@ export default {
                             >
                                 <IconGitHub class="d-inline-block align-top" />
                             </BNavItem>
-                            <BNavItem align="center" href="" target="_blank">
+                            <BNavItem align="center" VBModal_info-modal>
                                 <IconInfo class="d-inline-block align-top" />
                             </BNavItem>
                         </BNavbarNav>
                     </BCollapse>
                 </BNavbar>
                 <SelectDataModal />
+                <InfoModal />
             </div>
         );
     },

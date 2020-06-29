@@ -221,5 +221,6 @@ export default {
 }
 .data-content-container {
     overflow-y: scroll;
+    background-color: var(--light);
 }
 </style>
