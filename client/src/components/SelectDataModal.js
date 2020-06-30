@@ -1,21 +1,19 @@
-<script>
 import {
     BModal,
     BFormGroup,
     BFormRadioGroup,
-    BFormSelect
+    BFormSelect,
 } from "bootstrap-vue";
 import { mapActions, mapGetters, mapState } from "vuex";
-import Spinner from "./Spinner.vue";
 
 export default {
     name: "SelectDataModal",
     computed: {
         ...mapState("home", {
-            homeSource: state => state.source,
-            homeGeo: state => state.geo,
-            homeLocation: state => state.location,
-            homeData: state => state.data
+            homeSource: (state) => state.source,
+            homeGeo: (state) => state.geo,
+            homeLocation: (state) => state.location,
+            homeData: (state) => state.data,
         }),
         ...mapState("meta", ["loading", "error"]),
         ...mapGetters("meta", ["getMetaData"]),
@@ -23,7 +21,7 @@ export default {
             return this.selectedSource && this.selectedGeoType
                 ? this.getMetaData({
                       name: this.selectedSource,
-                      type: this.selectedGeoType
+                      type: this.selectedGeoType,
                   })
                 : null;
         },
@@ -32,7 +30,7 @@ export default {
             return this.$route.name === "Data"
                 ? this.getMobilityData(this.$route.params)
                 : null;
-        }
+        },
     },
     data() {
         return {
@@ -40,11 +38,11 @@ export default {
             selectedSource: null,
             geoTypeOptions: [
                 "Countries",
-                { value: "States", text: "United States" }
+                { value: "States", text: "United States" },
             ],
             selectedGeoType: null,
             selectedLocaton: null,
-            selectedData: null
+            selectedData: null,
         };
     },
     methods: {
@@ -61,7 +59,7 @@ export default {
                 ) {
                     this.fetchMetaData({
                         name: this.selectedSource,
-                        type: this.selectedGeoType
+                        type: this.selectedGeoType,
                     });
                 }
             }
@@ -70,12 +68,12 @@ export default {
             const locationDefault = {
                 value: this.dataset ? null : this.selectedLocaton,
                 text: "Select a Location",
-                disabled: true
+                disabled: true,
             };
             if (this.dataset) {
                 return [
                     locationDefault,
-                    ...Array.from(Object.keys(this.dataset.data)).sort()
+                    ...Array.from(Object.keys(this.dataset.data)).sort(),
                 ];
             } else {
                 return [locationDefault];
@@ -85,14 +83,14 @@ export default {
             const dataDefault = {
                 value: this.dataset ? null : this.selectedData,
                 text: "Select a Data Type",
-                disabled: true
+                disabled: true,
             };
             if (this.dataset && this.selectedLocaton in this.dataset.data) {
                 return [
                     dataDefault,
                     ...Array.from(
                         this.dataset.data[this.selectedLocaton]
-                    ).sort()
+                    ).sort(),
                 ];
             } else {
                 return [dataDefault];
@@ -116,11 +114,11 @@ export default {
                     name: "Data",
                     params: {
                         name: this.selectedLocaton,
-                        type: this.selectedData
-                    }
+                        type: this.selectedData,
+                    },
                 });
             }
-        }
+        },
     },
     created() {
         this.checkForMetaData();
@@ -135,12 +133,12 @@ export default {
                     this.selectedSource,
                     this.selectedGeoType,
                     this.selectedLocaton,
-                    this.selectedData
+                    this.selectedData,
                 ] = [
                     this.homeSource,
                     this.homeGeo,
                     this.homeLocation,
-                    this.homeData
+                    this.homeData,
                 ];
             } else if (this.currentMobility) {
                 const { source, geo, name, type } = this.currentMobility;
@@ -148,14 +146,14 @@ export default {
                     this.selectedSource,
                     this.selectedGeoType,
                     this.selectedLocaton,
-                    this.selectedData
+                    this.selectedData,
                 ] = [source, geo, name, type];
             } else {
                 [
                     this.selectedSource,
                     this.selectedGeoType,
                     this.selectedLocaton,
-                    this.selectedData
+                    this.selectedData,
                 ] = [null, null, null, null];
             }
         });
@@ -218,15 +216,8 @@ export default {
                             disabled={!this.dataset || !this.selectedLocaton}
                         />
                     </BFormGroup>
-                    {this.loading ? (
-                        <Spinner class="select-data-spinner" />
-                    ) : null}
                 </section>
             </BModal>
         );
-    }
+    },
 };
-</script>
-
-<style lang="scss">
-</style>
