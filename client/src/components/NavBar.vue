@@ -1,3 +1,4 @@
+<script>
 import IconGitHub from "./icons/IconGitHub";
 import IconRearc from "./icons/IconRearc";
 import IconInfo from "./icons/IconInfo";
@@ -10,13 +11,13 @@ import {
     BCollapse,
     BNavbarNav,
     BNavItem,
-    VBModal,
+    VBModal
 } from "bootstrap-vue";
 
 export default {
     name: "NavBar",
     directives: {
-        BModal: VBModal,
+        BModal: VBModal
     },
     render() {
         return (
@@ -60,5 +61,13 @@ export default {
                 <InfoModal />
             </div>
         );
-    },
+    }
 };
+</script>
+
+<style lang="scss">
+.navbar {
+    box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.25),
+        inset 0 -1px 5px rgba(0, 0, 0, 0.25);
+}
+</style>
