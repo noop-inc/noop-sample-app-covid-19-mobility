@@ -232,6 +232,10 @@ export default {
         margin: 0;
     }
 }
+.card {
+    box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.25),
+        inset 0 -1px 5px rgba(0, 0, 0, 0.25);
+}
 .card-header {
     padding: 12px;
 }

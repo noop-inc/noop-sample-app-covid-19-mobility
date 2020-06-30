@@ -1,5 +1,5 @@
 <script>
-import NavBar from "./components/NavBar";
+import NavBar from "./components/NavBar.vue";
 import { BContainer } from "bootstrap-vue";
 export default {
     name: "App",
