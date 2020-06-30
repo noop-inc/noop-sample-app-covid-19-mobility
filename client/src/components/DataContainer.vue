@@ -116,10 +116,8 @@ export default {
             };
         },
         createTabHeader() {
-            const headerText = this.dataset
-                ? `${this.dataset.type} mobility data for ${this.dataset.name} during the COVID-19 Pandemic`
-                : null;
-            return this.$route.name !== "Data" && this.dataset ? (
+            const headerText = `${this.dataset.type} mobility data for ${this.dataset.name} during the COVID-19 Pandemic`;
+            return this.$route.name !== "Data" ? (
                 <BLink
                     class="data-content-link"
                     to={{
@@ -174,24 +172,24 @@ export default {
                         ) : null}
                     </BTab>
                     <BTab title="Table">
-                        <section class="tab-content-container">
-                            {this.createTabHeader()}
-                            <section class="data-content-container border rounded">
-                                {this.dataset ? (
+                        {this.dataset ? (
+                            <section class="tab-content-container">
+                                {this.createTabHeader()}
+                                <section class="data-content-container border rounded">
                                     <Table dataset={this.dataset} />
-                                ) : null}
+                                </section>
                             </section>
-                        </section>
+                        ) : null}
                     </BTab>
                     <BTab title="JSON">
-                        <section class="tab-content-container">
-                            {this.createTabHeader()}
-                            <section class="data-content-container border rounded">
-                                {this.dataset ? (
+                        {this.dataset ? (
+                            <section class="tab-content-container">
+                                {this.createTabHeader()}
+                                <section class="data-content-container border rounded">
                                     <RawData dataset={this.dataset} />
-                                ) : null}
+                                </section>
                             </section>
-                        </section>
+                        ) : null}
                     </BTab>
                     {this.error && !this.dateset ? this.errorMessage() : null}
                 </BTabs>

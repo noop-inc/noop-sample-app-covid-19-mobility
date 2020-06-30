@@ -66,7 +66,8 @@ export default {
 </script>
 
 <style lang="scss">
-.navbar {
+.navbar,
+.modal-content {
     box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.25),
         inset 0 -1px 5px rgba(0, 0, 0, 0.25);
 }
