@@ -40,12 +40,16 @@ const actions = {
                         commit("meta/" + RECEIVE_META_DATA, res.data.meta, {
                             root: true,
                         });
-                        commit("home/" + SET_HOME_DATA, {
-                            source: res.data.mobility.source,
-                            geo: res.data.mobility.geo,
-                            location: res.data.mobility.name,
-                            data: res.data.mobility.type,
-                        });
+                        commit(
+                            "home/" + SET_HOME_DATA,
+                            {
+                                source: res.data.mobility.source,
+                                geo: res.data.mobility.geo,
+                                location: res.data.mobility.name,
+                                data: res.data.mobility.type,
+                            },
+                            { root: true }
+                        );
                     },
                     dev ? 200 : 0
                 )

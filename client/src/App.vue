@@ -41,14 +41,4 @@ button:disabled,
     padding-bottom: 15px;
     height: calc(100vh);
 }
-
-.spinner-backdrop {
-    opacity: 0.5;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #000;
-}
 </style>

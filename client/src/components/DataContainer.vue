@@ -6,7 +6,15 @@ import Graph from "./Graph";
 import Table from "./Table.vue";
 import RawData from "./RawData.vue";
 import colors from "../util/colors";
-import { BTab, BTabs, BCard, BContainer, BLink } from "bootstrap-vue";
+import {
+    BTab,
+    BTabs,
+    BCard,
+    BContainer,
+    BLink,
+    BJumbotron,
+    BButton
+} from "bootstrap-vue";
 
 export default {
     name: "DataContainer",
@@ -19,11 +27,6 @@ export default {
     computed: {
         ...mapState("mobility", ["loading", "error"]),
         ...mapGetters("mobility", ["getMobilityData"])
-    },
-    data() {
-        return {
-            headerHeight: 19
-        };
     },
     methods: {
         formatData() {
@@ -113,23 +116,50 @@ export default {
                 }
             };
         },
-        setHeaderHeight() {
-            if (this.$refs.chartHeader.clientHeight) {
-                this.headerHeight = this.$refs.chartHeader.clientHeight;
-            } else if (this.$refs.rawDataHeader.clientHeight) {
-                this.headerHeight = this.$refs.rawDataHeader.clientHeight;
-            } else if (this.$refs.tableHeader.clientHeight) {
-                this.headerHeight = this.$refs.tableHeader.clientHeight;
-            } else if (this.headerHeight !== 19) {
-                this.headerHeight = 19;
-            }
+        createTabHeader() {
+            return this.$route.name !== "Data" && this.dataset ? (
+                <BLink
+                    class="data-content-link"
+                    to={{
+                        name: "Data",
+                        params: {
+                            name: this.dataset.name,
+                            type: this.dataset.type
+                        }
+                    }}
+                >
+                    <h6 class="data-content-header">
+                        {this.dataset
+                            ? `${this.dataset.type} mobility data for ${this.dataset.name} during the COVID-19 Pandemic`
+                            : null}
+                    </h6>
+                </BLink>
+            ) : (
+                <h6 class="data-content-header">
+                    {this.dataset
+                        ? `${this.dataset.type} mobility data for ${this.dataset.name} during the COVID-19 Pandemic`
+                        : null}
+                </h6>
+            );
+        },
+        errorMessage() {
+            return (
+                <section class="data-error-container">
+                    <BJumbotron
+                        bg-variant="white"
+                        header="Page Not Found"
+                        lead="Content for this page is unavailable."
+                        fluid
+                    >
+                        {this.$route.name !== "Home" ? (
+                            <BButton variant="primary" to={{ name: "Home" }}>
+                                Return to Home Page
+                            </BButton>
+                        ) : null}
+                    </BJumbotron>
+                </section>
+            );
         }
-    },
-    mounted() {
-        window.addEventListener("resize", this.setHeaderHeight);
-    },
-    updated() {
-        this.setHeaderHeight();
     },
     beforeDestroy() {
         window.removeEventListener("resize", this.setHeaderHeight);
@@ -138,139 +168,49 @@ export default {
         return (
             <BCard no-body>
                 <BTabs card vertical pills no-fade>
-                    <BTab title="Chart" active>
-                        {this.$route.name !== "Data" && this.dataset ? (
-                            <BLink
-                                class="data-content-link"
-                                to={{
-                                    name: "Data",
-                                    params: {
-                                        name: this.dataset.name,
-                                        type: this.dataset.type
-                                    }
-                                }}
-                            >
-                                <h6
-                                    ref="chartHeader"
-                                    class="data-content-header"
-                                >
-                                    {this.dataset
-                                        ? `${this.dataset.type} mobility data for ${this.dataset.name} during the COVID-19 Pandemic`
-                                        : null}
-                                </h6>
-                            </BLink>
-                        ) : (
-                            <h6 ref="chartHeader" class="data-content-header">
-                                {this.dataset
-                                    ? `${this.dataset.type} mobility data for ${this.dataset.name} during the COVID-19 Pandemic`
-                                    : null}
-                            </h6>
-                        )}
-                        <section
-                            style={`height: calc(100vh - ${136 +
-                                this.headerHeight}px);`}
-                            class="data-content-container border rounded"
-                        >
-                            {this.dataset ? null : (
-                                <div class="spinner-backdrop" />
-                            )}
-                            {this.dataset ? (
-                                <Graph
-                                    styles={{ height: `100%` }}
-                                    chartData={this.formatData()}
-                                    chartOptions={this.formatOptions()}
-                                />
-                            ) : (
-                                <Spinner />
-                            )}
+                    <BTab
+                        title="Chart"
+                        active
+                        disabled={!this.dataset || this.loading}
+                    >
+                        <section class="tab-content-container">
+                            {this.createTabHeader()}
+                            <section class="data-content-container border rounded">
+                                {this.dataset ? (
+                                    <Graph
+                                        styles={{ height: `100%` }}
+                                        chartData={this.formatData()}
+                                        chartOptions={this.formatOptions()}
+                                    />
+                                ) : null}
+                            </section>
                         </section>
                     </BTab>
-                    <BTab title="Table">
-                        {this.$route.name !== "Data" && this.dataset ? (
-                            <BLink
-                                class="data-content-link"
-                                to={{
-                                    name: "Data",
-                                    params: {
-                                        name: this.dataset.name,
-                                        type: this.dataset.type
-                                    }
-                                }}
-                            >
-                                <h6
-                                    ref="tableHeader"
-                                    class="data-content-header"
-                                >
-                                    {this.dataset
-                                        ? `${this.dataset.type} mobility data for ${this.dataset.name} during the COVID-19 Pandemic`
-                                        : null}
-                                </h6>
-                            </BLink>
-                        ) : (
-                            <h6 ref="tableHeader" class="data-content-header">
-                                {this.dataset
-                                    ? `${this.dataset.type} mobility data for ${this.dataset.name} during the COVID-19 Pandemic`
-                                    : null}
-                            </h6>
-                        )}
-                        <section
-                            class="data-content-container border rounded"
-                            style={`height: calc(100vh - ${136 +
-                                this.headerHeight}px);`}
-                        >
-                            {this.dataset ? null : (
-                                <div class="spinner-backdrop" />
-                            )}
-                            {this.dataset ? (
-                                <Table dataset={this.dataset} />
-                            ) : (
-                                <Spinner />
-                            )}
+                    <BTab
+                        title="Table"
+                        disabled={!this.dataset || this.loading}
+                    >
+                        <section class="tab-content-container">
+                            {this.createTabHeader()}
+                            <section class="data-content-container border rounded">
+                                {this.dataset ? (
+                                    <Table dataset={this.dataset} />
+                                ) : null}
+                            </section>
                         </section>
                     </BTab>
-                    <BTab title="JSON">
-                        {this.$route.name !== "Data" && this.dataset ? (
-                            <BLink
-                                class="data-content-link"
-                                to={{
-                                    name: "Data",
-                                    params: {
-                                        name: this.dataset.name,
-                                        type: this.dataset.type
-                                    }
-                                }}
-                            >
-                                <h6
-                                    ref="rawDataHeader"
-                                    class="data-content-header"
-                                >
-                                    {this.dataset
-                                        ? `${this.dataset.type} mobility data for ${this.dataset.name} during the COVID-19 Pandemic`
-                                        : null}
-                                </h6>
-                            </BLink>
-                        ) : (
-                            <h6 ref="rawDataHeader" class="data-content-header">
-                                {this.dataset
-                                    ? `${this.dataset.type} mobility data for ${this.dataset.name} during the COVID-19 Pandemic`
-                                    : null}
-                            </h6>
-                        )}
-                        <section
-                            class="data-content-container border rounded"
-                            style={`height: calc(100vh - ${136 +
-                                this.headerHeight}px);`}
-                        >
-                            {this.dataset ? null : (
-                                <div class="spinner-backdrop" />
-                            )}
-                            {this.dataset ? (
-                                <RawData dataset={this.dataset} />
-                            ) : (
-                                <Spinner />
-                            )}
+                    <BTab title="JSON" disabled={!this.dataset || this.loading}>
+                        <section class="tab-content-container">
+                            {this.createTabHeader()}
+                            <section class="data-content-container border rounded">
+                                {this.dataset ? (
+                                    <RawData dataset={this.dataset} />
+                                ) : null}
+                            </section>
                         </section>
                     </BTab>
+                    {this.loading ? <Spinner /> : null}
+                    {this.error && !this.dateset ? this.errorMessage() : null}
                 </BTabs>
             </BCard>
         );
@@ -279,8 +219,26 @@ export default {
 </script>
 
 <style lang="scss">
+.tab-content,
+.data-error-container {
+    height: calc(100vh - 88px);
+}
+.data-error-container {
+    overflow-y: scroll;
+
+    > .jumbotron {
+        width: 100%;
+        padding-bottom: 20px;
+        margin: 0;
+    }
+}
 .card-header {
     padding: 12px;
+}
+.tab-content-container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 128px);
 }
 .data-content-link,
 .data-content-link:hover {
@@ -292,5 +250,6 @@ export default {
 .data-content-container {
     overflow-y: scroll;
     background-color: var(--light);
+    flex: 1;
 }
 </style>
