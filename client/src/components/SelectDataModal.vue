@@ -218,7 +218,6 @@ export default {
                             disabled={!this.dataset || !this.selectedLocaton}
                         />
                     </BFormGroup>
-                    {this.loading ? <div class="spinner-backdrop" /> : null}
                     {this.loading ? (
                         <Spinner class="select-data-spinner" />
                     ) : null}
@@ -230,11 +229,4 @@ export default {
 </script>
 
 <style lang="scss">
-.selected-data-form {
-    position: relative;
-}
-.select-data-spinner {
-    position: absolute;
-    top: 0;
-}
 </style>

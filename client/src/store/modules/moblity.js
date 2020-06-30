@@ -4,6 +4,7 @@ import {
     START_MOBILITY_LOADING,
     RECEIVE_MOBILITY_DATA,
     SET_MOBILITY_ERROR,
+    CLEAR_MOBILITY_ERROR,
 } from "../../util/types";
 
 const dev = process.env.NODE_ENV !== "production";
@@ -77,6 +78,9 @@ const mutations = {
     [SET_MOBILITY_ERROR](state, data) {
         state.error = data.error;
         state.loading = false;
+    },
+    [CLEAR_MOBILITY_ERROR](state) {
+        state.error = null;
     },
 };
 

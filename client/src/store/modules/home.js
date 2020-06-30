@@ -1,4 +1,8 @@
-import { SET_HOME_DATA, CLEAR_HOME_DATA } from "../../util/types";
+import {
+    SET_HOME_DATA,
+    CLEAR_HOME_DATA,
+    CLEAR_MOBILITY_ERROR,
+} from "../../util/types";
 
 const state = () => ({
     source: null,
@@ -10,6 +14,7 @@ const state = () => ({
 const actions = {
     assignHomeData({ commit }, data) {
         commit(SET_HOME_DATA, data);
+        commit("mobility/" + CLEAR_MOBILITY_ERROR, null, { root: true });
     },
     removeHomeData({ commit }) {
         commit(CLEAR_HOME_DATA);
