@@ -55,8 +55,8 @@ const mutations = {
         state.loading = false;
         state.error = null;
     },
-    [SET_META_ERROR](state, data) {
-        state.error = data.error;
+    [SET_META_ERROR](state, error) {
+        state.error = error;
         state.loading = false;
     },
 };

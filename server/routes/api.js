@@ -22,7 +22,7 @@ router.get("/random", (req, res) => {
     };
     documentClient.get(params, (err, data) => {
         if (err) {
-            return res.status(400).json({ error: err });
+            return res.status(400).json(err);
         } else if (data.Item) {
             const meta = data.Item;
 
@@ -43,17 +43,15 @@ router.get("/random", (req, res) => {
             };
             documentClient.get(params, (err, data) => {
                 if (err) {
-                    return res.status(400).json({ error: err });
+                    return res.status(400).json(err);
                 } else if (data.Item) {
                     return res.json({ meta, mobility: data.Item });
                 } else {
-                    return res
-                        .status(404)
-                        .json({ error: "Data could not be found" });
+                    return res.status(404).json("Data could not be found");
                 }
             });
         } else {
-            return res.status(404).json({ error: "Data could not be found" });
+            return res.status(404).json("Data could not be found");
         }
     });
 });
@@ -70,11 +68,11 @@ router.get("/:name/:type", (req, res) => {
     };
     documentClient.get(params, (err, data) => {
         if (err) {
-            return res.status(400).json({ error: err });
+            return res.status(400).json(err);
         } else if (data.Item) {
             return res.json(data.Item);
         } else {
-            return res.status(404).json({ error: "Data could not be found" });
+            return res.status(404).json("Data could not be found");
         }
     });
 });

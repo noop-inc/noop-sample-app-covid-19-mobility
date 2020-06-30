@@ -1,5 +1,6 @@
 <script>
 import NavBar from "./components/NavBar.vue";
+import Spinner from "./components/Spinner.vue";
 import { BContainer } from "bootstrap-vue";
 export default {
     name: "App",
@@ -10,6 +11,7 @@ export default {
                 <BContainer class="router-container" fluid>
                     <router-view />
                 </BContainer>
+                <Spinner />
             </div>
         );
     }

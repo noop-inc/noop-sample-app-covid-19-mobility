@@ -75,8 +75,8 @@ const mutations = {
         state.loading = false;
         state.error = null;
     },
-    [SET_MOBILITY_ERROR](state, data) {
-        state.error = data.error;
+    [SET_MOBILITY_ERROR](state, error) {
+        state.error = error;
         state.loading = false;
     },
     [CLEAR_MOBILITY_ERROR](state) {

@@ -1,7 +1,6 @@
 <script>
 import { mapActions, mapGetters, mapState } from "vuex";
 import moment from "moment";
-import Spinner from "./Spinner.vue";
 import Graph from "./Graph";
 import Table from "./Table.vue";
 import RawData from "./RawData.vue";
@@ -117,6 +116,9 @@ export default {
             };
         },
         createTabHeader() {
+            const headerText = this.dataset
+                ? `${this.dataset.type} mobility data for ${this.dataset.name} during the COVID-19 Pandemic`
+                : null;
             return this.$route.name !== "Data" && this.dataset ? (
                 <BLink
                     class="data-content-link"
@@ -128,18 +130,10 @@ export default {
                         }
                     }}
                 >
-                    <h6 class="data-content-header">
-                        {this.dataset
-                            ? `${this.dataset.type} mobility data for ${this.dataset.name} during the COVID-19 Pandemic`
-                            : null}
-                    </h6>
+                    <h6 class="data-content-header">{headerText}</h6>
                 </BLink>
             ) : (
-                <h6 class="data-content-header">
-                    {this.dataset
-                        ? `${this.dataset.type} mobility data for ${this.dataset.name} during the COVID-19 Pandemic`
-                        : null}
-                </h6>
+                <h6 class="data-content-header">{headerText}</h6>
             );
         },
         errorMessage() {
@@ -161,35 +155,25 @@ export default {
             );
         }
     },
-    beforeDestroy() {
-        window.removeEventListener("resize", this.setHeaderHeight);
-    },
     render() {
         return (
             <BCard no-body>
                 <BTabs card vertical pills no-fade>
-                    <BTab
-                        title="Chart"
-                        active
-                        disabled={!this.dataset || this.loading}
-                    >
-                        <section class="tab-content-container">
-                            {this.createTabHeader()}
-                            <section class="data-content-container border rounded">
-                                {this.dataset ? (
+                    <BTab title="Chart" active>
+                        {this.dataset ? (
+                            <section class="tab-content-container">
+                                {this.createTabHeader()}
+                                <section class="data-content-container border rounded">
                                     <Graph
-                                        styles={{ height: `100%` }}
+                                        styles={{ height: "100%" }}
                                         chartData={this.formatData()}
                                         chartOptions={this.formatOptions()}
                                     />
-                                ) : null}
+                                </section>
                             </section>
-                        </section>
+                        ) : null}
                     </BTab>
-                    <BTab
-                        title="Table"
-                        disabled={!this.dataset || this.loading}
-                    >
+                    <BTab title="Table">
                         <section class="tab-content-container">
                             {this.createTabHeader()}
                             <section class="data-content-container border rounded">
@@ -199,7 +183,7 @@ export default {
                             </section>
                         </section>
                     </BTab>
-                    <BTab title="JSON" disabled={!this.dataset || this.loading}>
+                    <BTab title="JSON">
                         <section class="tab-content-container">
                             {this.createTabHeader()}
                             <section class="data-content-container border rounded">
@@ -209,7 +193,6 @@ export default {
                             </section>
                         </section>
                     </BTab>
-                    {this.loading ? <Spinner /> : null}
                     {this.error && !this.dateset ? this.errorMessage() : null}
                 </BTabs>
             </BCard>
@@ -243,10 +226,6 @@ export default {
     display: flex;
     flex-direction: column;
     height: calc(100vh - 128px);
-}
-.data-content-link,
-.data-content-link:hover {
-    color: var(--dark);
 }
 .data-content-header {
     min-height: 19px;

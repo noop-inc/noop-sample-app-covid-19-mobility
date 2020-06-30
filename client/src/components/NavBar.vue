@@ -2,7 +2,7 @@
 import IconGitHub from "./icons/IconGitHub";
 import IconRearc from "./icons/IconRearc";
 import IconInfo from "./icons/IconInfo";
-import SelectDataModal from "./SelectDataModal.vue";
+import SelectDataModal from "./SelectDataModal";
 import InfoModal from "./InfoModal.vue";
 import {
     BNavbar,

@@ -1,5 +1,6 @@
 <script>
 import GridLoader from "vue-spinner/src/GridLoader.vue";
+import { mapState } from "vuex";
 
 export default {
     name: "LoadingSpinner",
@@ -13,8 +14,12 @@ export default {
             default: "light"
         }
     },
+    computed: {
+        ...mapState("mobility", { mobilityLoading: state => state.loading }),
+        ...mapState("meta", { metaLoading: state => state.loading })
+    },
     render() {
-        return (
+        return this.mobilityLoading || this.metaLoading ? (
             <section class="loading-spinner-container">
                 <div class="spinner-backdrop" />
                 <div class="spinner-position">
@@ -24,7 +29,7 @@ export default {
                     />
                 </div>
             </section>
-        );
+        ) : null;
     }
 };
 </script>
@@ -36,6 +41,7 @@ export default {
     left: 0;
     right: 0;
     bottom: 0;
+    z-index: 2000;
     .spinner-backdrop {
         opacity: 0.5;
         position: fixed;
@@ -44,7 +50,6 @@ export default {
         right: 0;
         bottom: 0;
         background-color: #000;
-        z-index: 2000;
     }
     > .spinner-position {
         height: 100vh;
@@ -52,9 +57,6 @@ export default {
         display: flex;
         align-items: center;
         justify-content: center;
-        > * {
-            z-index: 3000;
-        }
     }
 }
 </style>
