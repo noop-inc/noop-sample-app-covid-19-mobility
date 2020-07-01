@@ -11,24 +11,39 @@ import {
     BCollapse,
     BNavbarNav,
     BNavItem,
-    VBModal
+    VBModal,
+    VBTooltip
 } from "bootstrap-vue";
 
 export default {
     name: "NavBar",
     directives: {
-        BModal: VBModal
+        BModal: VBModal,
+        BTooltip: VBTooltip
     },
     render() {
         return (
-            <div class="navbar-container">
+            <header class="navbar-container">
                 <BNavbar
                     fixed="top"
                     toggleable="sm"
                     type="dark"
                     variant="primary"
                 >
-                    <BNavbarBrand to="/">Mobility Data Dashboard</BNavbarBrand>
+                    <BNavbarBrand
+                        to={
+                            this.$route.name !== "Home"
+                                ? { name: "Home" }
+                                : null
+                        }
+                        style={
+                            this.$route.name === "Home"
+                                ? "cursor: default;"
+                                : null
+                        }
+                    >
+                        Mobility Data
+                    </BNavbarBrand>
                     <BNavbarToggle target="nav-collapse" />
                     <BCollapse id="nav-collapse" is-nav>
                         <BNavbarNav>
@@ -41,6 +56,8 @@ export default {
                                 align="center"
                                 href="https://www.rearc.io"
                                 target="_blank"
+                                VBTooltip_hover_noFade
+                                title="Visit Rearc's Website"
                             >
                                 <IconRearc class="d-inline-block align-top" />
                             </BNavItem>
@@ -48,10 +65,17 @@ export default {
                                 align="center"
                                 href="https://github.com/noop-cloud/mobility-dashboard"
                                 target="_blank"
+                                VBTooltip_hover_noFade
+                                title="View source code on GitHub"
                             >
                                 <IconGitHub class="d-inline-block align-top" />
                             </BNavItem>
-                            <BNavItem align="center" VBModal_info-modal>
+                            <BNavItem
+                                align="center"
+                                VBModal_info-modal
+                                VBTooltip_hover_noFade
+                                title="Information about Noop"
+                            >
                                 <IconInfo class="d-inline-block align-top" />
                             </BNavItem>
                         </BNavbarNav>
@@ -59,7 +83,7 @@ export default {
                 </BNavbar>
                 <SelectDataModal />
                 <InfoModal />
-            </div>
+            </header>
         );
     }
 };

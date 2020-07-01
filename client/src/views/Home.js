@@ -1,4 +1,3 @@
-<script>
 import { mapActions, mapGetters, mapState } from "vuex";
 import DataContainer from "../components/DataContainer.vue";
 
@@ -11,9 +10,9 @@ export default {
         dataset() {
             return this.getMobilityData({
                 name: this.location,
-                type: this.data
+                type: this.data,
             });
-        }
+        },
     },
     methods: {
         ...mapActions("home", ["assignHomeData", "removeHomeData"]),
@@ -29,7 +28,7 @@ export default {
                     }
                 }
             }
-        }
+        },
     },
     created() {
         this.checkForRandomData();
@@ -42,6 +41,5 @@ export default {
     },
     render() {
         return <DataContainer dataset={this.dataset} />;
-    }
+    },
 };
-</script>
