@@ -1,4 +1,3 @@
-<script>
 import { mapActions, mapGetters, mapState } from "vuex";
 import DataContainer from "../components/DataContainer.vue";
 
@@ -9,7 +8,7 @@ export default {
         ...mapGetters("mobility", ["getMobilityData"]),
         dataset() {
             return this.getMobilityData(this.$route.params);
-        }
+        },
     },
     methods: {
         ...mapActions("mobility", ["fetchMobilityData"]),
@@ -24,7 +23,7 @@ export default {
                     this.fetchMobilityData(this.$route.params);
                 }
             }
-        }
+        },
     },
     created() {
         this.checkForMobilityData();
@@ -34,6 +33,5 @@ export default {
     },
     render() {
         return <DataContainer dataset={this.dataset} />;
-    }
+    },
 };
-</script>

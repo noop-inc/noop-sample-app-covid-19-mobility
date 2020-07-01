@@ -4,16 +4,9 @@ import moment from "moment";
 import Graph from "./Graph";
 import Table from "./Table.vue";
 import RawData from "./RawData.vue";
+import ErrorMessage from "./ErrorMessage.vue";
 import colors from "../util/colors";
-import {
-    BTab,
-    BTabs,
-    BCard,
-    BContainer,
-    BLink,
-    BJumbotron,
-    BButton
-} from "bootstrap-vue";
+import { BTab, BTabs, BCard, BLink } from "bootstrap-vue";
 
 export default {
     name: "DataContainer",
@@ -28,6 +21,9 @@ export default {
         ...mapGetters("mobility", ["getMobilityData"])
     },
     methods: {
+        createdGradient() {
+            return gradient;
+        },
         formatData() {
             if (this.dataset) {
                 const data = [
@@ -133,31 +129,13 @@ export default {
             ) : (
                 <h6 class="data-content-header">{headerText}</h6>
             );
-        },
-        errorMessage() {
-            return (
-                <section class="data-error-container">
-                    <BJumbotron
-                        bg-variant="white"
-                        header="Page Not Found"
-                        lead="Content for this page is unavailable."
-                        fluid
-                    >
-                        {this.$route.name !== "Home" ? (
-                            <BButton variant="primary" to={{ name: "Home" }}>
-                                Return to Home Page
-                            </BButton>
-                        ) : null}
-                    </BJumbotron>
-                </section>
-            );
         }
     },
     render() {
         return (
             <BCard no-body>
                 <BTabs card vertical pills no-fade>
-                    <BTab title="Chart" active>
+                    <BTab title="Chart" active disabled={!!this.error}>
                         {this.dataset ? (
                             <section class="tab-content-container">
                                 {this.createTabHeader()}
@@ -171,7 +149,7 @@ export default {
                             </section>
                         ) : null}
                     </BTab>
-                    <BTab title="Table">
+                    <BTab title="Table" disabled={!!this.error}>
                         {this.dataset ? (
                             <section class="tab-content-container">
                                 {this.createTabHeader()}
@@ -181,7 +159,7 @@ export default {
                             </section>
                         ) : null}
                     </BTab>
-                    <BTab title="JSON">
+                    <BTab title="JSON" disabled={!!this.error}>
                         {this.dataset ? (
                             <section class="tab-content-container">
                                 {this.createTabHeader()}
@@ -191,7 +169,7 @@ export default {
                             </section>
                         ) : null}
                     </BTab>
-                    {this.error && !this.dateset ? this.errorMessage() : null}
+                    {this.error && !this.dateset ? <ErrorMessage /> : null}
                 </BTabs>
             </BCard>
         );
@@ -200,30 +178,27 @@ export default {
 </script>
 
 <style lang="scss">
-.tab-content,
-.data-error-container {
-    height: calc(100vh - 88px);
-}
-.data-error-container {
-    overflow-y: scroll;
-
-    > .jumbotron {
-        width: 100%;
-        padding-bottom: 20px;
-        margin: 0;
-    }
+.tab-content {
+    height: calc(100vh - 103px);
 }
 .card {
     box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.25),
         inset 0 -1px 5px rgba(0, 0, 0, 0.25);
+    .nav-link.active {
+        box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.25),
+            inset 0 -1px 5px rgba(0, 0, 0, 0.25);
+    }
 }
 .card-header {
-    padding: 12px;
+    padding: 12px 8px;
 }
 .tab-content-container {
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 128px);
+    height: calc(100vh - 143px);
+}
+.data-content-link {
+    color: var(--dark);
 }
 .data-content-header {
     min-height: 19px;

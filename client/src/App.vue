@@ -2,6 +2,7 @@
 import NavBar from "./components/NavBar.vue";
 import Spinner from "./components/Spinner.vue";
 import { BContainer } from "bootstrap-vue";
+import Footer from "./components/Footer.vue";
 export default {
     name: "App",
     render() {
@@ -12,6 +13,7 @@ export default {
                     <router-view />
                 </BContainer>
                 <Spinner />
+                <Footer />
             </div>
         );
     }
@@ -26,6 +28,11 @@ export default {
 button:disabled,
 .custom-select:disabled {
     cursor: not-allowed;
+}
+
+.btn.btn-primary {
+    box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.25),
+        inset 0 -1px 5px rgba(0, 0, 0, 0.25);
 }
 
 .custom-select {
