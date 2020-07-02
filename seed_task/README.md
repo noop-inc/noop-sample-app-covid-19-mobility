@@ -6,7 +6,7 @@ The source code included in this directory accesses the JSON file exposed at the
 ```
 COMPONENT seedTask task
 
-RESOURCE mobilityDB dynamodb -p hashKeyName=name -p hashKeyType=S -p rangeKeyName=type -p rangeKeyType=S
+RESOURCE mobilityDB dynamodb -s hashKeyName=name -s hashKeyType=S -s rangeKeyName=type -s rangeKeyType=S
 
 FROM node:12-alpine AS build
 ENV NODE_ENV production
