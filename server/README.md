@@ -1,0 +1,1 @@
+# Noop Sample Application (Server Component)

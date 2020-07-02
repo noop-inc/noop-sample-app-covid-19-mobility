@@ -1,2 +1,1 @@
-# mobility-dashboard
-Mobility dashboard running on Noop
+# Noop Sample Application (Node.js, Vue.js, Express, DynamoDB, Python)
