@@ -1,6 +1,6 @@
 # Noop Full-Stack Sample Application (Server Component)
 
-The source code included in this directory is for an Express.js Server, which recieves a request from the Client Component, retrieves data from the application's DynamoDB resource, and returns said data as a response on the exposed `/api/*` endpoint. This directory's `Noopfile` passes environmental variables (`ENV`) for the application's DynamoDB resource to be available within its runtime container.
+The source code included in this directory inlcudes an Express.js Server, which responses to a requests from the Client Component, and communicates with the application's DynamoDB resource. This directory's `Noopfile` passes in environmental variables (`ENV`) for the application's DynamoDB resource to be available during the container's runtime.
 
 ## Server Noopfile
 ```

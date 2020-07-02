@@ -1,6 +1,6 @@
 # Noop Full-Stack Sample Application (Seeding Data Task Component)
 
-The source code included in this directory accesses the JSON file exposed at the `/data` endpoint and uses this file to seed items into the application's database resource. Since the Seeding Data component is a `task`, the resulting container is only active during events idenified within either the `LIFECYCLE` or `CRON` directives in the directory's `Noopfile` - in this case, `postdeploy`.
+The source code included in this directory accesses the JSON file exposed at the `/data` endpoint, and uses this file to seed data into the application's database resource. Since the Seeding Data component is a `task`, the resulting container is only active during events idenified within either a `LIFECYCLE` or `CRON` directives within a `Noopfile` - for this component it's `postdeploy`.
 
 ## SeedTask Noopfile
 ```
