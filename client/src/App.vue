@@ -39,6 +39,10 @@ button:disabled,
     appearance: none;
 }
 
+* {
+    outline: none;
+}
+
 #app {
     background-color: var(--secondary);
     height: calc(100vh);
