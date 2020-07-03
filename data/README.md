@@ -5,7 +5,7 @@ The source code in this directory processes multiple CSV files into a single JSO
 ## Data Noopfile
 ```
 # Defines the name (data) and type (service) of the component.
-COMPONENT data service.
+COMPONENT data service
 
 # Specifies the route ('/data') available to this component within the application's route table.
 ROUTE -m GET /data -p

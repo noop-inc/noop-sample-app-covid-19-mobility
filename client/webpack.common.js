@@ -15,7 +15,10 @@ module.exports = {
         rules: [
             {
                 test: /\.vue$/,
-                // include: path.resolve(__dirname, "src"),
+                include: [
+                    path.resolve(__dirname, "src"),
+                    path.resolve(__dirname, "node_modules", "vue-spinner"),
+                ],
                 use: "vue-loader",
             },
             {
@@ -30,7 +33,10 @@ module.exports = {
             },
             {
                 test: /\.css|\.scss$/,
-                // include: path.resolve(__dirname, "src"),
+                include: [
+                    path.resolve(__dirname, "src"),
+                    path.resolve(__dirname, "node_modules", "vue-spinner"),
+                ],
                 use: [
                     process.env.NODE_ENV === "production"
                         ? MiniCssExtractPlugin.loader
