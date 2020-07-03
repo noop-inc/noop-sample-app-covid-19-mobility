@@ -15,5 +15,4 @@ ENV DYNAMO_ENDPOINT $.resources.mobilityDB.endpoint
 COPY --from=build .  .
 COPY server.js .
 COPY /routes ./routes
-
 ENTRYPOINT npm start
