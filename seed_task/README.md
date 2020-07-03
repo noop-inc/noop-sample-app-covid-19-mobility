@@ -1,6 +1,6 @@
 # Noop Full-Stack Sample Application (Seeding Data Task Component)
 
-The source code included in this directory accesses the JSON file exposed at the `/data` endpoint, and uses this file to seed data into the application's database resource. Since the Seeding Data component is a `task`, the resulting container is only active during events idenified within either a `LIFECYCLE` or `CRON` directives within a `Noopfile` - for this component it's `postdeploy`.
+The source code included in this directory accesses the JSON file exposed at the `/data` endpoint, and uses this file to seed data into the application's database resource. Since the seedTalk component is a `task`, the resulting container is only active during events defined within either a `LIFECYCLE` or `CRON` directives - for this component the event is `postdeploy`.
 
 ## SeedTask Noopfile
 ```
@@ -10,7 +10,7 @@ COMPONENT seedTask task
 # Describes a database resource used by the components in this application.
 RESOURCE mobilityDB dynamodb -s hashKeyName=name -s hashKeyType=S -s rangeKeyName=type -s rangeKeyType=S
 
-# Build1 installs dependencies.
+# The 'build' stage installs dependencies.
 FROM node:12-alpine AS build
 
 # Sets an environment variable available at build's runtime.
@@ -19,7 +19,7 @@ ENV NODE_ENV production
 COPY package*.json  ./
 RUN npm install --loglevel=error
 
-# Recieves dependencies from build, and uses those files for execution of  
+# The runtime stage recieves dependencies from build, and uses those files to assist in execution of the component.
 FROM node:12-alpine
 
 # Sets environment variables available at build's runtime. The variables available from a defined resource vary depending on the type of the resource.

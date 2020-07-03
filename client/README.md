@@ -1,6 +1,6 @@
 # Noop Full-Stack Sample Application (Client Facing Service Component)
 
-The source code included in this directory includes a Vue.js single-page application. The directions in this directory's `Noopfile` creates a build for this application, and hosts the resulting files within an NGINX container.
+The source code in this directory is for a Vue.js single-page application. This directory's `Noopfile` instructs the creation of a build from the source code, and hosts the resulting files within an NGINX container.
 
 ## Client Noopfile
 ```
@@ -10,7 +10,7 @@ COMPONENT client service
 # Specifies the routes available to this component within the application's route table. '*' assigns this component as the default route for if the location does not match a route defined in any of the application's other components.
 ROUTE -m GET *
 
-# Build1 installs dependencies.
+# The 'build1' stage installs dependencies.
 FROM node:12-alpine AS build1
 
 # Sets an environment variable available at build1's runtime.
@@ -19,7 +19,7 @@ ENV NODE_ENV production
 COPY package*.json  ./
 RUN npm install --loglevel=error
 
-# Build2 receives the dependencies installed in build1, and creates a compiled build to deploy.
+# The 'build2' stage receives the dependencies installed in build1, and creates a compiled build for deployment.
 FROM node:12-alpine AS build2
 
 # Sets an environment variable available at build2's runtime.
@@ -31,7 +31,7 @@ COPY /public ./public
 COPY /src ./src
 RUN npm run build
 
-# Recieves the compiled build from build2, and hosts the files through an NGINX server.
+# The runtime stage recieves the compiled build from build2, and hosts the files through an NGINX server.
 FROM nginx:1-alpine
 
 COPY --from=build2 /dist /usr/share/nginx/html
