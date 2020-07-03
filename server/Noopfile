@@ -1,7 +1,7 @@
 # Defines the name (server) and type (service) of the component.
 COMPONENT server service
 
-# Specifies the route ('/api/*') available to this component within the application's route table. Since the route ends in a '*', any location beginning with '/api/' will be directed to this component.
+# Specifies the route ('/api/*') available to this component within the application's route table. Since the route ends with a '*', any location beginning with '/api/' will be directed to this component.
 ROUTE -m GET /api/*
 
 # Describes a database resource used by the components in this application. Hash and Range key settings do not need to be included, since they are already defined within the seedTask's Noopfile.

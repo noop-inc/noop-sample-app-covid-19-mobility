@@ -1,6 +1,6 @@
 # Noop Full-Stack Sample Application (Client Facing Service Component)
 
-The source code in this directory is for a Vue.js single-page application. This directory's `Noopfile` instructs the creation of a build from the source code, and hosts the resulting files within an NGINX container.
+The source code in this directory is for a Vue.js single-page application. This directory's `Noopfile` instructs the creation of a compiled build, and hosts the resulting files within an NGINX container.
 
 ## Client Noopfile
 ```
