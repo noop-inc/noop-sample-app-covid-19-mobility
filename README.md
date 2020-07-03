@@ -41,7 +41,7 @@ When all the Noop components are running the Noop Dev Server can be accessed by 
 
 #### Prerequisites for deploying on Noop Cloud
 
-In order to launch this sample application on Noop Cloud the source code needs to be in "forked" into your own GitHub account. You can fork the repository by pressing the button labeled "Fork" on the upper-right hand side of the sample application's [GitHub Page](https://github.com/noop-cloud/mobility-dashboard).
+In order to launch this sample application on Noop Cloud the source code needs to be in "forked" into your own GitHub account. You can fork the repository by pressing the button labeled "Fork" on the upper-right hand side of the sample application's [GitHub Page](https://github.com/noop-cloud/mobility-dashboard). You also need to sign up for a [Noop Cloud](https://www.noop.app/) account and grant the [Noop Cloud GitHub App](https://github.com/apps/noop-cloud) access to your GitHub account.
 
 #### Launch Sample Application on Noop Cloud
 
