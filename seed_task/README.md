@@ -4,10 +4,10 @@ The source code included in this directory accesses the JSON file exposed at the
 
 ## SeedTask Noopfile
 ```
-# Defines the name (seedTask) and type (task) of the component.
+# Defines the name (seedTask) and type (task) of this component.
 COMPONENT seedTask task
 
-# Describes a database resource used by the components in this application.
+# Describes a database resource used by the component defined within this file.
 RESOURCE mobilityDB dynamodb -s hashKeyName=name -s hashKeyType=S -s rangeKeyName=type -s rangeKeyType=S
 
 # The 'build' stage installs dependencies.
@@ -19,7 +19,7 @@ ENV NODE_ENV production
 COPY package*.json  ./
 RUN npm install --loglevel=error
 
-# The runtime stage recieves dependencies from build, and uses those files to assist in execution of the component.
+# The runtime stage recieves dependencies from build, and uses these files to assist in execution of the component.
 FROM node:12-alpine
 
 # Sets environment variables available at build's runtime. The variables available from a defined resource vary depending on the type of the resource.
