@@ -4,16 +4,16 @@ The source code included in this directory creates an Express.js Server. The ser
 
 ## Server Noopfile
 ```
-# Defines the name (server) and type (service) of the component.
+# Defines the name (server) and type (service) of this component.
 COMPONENT server service
 
-# Specifies the route ('/api/*') available to this component within the application's route table. Since the route ends with a '*', any location beginning with '/api/' will be directed to this component.
+# Specifies the route ('/api/*') available to access this component within the application's route table. Since the route ends with a '*', any location beginning with '/api/' will be directed to this component.
 ROUTE -m GET /api/*
 
 # Describes a database resource used by the components in this application. Hash and Range key settings do not need to be included, since they are already defined within the seedTask's Noopfile.
 RESOURCE mobilityDB dynamodb
 
-# The stage 'build' installs dependencies.
+# The 'build' stage installs dependencies.
 FROM node:12-alpine AS build
 
 # Sets environment variables available at build's runtime.

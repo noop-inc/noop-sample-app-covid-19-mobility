@@ -16,7 +16,7 @@ export default {
                 <div>
                     Built for{" "}
                     <BLink href="https://noop.app/" target="_blank">
-                        Noop Cloud
+                        Noop
                     </BLink>
                 </div>
             </footer>

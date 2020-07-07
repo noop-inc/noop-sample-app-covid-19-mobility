@@ -14,6 +14,18 @@
 
 ## What is Noop?
 
+Noop is a platform which makes it easy to develop, build, run, and deploy your applications. In essence, Noop streamlines setting up and maintaining a cloud-based infrastructure for your application. All you need to do is provide a file (Noopfile) to explain the configuration of your application, and Noop takes care of the rest. 
+
+A Noopfile is configuration file that lives in your source code. It describes the structure of your applications in terms of components (which can be thought of as running code), resources (which can be thought of as database services), and the relationships between each other. Anytime a new version of your application is deployed, connected resources retain their preexisting state.
+
+If you have used Docker before you might find some aspects of Noopfiles familiar. In fact, the presentation of Noopfiles largely serve as a syntactical extension of the standards utilized in Dockerfiles. Therefore, existing Docker applications often require minimal alterations to accommodate Noop.
+
+Noop currently supports two distinct software environments, Noop Local and Noop Cloud. Noop Local helps facilitates the local development of Noop applications, while Noop Cloud is a PaaS (Platform as a Service) provider for deploying Noop applications. 
+
+This guide will help you get started running and deploying with Noop by way of a sample application. By using both Noop Local and Noop Cloud with the sample application, you will be able to quickly gain an understanding of how components, resources, and Noopfiles all work together.
+
+With that said - let's get started!
+
 ## The Sample Application
 
 ## Noop Local Quick Start
@@ -21,7 +33,7 @@
 #### Prerequisites for running Noop Local
 In order to run the sample application in this repository with Noop Local, the following development tools are required: [Git](https://git-scm.com), [Docker](https://www.docker.com), [Node.js](https://nodejs.org/en/) (current LTS release recommended).
 
-**Note**: We recommend running Noop Local on a device with a recent version of macOS installed. Windows is currently not supported.
+**Note**: We recommend using Noop Local on a device running a recent version of macOS installed. A Unix-like operating system is required.
 
 #### Launch Sample Application in Noop Local Environment
 
@@ -29,7 +41,7 @@ In order to run the sample application in this repository with Noop Local, the f
 
 2) Confirm Noop Local has been properly installed by entering `noop` in a terminal window. This command should output the current version of Noop Local installed on your device (e.g. `noop-local v1.0.11`).
 
-3) Confirm the Docker dameon on your device by entering `docker ps` into a terminal window.
+3) Confirm the Docker dameon is running on your device by entering `docker ps` into a terminal window.
 
 4) Clone this repository onto your local device: `git clone https://github.com/noop-cloud/mobility-dashboard.git`
 
@@ -41,27 +53,24 @@ When all the Noop components are running the Noop Dev Server can be accessed by 
 
 #### Prerequisites for deploying on Noop Cloud
 
-In order to launch this sample application on Noop Cloud the source code needs to be in "forked" into your own GitHub account. You can fork the repository by pressing the button labeled "Fork" on the upper-right hand side of the sample application's [GitHub Page](https://github.com/noop-cloud/mobility-dashboard). You also need to sign up for a [Noop Cloud](https://www.noop.app/) account and grant the [Noop Cloud GitHub App](https://github.com/apps/noop-cloud) access to your GitHub account.
+In order to launch the sample application on Noop Cloud, the source code needs to be in "forked" into your own GitHub account. You can fork the repository by pressing the button labeled "Fork" on the upper-right hand side of the sample application's [GitHub Page](https://github.com/noop-cloud/mobility-dashboard). You also need to register a [Noop Cloud](https://www.noop.app/) account and grant the [Noop Cloud GitHub App](https://github.com/apps/noop-cloud) access to your GitHub account.
 
 #### Launch Sample Application on Noop Cloud
 
-##### Coming Soon
-
 ## Noop Specific Tips and Tricks
 
-#### Break down directives in Noopfiles to be as granular as possible, and place any directives involving frequently changing files as far down the in file's ordering as possible.
+#### Break down directives in Noopfiles to be as granular as possible, and be intentional with ordering.
 
 Since Noopfiles largely serves as an extension of Dockerfiles, many of [advantages of the Docker ecosystem](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/) continue to be strengths when working with Noop. For instance, a component's container is cached after each directive in a Noopfile, so the ordering of your Noopfile can have a significant impact on build-times of your components.
 
-Two great approaches for achiving speedy builds when working with Noop is to ensure lengthy steps occur as early as possible, and steps involving frequent changing files occur as late as possible.
+Two great approaches for achieving speedy builds when working with Noop is to ensure lengthy steps occur as early as possible, and steps involving frequent changing files occur as late as possible.
 
 #### Explore multi-stage builds and polyglot patterns within individual containers.
 
-#### All Noop components can be exposed on the same port.
+#### Feel free to expose all your Noop components on the same port.
 
-That's right, Noop's own internal route table will facilitate the communication between different components, so there is no need to explictly assign differnt ports to each of your components. All you need to make sure is that none of the locations defined in the `ROUTE` directives of your Noopfiles conflict with one another.
+That's right, Noop's own internal route table will facilitate communication between different components, so there is no need to explicitly assign different ports to each of your components. All you need to make sure is that none of the locations defined in the `ROUTE` directives of your Noopfiles conflict with one another.
 
-Addtionally, Noop provides a easy shorthand to allow any of your server-side componets to communicate with each other. Just use [http://localapp](http://localapp) - followed by the route pattern defined in your Noopfiles - and you are good to go!
+Additionally, Noop provides an easy shorthand to allow any of your server-side components to communicate with each other. Just use [http://localapp](http://localapp) - followed by the route pattern defined in your Noopfiles - and you are good to go!
 
-## Addtional Resources
-
+## Additional Resources

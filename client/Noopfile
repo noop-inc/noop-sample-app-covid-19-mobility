@@ -1,7 +1,7 @@
-# Defines the name (client) and type (service) of the component.
+# Defines the name (client) and type (service) of this component.
 COMPONENT client service
 
-# Specifies the routes available to this component within the application's route table. '*' assigns this component as the default route for if the location does not match a route defined in any of the application's other components.
+# Specifies the routes available to access this component within the application's route table. '*' assigns this component as the default route if a location does not match a routes defined in other components.
 ROUTE -m GET *
 
 # The 'build1' stage installs dependencies.
@@ -13,7 +13,7 @@ ENV NODE_ENV production
 COPY package*.json  ./
 RUN npm install --loglevel=error
 
-# The 'build2' stage receives the dependencies installed in build1, and creates a compiled build for deployment.
+# The 'build2' stage receives the dependencies from build1, and creates a compiled build for deployment.
 FROM node:12-alpine AS build2
 
 # Sets an environment variable available at build2's runtime.
@@ -25,7 +25,7 @@ COPY /public ./public
 COPY /src ./src
 RUN npm run build
 
-# The runtime stage recieves the compiled build from build2, and hosts the files through an NGINX server.
+# The runtime stage recieves the compiled build from build2, and hosts the files on an NGINX server.
 FROM nginx:1-alpine
 
 COPY --from=build2 /dist /usr/share/nginx/html
