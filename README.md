@@ -26,9 +26,9 @@ This guide will help you get started running and deploying with Noop by way of a
 With that said - let's get started!
 
 ## The Sample Application
-The source code in this repository features a full-stack application built from the ground up for Noop. To an end-user, the application provides a queryable dashboard utilizing mobility data released during the COVID-19 pandemic.
+This repository features the source code for a full-stack application built from the ground up for Noop. To an end-user, the application provides a queryable data visualization dashboard utilizing mobility data released during the COVID-19 pandemic.
 
-The four subdirectories located at the root of this repository each feature the source code for an individual Noop component. Each component is defined by a `Noopfile` located at its own root level. The Noopfiles in this repository also define a **DynamoDB resource**, `mobilityDB`, which serves as a database dependency that is accessible by server-side components.
+The four subdirectories located at the root of this repository each feature the source code for an individual Noop component. Each component is defined by a `Noopfile` located at its own root level. The Noopfiles in this repository also define a **DynamoDB resource**, `mobilityDB`, which serves as a database dependency accessible to the application's components.
 
 The sample application's Noop components include:
 1) [`client`](./client), a Vue.js **service component**, which manages the client-side user interface.
@@ -37,9 +37,10 @@ The sample application's Noop components include:
 4) [`server`](./server), an Express.js **service component**, which facilitates communication between `mobilityDB` and `client`.
 
 ## Noop Local Quick Start
+[Noop Local](https://github.com/noop-cloud/noop-local) is a development server, which assists with running a Noop application on a local machine. Features include a command line interface for interacting with a Noop application, and auto-reloading of individual components upon changes to source code.
 
 #### Prerequisites for running Noop Local
-In order to run the sample application in this repository with Noop Local, the following development tools are required: [Git](https://git-scm.com), [Docker](https://www.docker.com), [Node.js](https://nodejs.org/en/) (current LTS release recommended).
+In order to run the sample application with Noop Local, the following development tools are required: [Git](https://git-scm.com), [Docker](https://www.docker.com), [Node.js](https://nodejs.org/en/) (current LTS release recommended).
 
 **Note**: We recommend using Noop Local on a local machine running a recent version of macOS. A Unix-like operating system is required.
 
@@ -68,7 +69,7 @@ In order to launch the sample application on Noop Cloud, the source code in this
 
 #### Break down directives in Noopfiles to be as granular as possible, and be intentional with ordering.
 
-Since Noopfiles largely serves as an extension of Dockerfiles, many of [advantages of the Docker ecosystem](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/) continue to be strengths when working with Noop. For instance, a component's container is cached after each directive in a Noopfile, so the ordering of your Noopfile can have a significant impact on build-times of your components.
+Since Noopfiles largely serves as an extension of Dockerfiles, many of [advantages of Docker](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/) continue to be strengths when working with Noop. For instance, a component's container is cached after each directive in a Noopfile, so the ordering of your Noopfile can have a significant impact on build-times of your components.
 
 Two great approaches for achieving speedy builds when working with Noop is to ensure lengthy steps occur as early as possible, and steps involving frequent changing files occur as late as possible.
 
