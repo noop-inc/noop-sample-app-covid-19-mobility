@@ -14,4 +14,4 @@ ENV NODE_ENV production
 COPY --from=build . .
 COPY index.js .
 ENTRYPOINT npm start
-LIFECYCLE postdeploy
+LIFECYCLE beforeTraffic
