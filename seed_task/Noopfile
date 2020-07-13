@@ -25,5 +25,5 @@ COPY --from=build . .
 COPY index.js .
 ENTRYPOINT npm start
 
-# Specifies when this task component will run. Postdeploy means this task will run immediately after all other components have been deployed.
-LIFECYCLE postdeploy
+# Specifies when this task component will run. BeforeTraffic means this task will run immediately after all other components have been deployed.
+LIFECYCLE beforeTraffic
