@@ -48,7 +48,7 @@ In order to run the sample application with Noop Local, the following developmen
 When all the Noop components are running, you can access the Noop Dev Server by pressing `o` (or by visiting [localnoop.app:1234](https://localnoop.app:1234) in a web browser) and the Noop Local Inspector by pressing `i` (or by visiting [localhost:1235](http://localhost:1235) in a web browser). You can press `q` to close all running Noop components.
 
 ## Noop Cloud Quick Start
-[Noop Cloud](https://www.noop.app) is a PaaS provider designed for hosting and managing Noop applications. Noop Cloud strives to make it super simple to setup and deploy an application on a cloud-based infrastructure, while retaining a robust set of configuration options.
+[Noop Cloud](https://www.noop.app) is a PaaS provider designed for hosting and managing Noop applications. Noop Cloud strives to streamline the process of setting up and deploying your application, while also retaining robust configuration options.
 
 #### Prerequisites for deploying on Noop Cloud
 In order to launch the sample application on Noop Cloud, the source code within this repository needs to be in "forked" or cloned into your own GitHub account. You also need to sign up for a [Noop Cloud](https://www.noop.app/) account to grant Noop Cloud access to the Noop application.
