@@ -14,10 +14,11 @@ export default {
                 </div>
                 <div class="divider" />
                 <div>
-                    Built for{" "}
+                    Leveraging the{" "}
                     <BLink href="https://noop.app/" target="_blank">
                         Noop
-                    </BLink>
+                    </BLink>{" "}
+                    Platform
                 </div>
             </footer>
         );
