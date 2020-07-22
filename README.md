@@ -49,14 +49,14 @@ In order to run the sample application with Noop Local, the following developmen
 When all the Noop components are running, you can access the Noop Dev Server by pressing `o` (or by visiting [localnoop.app:1234](https://localnoop.app:1234) in a web browser) and the Noop Local Inspector by pressing `i` (or by visiting [localhost:1235](http://localhost:1235) in a web browser). You can press `q` to close all running Noop components.
 
 ## Noop Cloud Quick Start
-[Noop Cloud](https://www.noop.app) is a PaaS provider designed for hosting and managing Noop applications. Noop Cloud strives to streamline the process of setting up and deploying your application, while also retaining a robust set of configuration options.
+[Noop Cloud](https://noop.app) is a PaaS provider designed for hosting and managing Noop applications. Noop Cloud strives to streamline the process of setting up and deploying your application, while also retaining a robust set of configuration options.
 
 #### Prerequisites for deploying on Noop Cloud
-In order to launch the sample application on Noop Cloud, the source code within this repository needs to be in "forked" or cloned into your own GitHub account. You also need to sign up for a [Noop Cloud](https://www.noop.app/) account to grant Noop Cloud access to the Noop application.
+In order to launch the sample application on Noop Cloud, the source code within this repository needs to be in "forked" or cloned into your own GitHub account. You also need to sign up for a [Noop Cloud](https://noop.app/) account to grant Noop Cloud access to the Noop application.
 
 #### Launch Sample Application on Noop Cloud
 
-1) **Create App.** Visit [Noop Cloud](https://www.noop.app/), and click on the "Applications" icon in the left-hand sidebar. Then click "Create New App", and select the repository that contains the sample application's source code. Click "save" to continue.
+1) **Create App.** Visit [Noop Cloud](https://noop.app/), and click on the "Applications" icon in the left-hand sidebar. Then click "Create New App", and select the repository that contains the sample application's source code. Click "save" to continue.
 
 2) **Launch Environment.** Click "Launch An Environment" on either the confirmation page after completing step 1, or on the management page for the newly created application. Select a region, cluster, domain and endpoint for the environment. Click "save" to continue.
 
@@ -77,4 +77,4 @@ In order to launch the sample application on Noop Cloud, the source code within 
 5) **Deploy Build.** Return to the management page for the launched environment, and click on "Deploy Changes". Under the "Build" section, select the build matching the git reference used to create the build in step 3. Then on the right-hand side of the page under the "Deploy Changes" section click "Deploy". When the deployment is completed the sample application will be available at the selected endpoint for your environment.
 
 ## Addtional Resource
-If your interested in learning more about Noop visit the Noop documentation at <a href="https://www.noop.app/learn" target="_blank">noop.app/learn</a>.
+If your interested in learning more about Noop visit the Noop documentation at <a href="https://noop.app/learn" target="_blank">noop.app/learn</a>.
