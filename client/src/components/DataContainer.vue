@@ -52,8 +52,8 @@ export default {
                     datasets: [
                         {
                             data,
-                            borderColor: colors.primary + "40",
-                            backgroundColor: colors.primary + "40",
+                            borderColor: colors.danger + "40",
+                            backgroundColor: colors.danger + "40",
                             pointBorderColor: pointColor,
                             pointRadius: 3,
                             pointHoverRadius: 6,
@@ -184,9 +184,20 @@ export default {
 .card {
     box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.25),
         inset 0 -1px 5px rgba(0, 0, 0, 0.25);
+    .nav-link {
+        color: var(--danger)
+    }
+    .nav-link:hover {
+        color: #c82333;
+    }
+    .nav-link.disabled {
+        color: var(--gray);
+    }
     .nav-link.active {
         box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.25),
             inset 0 -1px 5px rgba(0, 0, 0, 0.25);
+        background-color: var(--danger);
+        color: var(--white)
     }
 }
 .card-header {
@@ -199,6 +210,9 @@ export default {
 }
 .data-content-link {
     color: var(--dark);
+}
+.data-content-link:hover {
+    color: #c82333;
 }
 .data-content-header {
     min-height: 19px;

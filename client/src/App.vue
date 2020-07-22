@@ -33,7 +33,13 @@ button:disabled,
 .btn.btn-primary {
     box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.25),
         inset 0 -1px 5px rgba(0, 0, 0, 0.25);
+    background-color: var(--danger);
+    border-color: var(--danger);
 }
+
+.btn.btn-primary:hover {
+    background-color: #c82333;
+};
 
 .custom-select {
     appearance: none;

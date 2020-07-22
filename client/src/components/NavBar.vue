@@ -27,7 +27,7 @@ export default {
                     fixed="top"
                     toggleable="sm"
                     type="dark"
-                    variant="primary"
+                    variant="danger"
                 >
                     <BNavbarBrand
                         to={
@@ -84,5 +84,9 @@ export default {
 .modal-content {
     box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.25),
         inset 0 -1px 5px rgba(0, 0, 0, 0.25);
+}
+.custom-control-input:checked ~ .custom-control-label::before {
+    border-color: var(--danger) !important;
+    background-color: var(--danger) !important;
 }
 </style>
