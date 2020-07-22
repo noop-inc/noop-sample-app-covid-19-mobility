@@ -1,5 +1,5 @@
-# Noop Sample Application COVID-19 Mobility Dashboard
-#### Built for Noop with Node.js, Vue.js, Express.js, DynamoDB, Python
+# Noop Sample Application | COVID-19 Mobility Dashboard
+#### Leveraging the Noop platform to easily run an application built with Node.js, Vue.js, Express.js, DynamoDB and Python.
 
 ### Table of Contents
 - [What is Noop?](#what-is-noop)
@@ -19,7 +19,7 @@ Noop currently supports two distinct runtime environments, Noop Local and Noop C
 With that said - let's get started!
 
 ## The Sample Application
-The sample application included in this repository has been built from the ground up for Noop. To an end-user, this application provides a queryable data visualization dashboard utilizing mobility data released during the COVID-19 pandemic.
+The sample application included in this repository had been "Noopified" to leverage the Noop platform. To an end-user, this application provides a queryable data visualization dashboard utilizing mobility data released during the COVID-19 pandemic.
 
 The four subdirectories located at the root of this repository each feature the source code for an individual Noop component. Each component is defined by a `Noopfile` located at its own root level. The Noopfiles in this repository also defines a **DynamoDB database resource**, `mobilityDB`, which serves as a dependency accessible to the application's components.
 
