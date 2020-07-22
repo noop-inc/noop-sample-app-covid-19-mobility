@@ -7,7 +7,7 @@ export default {
         return (
             <footer class="footer-container">
                 <div>
-                    Designed by{" "}
+                    Developed by{" "}
                     <BLink href="https://www.rearc.io/" target="_blank">
                         Rearc
                     </BLink>

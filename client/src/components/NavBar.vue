@@ -3,7 +3,6 @@ import IconGitHub from "./icons/IconGitHub";
 import IconRearc from "./icons/IconRearc";
 import IconInfo from "./icons/IconInfo";
 import SelectDataModal from "./SelectDataModal";
-import InfoModal from "./InfoModal.vue";
 import {
     BNavbar,
     BNavbarBrand,
@@ -42,7 +41,7 @@ export default {
                                 : null
                         }
                     >
-                        Mobility Data
+                        COVID-19 Mobility
                     </BNavbarBrand>
                     <BNavbarToggle target="nav-collapse" />
                     <BCollapse id="nav-collapse" is-nav>
@@ -63,26 +62,17 @@ export default {
                             </BNavItem>
                             <BNavItem
                                 align="center"
-                                href="https://github.com/noop-cloud/mobility-dashboard"
+                                href="https://github.com/noop-cloud/noop-sample-app-covid-19-mobility"
                                 target="_blank"
                                 VBTooltip_hover_noFade
                                 title="View source code on GitHub"
                             >
                                 <IconGitHub class="d-inline-block align-top" />
                             </BNavItem>
-                            <BNavItem
-                                align="center"
-                                VBModal_info-modal
-                                VBTooltip_hover_noFade
-                                title="Information about Noop"
-                            >
-                                <IconInfo class="d-inline-block align-top" />
-                            </BNavItem>
                         </BNavbarNav>
                     </BCollapse>
                 </BNavbar>
                 <SelectDataModal />
-                <InfoModal />
             </header>
         );
     }
