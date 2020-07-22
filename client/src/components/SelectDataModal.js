@@ -179,7 +179,7 @@ export default {
             <BModal
                 id="select-data-modal"
                 ref="selectDataModal"
-                title="Select Mobility Data to Examine"
+                title="Select COVID-19 Mobility Data"
                 ok-disabled={!this.selectedLocaton || !this.selectedData}
                 onOk={this.handleOk}
                 no-fade
