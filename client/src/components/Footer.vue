@@ -7,7 +7,7 @@ export default {
         return (
             <footer class="footer-container">
                 <div>
-                    Designed by{" "}
+                    Developed by{" "}
                     <BLink href="https://www.rearc.io/" target="_blank">
                         Rearc
                     </BLink>
@@ -16,7 +16,7 @@ export default {
                 <div>
                     Built for{" "}
                     <BLink href="https://noop.app/" target="_blank">
-                        Noop Cloud
+                        Noop
                     </BLink>
                 </div>
             </footer>

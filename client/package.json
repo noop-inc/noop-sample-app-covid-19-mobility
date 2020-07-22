@@ -17,11 +17,11 @@
     },
     "homepage": "https://github.com/rearc-data/mobility-dashboard#readme",
     "dependencies": {
-        "@babel/core": "^7.10.4",
+        "@babel/core": "^7.10.5",
         "@babel/preset-env": "^7.10.4",
         "@vue/babel-helper-vue-jsx-merge-props": "^1.0.0",
         "@vue/babel-preset-jsx": "^1.1.2",
-        "autoprefixer": "^9.8.4",
+        "autoprefixer": "^9.8.5",
         "axios": "^0.19.2",
         "babel-loader": "^8.1.0",
         "bootstrap": "^4.5.0",
@@ -42,7 +42,7 @@
         "vue-chartjs": "^3.5.0",
         "vue-loader": "^15.9.3",
         "vue-router": "^3.3.4",
-        "vue-spinner": "^1.0.3",
+        "vue-spinner": "^1.0.4",
         "vue-template-compiler": "^2.6.11",
         "vuex": "^3.5.1",
         "webpack": "^4.43.0",
@@ -52,7 +52,7 @@
     "devDependencies": {
         "compression": "^1.7.4",
         "express": "^4.17.1",
-        "http-proxy-middleware": "^1.0.4",
+        "http-proxy-middleware": "^1.0.5",
         "style-loader": "^1.2.1",
         "webpack-dev-middleware": "^3.7.2",
         "webpack-hot-middleware": "^2.25.0"
