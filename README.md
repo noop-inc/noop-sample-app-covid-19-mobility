@@ -58,11 +58,11 @@ In order to launch the sample application on Noop Cloud, the source code within 
 
 1) **Create App.** Visit [Noop Cloud](https://noop.app/), and click on the "Applications" icon in the left-hand sidebar. Then click "Create New App", and select the repository that contains the sample application's source code. Click "save" to continue.
 
-2) **Launch Environment.** Go to the management page for the newly created application, select the "Environment" tab, and click "Launch Environment". On the "Launch an Environment" page select a region, cluster, domain and endpoint for the environment. Click "save" to continue.
+2) **Create Build.** Go to the management page for the newly created application, and select the "Builds" tab. Under the "Initiate Manual Build" section enter in a "Git Reference" (e.g. "master") to create a build of the sample application. Click "Build" and wait for the build to complete before continuing.
 
-3) **Create Build.** Return to the management page for the application, and select the "Builds" tab. Under the "Initiate Manual Build" section enter in a "Git Reference" (e.g. "master") to create a build of the sample application. Click "Build" and wait for the build to complete before continuing.
+3) **Launch Environment.** Return to the management page for the application, select the "Environment" tab, and click "Launch Environment". On the "Launch an Environment" page select a region, cluster, domain and endpoint for the environment. Click "save" to continue.
 
-4) **Launch Resource.** Return to the management page for the launched environment. Under the "Launch a New Resource" section click "DynamoDB Table". Enter values into the fields to match the DynamoDB resource description present within the sample application's Noopfiles.
+4) **Launch Resource.** Go to the management page for the launched environment. Under the "Launch a New Resource" section click "DynamoDB Table". Enter values into the fields to match the DynamoDB resource description present within the sample application's Noopfiles.
 
     | Field         | Value      |
     |---------------|------------|
