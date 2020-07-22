@@ -77,4 +77,4 @@ In order to launch the sample application on Noop Cloud, the source code within 
 5) **Deploy Build.** Return to the management page for the launched environment, and click on "Deploy Changes". Under the "Build" section, select the build matching the git reference used to create the build in step 3. Then on the right-hand side of the page under the "Deploy Changes" section click "Deploy". When the deployment is completed the sample application will be available at the selected endpoint for your environment.
 
 ## Additional Resource
-If your interested in learning more about Noop visit the Noop documentation at <a href="https://noop.app/learn" target="_blank">noop.app/learn</a>.
+If you are interested in learning more about Noop visit the Noop documentation at <a href="https://noop.app/learn" target="_blank">noop.app/learn</a>.
