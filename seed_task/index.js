@@ -57,8 +57,8 @@ const init = () => {
     dynamodb.describeTable({ TableName }, async (err, data) => {
         if (err) {
             console.error(
-                "Unable to check items in table",
-                ". Error JSON:",
+                "Unable to check items in table.",
+                "Error JSON:",
                 JSON.stringify(err, null, 2)
             );
         } else if (data.Table.ItemCount === 0) {
