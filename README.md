@@ -1,5 +1,4 @@
 # Noop Sample Application | COVID-19 Mobility Dashboard
-#### Leveraging the Noop platform to easily run an application built with Node.js, Vue.js, Express.js, DynamoDB and Python.
 
 ### Table of Contents
 - [What is Noop?](#what-is-noop)
@@ -19,7 +18,7 @@ Noop currently supports two distinct runtime environments, Noop Local and Noop C
 With that said - let's get started!
 
 ## The Sample Application
-The sample application included in this repository had been "Noopified" to leverage the Noop platform. To an end-user, this application provides a queryable data visualization dashboard utilizing mobility data released during the COVID-19 pandemic.
+To an end-user, the sample application provides a data visualiztion dashboard offering insight into mobility activity during the COVID-19 pandemic.
 
 The four subdirectories located at the root of this repository each feature the source code for an individual Noop component. Each component is defined by a `Noopfile` located at its own root level. The Noopfiles in this repository also defines a **DynamoDB database resource**, `mobilityDB`, which serves as a dependency accessible to the application's components.
 
@@ -52,7 +51,7 @@ When all the Noop components are running, you can access the Noop Dev Server by 
 [Noop Cloud](https://noop.app) is a PaaS provider designed for hosting and managing Noop applications. Noop Cloud strives to streamline the process of setting up and deploying your application, while also retaining a robust set of configuration options.
 
 #### Prerequisites for deploying on Noop Cloud
-In order to launch the sample application on Noop Cloud, the source code within this repository needs to be in "forked" or cloned into your own GitHub account. You also need to sign up for a [Noop Cloud](https://noop.app/) account to grant Noop Cloud access to the Noop application.
+In order to launch the sample application on Noop Cloud, the source code within this repository needs to be "forked" or cloned into your own GitHub account. You also need to sign up for a [Noop Cloud](https://noop.app/) account to grant Noop Cloud access to the Noop application.
 
 #### Launch Sample Application on Noop Cloud
 
