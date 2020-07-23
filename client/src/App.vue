@@ -25,6 +25,10 @@ export default {
 @import "~bootstrap-vue";
 @import "../node_modules/prismjs/themes/prism.css";
 
+body {
+    background-color: var(--secondary);
+}
+
 button:disabled,
 .custom-select:disabled {
     cursor: not-allowed;
