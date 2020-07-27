@@ -13,7 +13,7 @@ export default {
                     container-fluid
                 >
                     {this.$route.name !== "Home" ? (
-                        <BButton variant="primary" to={{ name: "Home" }}>
+                        <BButton variant="success" to={{ name: "Home" }}>
                             Return to Home Page
                         </BButton>
                     ) : null}
