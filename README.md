@@ -39,7 +39,7 @@ In order to run the sample application with Noop Local, the following developmen
 #### Launch Sample Application in Noop Local Environment
 1) Install the Noop Local as a global NPM package: `npm install -g noop-local`. You can confirm Noop Local has been properly installed by entering `noop` in a terminal window. This command will output the current version of Noop Local installed on your local machine (e.g. `noop-local v1.0.13`).
 
-2) Run docker on your local machine. You can confirm Confirm the Docker daemon is running on your local machine by entering `docker ps` into a terminal window.
+2) Run docker on your local machine. You can confirm the Docker daemon is running on your local machine by entering `docker ps` into a terminal window.
 
 3) Clone this repository onto your local machine: `git clone https://github.com/noop-cloud/noop-sample-app-covid-19-mobility.git`. Note, Noop Local requires a `.git` folder to identify a valid Noop application. If you download the source code in this repository instead of cloning it, you will need to initialize a git repo in the project's root directory, `git init`, for Noop Local to function properly. 
 
