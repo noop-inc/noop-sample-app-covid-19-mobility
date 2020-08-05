@@ -77,8 +77,4 @@ router.get("/:name/:type", (req, res) => {
     });
 });
 
-router.get('/health', (req, res) => {
-  res.status(200).end()
-})
-
 module.exports = router;

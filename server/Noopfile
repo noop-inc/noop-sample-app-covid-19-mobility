@@ -27,6 +27,4 @@ COPY --from=build .  .
 COPY server.js .
 COPY /routes ./routes
 
-HEALTHCHECK HTTP /health
-
 ENTRYPOINT npm start
