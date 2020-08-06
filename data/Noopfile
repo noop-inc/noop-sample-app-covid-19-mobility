@@ -2,7 +2,7 @@
 COMPONENT data service
 
 # Specifies the route ('/data') available to this component within the application's route table.
-ROUTE -m GET /data -p
+ROUTE -m GET /data
 
 # The 'build' stage processes raw CSV data files to create a JSON seed data file.
 FROM python:3-alpine AS build

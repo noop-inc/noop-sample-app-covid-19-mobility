@@ -1,5 +1,5 @@
 const AWS = require("aws-sdk");
-const axios = require("axios");
+const http2 = require("http2");
 
 const TableName = process.env.DYNAMO_TABLE;
 const Endpoint = process.env.DYNAMO_ENDPOINT;
@@ -41,16 +41,19 @@ const formatData = async (data) => {
 };
 
 const getData = () => {
-    axios.defaults.headers.common["Accept-Encoding"] = "gzip, deflate, br";
-    axios
-        .get("http://localapp/data")
-        .then(async ({ data }) => {
-            await formatData(data);
-            return true;
-        })
-        .catch((err) => {
-            console.error(`Error: ${err.message}`);
-        });
+    const client = http2.connect("https://covid-mobility.noop.app");
+    const req = client.request({
+        ":path": "/data",
+    });
+    let data = "";
+    req.on("data", (chunk) => {
+        data += chunk;
+    });
+    req.on("end", () => {
+        formatData(JSON.parse(data));
+        client.close();
+    });
+    req.end();
 };
 
 const init = () => {
