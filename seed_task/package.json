@@ -1,5 +1,5 @@
 {
-    "name": "seeding",
+    "name": "seed_task",
     "version": "1.0.0",
     "description": "Seeding Data to DynamoDB",
     "main": "index.js",
@@ -8,16 +8,16 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/rearc-data/mobility-dashboard.git"
+        "url": "git+https://github.com/noop-cloud/noop-sample-app-covid-19-mobility.git"
     },
-    "author": "Rearc",
+    "author": "Noop",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/rearc-data/mobility-dashboard/issues"
+        "url": "https://github.com/noop-cloud/noop-sample-app-covid-19-mobility/issues"
     },
-    "homepage": "https://github.com/rearc-data/mobility-dashboard#readme",
+    "homepage": "https://github.com/noop-cloud/noop-sample-app-covid-19-mobility#readme",
     "dependencies": {
-        "aws-sdk": "^2.717.0",
+        "aws-sdk": "^2.730.0",
         "axios": "^0.19.2"
     }
 }
