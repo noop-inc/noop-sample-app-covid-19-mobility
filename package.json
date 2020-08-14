@@ -11,7 +11,7 @@
     "seed_task-update": "npm update --prefix seed_task",
     "install-all": "npm install && npm run client-install && npm run server-install && npm run seed_task-install",
     "update-all": "npm update && npm run client-update && npm run server-update && npm run seed_task-update",
-    "lint": "prettier-standard --lint && standard --fix"
+    "lint": "prettier-standard --lint"
   },
   "repository": {
     "type": "git",
@@ -26,8 +26,7 @@
   "devDependencies": {
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
-    "prettier-standard": "^16.4.1",
-    "standard": "^14.3.4"
+    "prettier-standard": "^16.4.1"
   },
   "husky": {
     "hooks": {
@@ -35,7 +34,6 @@
     }
   },
   "lint-staged": {
-    "*": "prettier-standard --lint",
-    "*.js": "standard --fix"
+    "*": "prettier-standard --lint"
   }
 }
