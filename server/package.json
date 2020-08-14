@@ -1,28 +1,28 @@
 {
-    "name": "server",
-    "version": "1.0.0",
-    "description": "Node.js Backend",
-    "scripts": {
-        "start": "node server.js",
-        "dev": "nodemon --inspect server.js"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/noop-cloud/noop-sample-app-covid-19-mobility.git"
-    },
-    "author": "Noop",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/noop-cloud/noop-sample-app-covid-19-mobility/issues"
-    },
-    "homepage": "https://github.com/noop-cloud/noop-sample-app-covid-19-mobility#readme",
-    "dependencies": {
-        "aws-sdk": "^2.730.0",
-        "compression": "^1.7.4",
-        "express": "^4.17.1",
-        "morgan": "^1.10.0"
-    },
-    "devDependencies": {
-        "nodemon": "^2.0.4"
-    }
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Node.js Backend",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon --inspect server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/noop-cloud/noop-sample-app-covid-19-mobility.git"
+  },
+  "author": "Noop",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/noop-cloud/noop-sample-app-covid-19-mobility/issues"
+  },
+  "homepage": "https://github.com/noop-cloud/noop-sample-app-covid-19-mobility#readme",
+  "dependencies": {
+    "aws-sdk": "^2.730.0",
+    "compression": "^1.7.4",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
 }
