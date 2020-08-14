@@ -1,61 +1,61 @@
 <script>
-import Prism from "prismjs";
-import "prismjs/components/prism-json.min";
+import Prism from 'prismjs'
+import 'prismjs/components/prism-json.min'
 export default {
-    name: "RawData",
-    props: {
-        dataset: {
-            type: Object,
-            default: null
-        }
-    },
-    methods: {
-        formatRawData() {
-            return Prism.highlight(
-                JSON.stringify(this.dataset, null, 4),
-                Prism.languages.json
-            );
-        }
-    },
-    mounted() {
-        this.$refs.code.innerHTML = this.formatRawData();
-    },
-    updated() {
-        this.$refs.code.innerHTML = this.formatRawData();
-    },
-    render() {
-        return this.dataset ? (
-            <pre class="raw-data-container">
-                <code class="language-json" ref="code" />
-            </pre>
-        ) : null;
+  name: 'RawData',
+  props: {
+    dataset: {
+      type: Object,
+      default: null
     }
-};
+  },
+  methods: {
+    formatRawData () {
+      return Prism.highlight(
+        JSON.stringify(this.dataset, null, 4),
+        Prism.languages.json
+      )
+    }
+  },
+  mounted () {
+    this.$refs.code.innerHTML = this.formatRawData()
+  },
+  updated () {
+    this.$refs.code.innerHTML = this.formatRawData()
+  },
+  render () {
+    return this.dataset ? (
+      <pre class='raw-data-container'>
+        <code class='language-json' ref='code' />
+      </pre>
+    ) : null
+  }
+}
 </script>
 
 <style lang="scss">
 .raw-data-container {
-    margin-bottom: 0;
-    padding: 12px;
+  margin-bottom: 0;
+  padding: 12px;
 }
 
 .language-json {
-    .token {
-        text-shadow: 0 -0.1em 0.2em white;
-        background: none;
-    }
-    .token.punctuation,
-    .token.operator {
-        color: var(--secondary);
-    }
-    .token.property {
-        color: var(--cyan);
-    }
-    .token.string {
-        color: var(--orange);
-    }
-    .token.number {
-        color: var(--green);
-    }
+  .token {
+    text-shadow: 0 -0.1em 0.2em white;
+    background: none;
+  }
+  .token.punctuation,
+  .token.operator {
+    color: var(--secondary);
+  }
+  .token.property {
+    color: var(--cyan);
+  }
+  .token.string {
+    color: var(--orange);
+  }
+  .token.number {
+    color: var(--green);
+  }
 }
 </style>

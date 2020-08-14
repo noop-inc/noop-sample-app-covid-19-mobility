@@ -7,24 +7,20 @@ ROUTE -m GET /api/*
 # Describes a database resource used by the components in this application. Hash and Range key settings do not need to be included, since they are already defined within the seedTask's Noopfile.
 RESOURCE mobilityDB dynamodb
 
-# The 'build' stage installs dependencies.
-FROM node:12-alpine AS build
+# Runtime stage installs dependencies, and organize files to assist in execution of the component.
+FROM node:12-alpine
 
 # Sets environment variables available at build's runtime.
 ENV NODE_ENV production
 COPY package*.json ./
 RUN npm install --loglevel=error
 
-# The runtime stage receives the dependencies installed in build
-FROM node:12-alpine
-
-# Sets environment variables available at runtime. The variables available from a defined resource vary depending on the type of the resource.
+# Sets environment variables. The variables available from a defined resource vary depending on the type of the resource.
 ENV NODE_ENV production
 ENV DYNAMO_TABLE $.resources.mobilityDB.tableName
 ENV DYNAMO_ENDPOINT $.resources.mobilityDB.endpoint
 
-COPY --from=build .  .
 COPY server.js .
 COPY /routes ./routes
 
-ENTRYPOINT npm start
+CMD npm start
