@@ -13,26 +13,31 @@
 
 ## What is Noop?
 
-Noop is a platform which makes it easy to develop, build, run, and deploy your applications. In essence, Noop streamlines setting up and maintaining a cloud-based infrastructure for your application. All you need to do is provide a Noopfile(s) to explain the configuration of your application, and Noop will take care of the rest.
+Noop is a platform which makes it easy to develop, build, run, and deploy your applications. In essence, Noop streamlines setting up and maintaining a cloud-based infrastructure for hosting your application. All you need to do is provide a Noopfile(s) to explain the configuration of your application, and Noop will take care of the rest.
 
-Noop currently supports two distinct runtime environments, Noop Local and Noop Cloud. Noop Local helps facilitates the local development of Noop applications, while Noop Cloud is a PaaS (Platform as a Service) provider for deploying Noop applications. The guide below will help you get familiar with both Noop Local and Noop Cloud by way of a sample application.
+Noop currently provides two distinct runtime environments, Noop Local and Noop Cloud. Noop Local helps facilitate local development of Noop applications, while Noop Cloud is a platform to run Noop applications in the cloud.
 
 With that said - let's get started!
 
 ## The Sample Application
 
-To an end-user, the sample application provides a data visualiztion dashboard offering insight into mobility activity during the COVID-19 pandemic.
+To an end-user, the sample application featured in this repository delivers a data visualization dashboard offering insight into mobility during the COVID-19 pandemic. Moreover, the application serves as away to illustrate how simple it is to create complex relationships between disparate portions of a project using the **Noop App Model</**.
 
-The four subdirectories located at the root of this repository each feature the source code for an individual Noop component. Each component is defined by a `Noopfile` located at its own root level. The Noopfiles in this repository also defines a **DynamoDB database resource**, `mobilityDB`, which serves as a dependency accessible to the application's components.
+Source code for the sample application is divided into four subdirectories at the root of the project. These four subdirectories each contain source code for an individual Noop component. Each component is defined by a **Noopfile** located at its own root level. The sample application's Noopfiles also define a **DynamoDB database resource**, `mobilityDB`, which serves as a dependency accessible to the application's components.
 
 The sample application's Noop components include:
 
-1. [`client`](./client), a Vue.js **service component**, which manages the client-side user interface.
-2. [`data`](./data), a Python **service component**, which processes raw data files into a seed data file.
-3. [`seedTask`](./seed_task), a Node.js **task component**, which checks valid entries in `mobilityDB`, and seeds data if needed.
-4. [`server`](./server), an Express.js **service component**, which facilitates communication between `mobilityDB` and `client`.
+1. `client`, a Vue.js **service component**, which manages the client-side user interface.
 
-Examining the source code of the sample application will be helpful for familiarizing yourself with Noop specific development practices. Otherwise interacting directly with the source code is not necessary to proceed with the steps below.
+2. `data`, a Python **service component**, which processes raw data files into a seed data file.
+
+3. `seedTask`, a Node.js **task component**, which checks valid entries in `mobilityDB`, and seeds data if needed.
+
+4. `server`, an Express.js **service component**, which facilitates communication between `mobilityDB` and `client`.
+
+[![Noop App Model](https://www.noop.app/img/docs/quickstart-noop-app-model.png)](https://www.noop.app/img/docs/quickstart-noop-app-model.png)
+
+Examining the source code of the sample application will be helpful for familiarizing yourself with Noop specific development practices. Otherwise interacting directly with the source code is not necessary to proceed with running it on Noop.
 
 ## Noop Local Quick Start
 
@@ -42,17 +47,31 @@ Examining the source code of the sample application will be helpful for familiar
 
 In order to run the sample application with Noop Local, the following development tools are required: [Git](https://git-scm.com), [Docker](https://www.docker.com), [Node.js](https://nodejs.org/en/) (current LTS release recommended).
 
+**Windows Specific Instructions**
+
+A GNU/Linux environment is required to run Noop Local on a Windows machine. This can be achieved by using [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/about). Refer to Microsoft's [installation guide for WSL 2](https://docs.microsoft.com/en-us/windows/wsl/install-win10) along with Docker's [setup guide for using Docker with WSL 2](https://docs.docker.com/docker-for-windows/wsl/) to o create a development environment compatible with Noop Local.
+
 #### Launch Sample Application in Noop Local Environment
 
-1. Install the Noop Local as a global NPM package: `npm install -g noop-local`. You can confirm Noop Local has been properly installed by entering `noop` in a terminal window. This command will output the current version of Noop Local installed on your local machine (e.g. `noop-local v1.0.13`).
+**1) Install Noop Local**
 
-2. Run docker on your local machine. You can confirm the Docker daemon is running on your local machine by entering `docker ps` into a terminal window.
+If Noop Local has yet to be be installed on your local machine, run `npm install -g noop-local` into a terminal window. You can confirm Noop Local has been properly installed by entering `noop` into a terminal window. This command will output the current version of Noop Local installed on your local machine (e.g. `noop-local v1.0.15`).
 
-3. Clone this repository onto your local machine: `git clone https://github.com/noop-cloud/noop-sample-app-covid-19-mobility.git`. Note, Noop Local requires a `.git` folder to identify a valid Noop application. If you download the source code in this repository instead of cloning it, you will need to initialize a git repo in the project's root directory, `git init`, for Noop Local to function properly.
+**2) Git Clone the Sample Application**
 
-4. Open a terminal window in the root directory of the cloned repository, and enter `noop run`. This command will build, and thereafter run, all the defined Noop components in this repository.
+Clone the sample application's git repository onto your local machine by running `git clone https://github.com/noop-cloud/noop-sample-app-covid-19-mobility.git`.
 
-When all the Noop components are running, you can access the Noop Dev Server by pressing `o` (or by visiting [localnoop.app:1234](https://localnoop.app:1234) in a web browser) and the Noop Local Inspector by pressing `i` (or by visiting [localhost:1235](http://localhost:1235) in a web browser). You can press `q` to close all running Noop components.
+Note: Noop Local searches for a `.git` folder to identify a root of a Noop application. If you download the source code of the sample application instead of cloning its git repository, you will need to initialize a git repo in the project's root directory with `git init` for Noop Local to function properly.
+
+**3) Run Docker**
+
+Make sure Docker is running on your local machine. You can confirm by entering `docker ps` into your terminal window.
+
+**4) Run Noop Local**
+
+Open a terminal window in the root directory of the sample application, and enter `noop run`. This command will build, and thereafter run, all the defined Noop components.
+
+When all the Noop components are running, you can access your application endpoint by pressing `o` (or by visiting [localnoop.app:1234](https://localnoop.app:1234) in a web browser) and the `Noop Local Inspector` by pressing `i` (or by visiting [localhost:1235](http://localhost:1235) in a web browser). You can press `q` to close all running Noop components.
 
 ## Noop Cloud Quick Start
 
@@ -64,26 +83,40 @@ In order to launch the sample application on Noop Cloud, the source code within 
 
 #### Launch Sample Application on Noop Cloud
 
-1. **Create App.** Visit [Noop Cloud](https://noop.app/), and click on the "Applications" icon in the left-hand sidebar. Then click "Create New App", and select the repository that contains the sample application's source code. Click "save" to continue.
+**1) Create App**
 
-2. **Create Build.** Go to the management page for the newly created application, and select the "Builds" tab. Under the "Initiate Manual Build" section enter in a "Git Reference" (e.g. "master") to create a build of the sample application. Click "Build" and wait for the build to complete before continuing.
+Visit [Noop Cloud](https://noop.app/), and click on the **Applications** icon in the left-hand sidebar. Then click **Create New App**, and select the repository that contains the sample application's source code. Click **Go to App** to continue.
 
-3. **Launch Environment.** Return to the management page for the application, select the "Environment" tab, and click "Launch Environment". On the "Launch an Environment" page select a region, cluster, domain and endpoint for the environment. Click "save" to continue.
+**2) Create Build**
 
-4. **Launch Resource.** Go to the management page for the launched environment. Under the "Launch a New Resource" section click "DynamoDB Table". Enter values into the fields to match the DynamoDB resource description present within the sample application's Noopfiles.
+Select the "Builds" tab. Under the **Initiate Manual Build** section enter in a **Git Reference** (e.g. `master`) to create a build of the sample application. Click **Build** and you will be directed to this specific Build's page. Wait for your build status to be listed as **Completed** before launching an environment.
 
-   | Field         | Value      |
-   | ------------- | ---------- |
-   | Resource Name | mobilityDB |
-   | hashKeyName   | name       |
-   | hashKeyType   | S          |
-   | rangeKeyName  | type       |
-   | rangeKeyType  | S          |
+**3) Launch Environment**
 
-   Click "Launch" to continue.
+Return to the management page for the application, select the **Environment** tab, and click **Launch Environment**. On the **Launch an Environment** page, select a region, cluster, domain and endpoint for the environment. Click **Save** and then **Go to Environment**.
 
-5. **Deploy Build.** Return to the management page for the launched environment, and click on "Deploy Changes". Under the "Build" section, select the build matching the git reference used to create the build in step 3. Then on the right-hand side of the page under the "Deploy Changes" section click "Deploy". When the deployment is completed the sample application will be available at the selected endpoint for your environment.
+**4) Launch Resource**
+
+Click **Resources** on the Environments page. Under the **Launch a New Resource** section click **DynamoDB Table**. Enter values into the fields to match the DynamoDB resource defined within the sample application's Noopfiles. Use the table below as a reference:
+
+| Field         | Value      |
+| ------------- | ---------- |
+| Resource Name | mobilityDB |
+| hashKeyName   | name       |
+| hashKeyType   | S          |
+| rangeKeyName  | type       |
+| rangeKeyType  | S          |
+
+Click "Launch" to continue. You should see **mobilityDB** show up instantly in the `Resources` section.
+
+**5) Deploy Build**
+
+Now click **Deploy Changes** on the Environments page. Under the **Build** section, select the build matching the git reference used to create the build in Step 3. Then on the right-hand side of the page under the **Deploy Changes** section click **Deploy**. You will be directed to the **Deployment Workflow** page.
+
+When for the status of your deploy to be listed as **Completed**, the sample application will be available at the selected endpoint for your environment. You can find the endpoint on **Endpoints** card on your environment's page.
 
 ## Additional Resource
 
-If you are interested in learning more about Noop visit the Noop documentation at <a href="https://noop.app/learn" target="_blank">noop.app/learn</a>.
+Now that you've gotten hands-on experience with Noop Local and Noop Cloud, you're ready to start using Noop on your own! Visit the documentation at [noop.app/learn](https://noop.app/learn) to learn how to create your own Noop application.
+
+If you have any questions, concerns or feedback, contact us through email. You can reach us at hello@noop.app.
