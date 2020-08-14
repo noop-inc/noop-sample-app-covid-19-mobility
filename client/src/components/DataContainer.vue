@@ -178,6 +178,7 @@ export default {
 
 <style lang="scss">
 .tab-content {
+  overflow: hidden;
   height: calc(100vh - 103px);
 }
 .card {
