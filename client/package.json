@@ -1,60 +1,60 @@
 {
-    "name": "client",
-    "version": "1.0.0",
-    "description": "Vue Frontend",
-    "scripts": {
-        "dev": "node dev_server.js",
-        "build": "webpack --config webpack.prod.js"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/noop-cloud/noop-sample-app-covid-19-mobility.git"
-    },
-    "author": "Noop",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/noop-cloud/noop-sample-app-covid-19-mobility/issues"
-    },
-    "homepage": "https://github.com/noop-cloud/noop-sample-app-covid-19-mobility#readme",
-    "dependencies": {
-        "@babel/core": "^7.11.1",
-        "@babel/preset-env": "^7.11.0",
-        "@vue/babel-helper-vue-jsx-merge-props": "^1.0.0",
-        "@vue/babel-preset-jsx": "^1.1.2",
-        "autoprefixer": "^9.8.6",
-        "axios": "^0.19.2",
-        "babel-loader": "^8.1.0",
-        "bootstrap": "^4.5.2",
-        "bootstrap-vue": "^2.16.0",
-        "chart.js": "^2.9.3",
-        "compression-webpack-plugin": "^4.0.0",
-        "css-loader": "^4.2.1",
-        "fibers": "^5.0.0",
-        "html-webpack-plugin": "^4.3.0",
-        "mini-css-extract-plugin": "^0.10.0",
-        "moment": "^2.27.0",
-        "moment-locales-webpack-plugin": "^1.2.0",
-        "node-sass": "^4.14.1",
-        "postcss-loader": "^3.0.0",
-        "prismjs": "^1.21.0",
-        "sass-loader": "^9.0.3",
-        "vue": "^2.6.11",
-        "vue-chartjs": "^3.5.0",
-        "vue-loader": "^15.9.3",
-        "vue-router": "^3.4.2",
-        "vue-spinner": "^1.0.4",
-        "vue-template-compiler": "^2.6.11",
-        "vuex": "^3.5.1",
-        "webpack": "^4.44.1",
-        "webpack-cli": "^3.3.12",
-        "webpack-merge": "^5.1.1"
-    },
-    "devDependencies": {
-        "compression": "^1.7.4",
-        "express": "^4.17.1",
-        "http-proxy-middleware": "^1.0.5",
-        "style-loader": "^1.2.1",
-        "webpack-dev-middleware": "^3.7.2",
-        "webpack-hot-middleware": "^2.25.0"
-    }
+  "name": "client",
+  "version": "1.0.0",
+  "description": "Vue Frontend",
+  "scripts": {
+    "dev": "node dev_server.js",
+    "build": "webpack --config webpack.prod.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/noop-cloud/noop-sample-app-covid-19-mobility.git"
+  },
+  "author": "Noop",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/noop-cloud/noop-sample-app-covid-19-mobility/issues"
+  },
+  "homepage": "https://github.com/noop-cloud/noop-sample-app-covid-19-mobility#readme",
+  "dependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/preset-env": "^7.11.0",
+    "@vue/babel-helper-vue-jsx-merge-props": "^1.0.0",
+    "@vue/babel-preset-jsx": "^1.1.2",
+    "autoprefixer": "^9.8.6",
+    "axios": "^0.19.2",
+    "babel-loader": "^8.1.0",
+    "bootstrap": "^4.5.2",
+    "bootstrap-vue": "^2.16.0",
+    "chart.js": "^2.9.3",
+    "compression-webpack-plugin": "^4.0.0",
+    "css-loader": "^4.2.1",
+    "fibers": "^5.0.0",
+    "html-webpack-plugin": "^4.3.0",
+    "mini-css-extract-plugin": "^0.10.0",
+    "moment": "^2.27.0",
+    "moment-locales-webpack-plugin": "^1.2.0",
+    "node-sass": "^4.14.1",
+    "postcss-loader": "^3.0.0",
+    "prismjs": "^1.21.0",
+    "sass-loader": "^9.0.3",
+    "vue": "^2.6.11",
+    "vue-chartjs": "^3.5.0",
+    "vue-loader": "^15.9.3",
+    "vue-router": "^3.4.2",
+    "vue-spinner": "^1.0.4",
+    "vue-template-compiler": "^2.6.11",
+    "vuex": "^3.5.1",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-merge": "^5.1.1"
+  },
+  "devDependencies": {
+    "compression": "^1.7.4",
+    "express": "^4.17.1",
+    "http-proxy-middleware": "^1.0.5",
+    "style-loader": "^1.2.1",
+    "webpack-dev-middleware": "^3.7.2",
+    "webpack-hot-middleware": "^2.25.0"
+  }
 }
