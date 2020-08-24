@@ -21,6 +21,9 @@ RUN npm run build
 # The runtime stage recieves the compiled build from build, and hosts the files on an NGINX server.
 FROM nginx:1-alpine
 
+# Quite startup internal NGINX startup logs
+ENV NGINX_ENTRYPOINT_QUIET_LOGS 1
+
 COPY --from=build /dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx
 CMD ["nginx","-g","daemon off;"]

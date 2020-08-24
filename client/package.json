@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/noop-cloud/noop-sample-app-covid-19-mobility#readme",
   "dependencies": {
-    "@babel/core": "^7.11.1",
+    "@babel/core": "^7.11.4",
     "@babel/preset-env": "^7.11.0",
     "@vue/babel-helper-vue-jsx-merge-props": "^1.0.0",
     "@vue/babel-preset-jsx": "^1.1.2",
@@ -38,16 +38,16 @@
     "postcss-loader": "^3.0.0",
     "prismjs": "^1.21.0",
     "sass-loader": "^9.0.3",
-    "vue": "^2.6.11",
-    "vue-chartjs": "^3.5.0",
+    "vue": "^2.6.12",
+    "vue-chartjs": "^3.5.1",
     "vue-loader": "^15.9.3",
     "vue-router": "^3.4.2",
     "vue-spinner": "^1.0.4",
-    "vue-template-compiler": "^2.6.11",
+    "vue-template-compiler": "^2.6.12",
     "vuex": "^3.5.1",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
-    "webpack-merge": "^5.1.1"
+    "webpack-merge": "^5.1.2"
   },
   "devDependencies": {
     "compression": "^1.7.4",
