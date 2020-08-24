@@ -14,6 +14,9 @@ RUN python index.py
 # The runtime stage recieves the JSON seed data file from build, and hosts this file on an NGINX server.
 FROM nginx:1-alpine
 
+# Quite startup internal NGINX startup logs
+ENV NGINX_ENTRYPOINT_QUIET_LOGS 1
+
 COPY --from=build data.json* /usr/share/nginx/html/
 COPY nginx.conf /etc/nginx
 CMD ["nginx","-g","daemon off;"]
