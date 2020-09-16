@@ -26,7 +26,7 @@ export default {
 @import '../node_modules/prismjs/themes/prism.css';
 
 body {
-  background-color: var(--primary);
+  background-color: var(--warning);
 }
 
 button:disabled,
