@@ -1,5 +1,6 @@
 # Noop Sample Application | COVID-19 Mobility Dashboard
 
+
 ### Table of Contents
 
 - [What is Noop?](#what-is-noop)
