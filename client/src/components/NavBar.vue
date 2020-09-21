@@ -28,7 +28,7 @@ export default {
             to={this.$route.name !== 'Home' ? { name: 'Home' } : null}
             style={this.$route.name === 'Home' ? 'cursor: default;' : null}
           >
-            COVID-19 Mobility
+            COVID-19 Mobility Dashboard
           </BNavbarBrand>
           <BNavbarToggle target='nav-collapse' />
           <BCollapse id='nav-collapse' is-nav>
@@ -40,10 +40,10 @@ export default {
             <BNavbarNav class='ml-auto'>
               <BNavItem
                 align='center'
-                href='https://www.rearc.io'
+                href='https://noop.app/'
                 target='_blank'
                 VBTooltip_hover_noFade
-                title="Visit Rearc's Website"
+                title='Visit Noop Cloud'
               >
                 <IconRearc class='d-inline-block align-top' />
               </BNavItem>
