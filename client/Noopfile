@@ -6,12 +6,13 @@ ROUTE -m GET *
 
 # The 'build' stage installs dependencies and create project's build.
 FROM node:12-alpine AS build
+WORKDIR client
 
 # Sets an environment variable available at build's runtime.
 ENV NODE_ENV production
 
-COPY package*.json  ./
-RUN npm install --loglevel=error
+COPY package*.json ./
+RUN npm ci
 
 COPY webpack*.js ./
 COPY /public ./public
@@ -24,6 +25,6 @@ FROM nginx:1-alpine
 # Quite startup internal NGINX startup logs
 ENV NGINX_ENTRYPOINT_QUIET_LOGS 1
 
-COPY --from=build /dist /usr/share/nginx/html
+COPY --from=build client/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx
 CMD ["nginx","-g","daemon off;"]
