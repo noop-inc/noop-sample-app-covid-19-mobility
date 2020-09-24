@@ -6,6 +6,7 @@ ROUTE -m GET /data -p
 
 # The 'build' stage processes raw CSV data files to create a JSON seed data file.
 FROM python:3-alpine AS build
+WORKDIR data
 
 COPY index.py ./
 COPY datasets/*.csv.gz datasets/
@@ -17,6 +18,6 @@ FROM nginx:1-alpine
 # Quite startup internal NGINX startup logs
 ENV NGINX_ENTRYPOINT_QUIET_LOGS 1
 
-COPY --from=build data.json* /usr/share/nginx/html/
+COPY --from=build data/data.json* /usr/share/nginx/html/
 COPY nginx.conf /etc/nginx
 CMD ["nginx","-g","daemon off;"]
