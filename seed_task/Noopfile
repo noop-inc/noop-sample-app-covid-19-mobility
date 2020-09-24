@@ -6,12 +6,13 @@ RESOURCE mobilityDB dynamodb -s hashKeyName=name -s hashKeyType=S -s rangeKeyNam
 
 # Runtime stage installs dependencies, and organize files to assist in execution of the component.
 FROM node:12-alpine
+WORKDIR seed_task
 
 # Sets an environment variable available at build's runtime.
 ENV NODE_ENV production
 
-COPY package*.json  ./
-RUN npm install --loglevel=error
+COPY package*.json ./
+RUN npm ci
 
 # Sets environment variables for runtime. The variables available from a defined resource vary depending on the type of the resource.
 ENV NODE_ENV production

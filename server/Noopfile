@@ -9,11 +9,12 @@ RESOURCE mobilityDB dynamodb
 
 # Runtime stage installs dependencies, and organize files to assist in execution of the component.
 FROM node:12-alpine
+WORKDIR server
 
 # Sets environment variables available at build's runtime.
 ENV NODE_ENV production
 COPY package*.json ./
-RUN npm install --loglevel=error
+RUN npm ci
 
 # Sets environment variables. The variables available from a defined resource vary depending on the type of the resource.
 ENV NODE_ENV production

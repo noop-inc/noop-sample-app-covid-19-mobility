@@ -8,8 +8,8 @@ export default {
       <footer class='footer-container'>
         <div>
           Developed by{' '}
-          <BLink href='https://www.rearc.io/' target='_blank'>
-            Rearc
+          <BLink href='https://noop.app/' target='_blank'>
+            Noop Inc.
           </BLink>
         </div>
         <div class='divider' />

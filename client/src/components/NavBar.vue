@@ -40,10 +40,10 @@ export default {
             <BNavbarNav class='ml-auto'>
               <BNavItem
                 align='center'
-                href='https://www.rearc.io'
+                href='https://noop.app/'
                 target='_blank'
                 VBTooltip_hover_noFade
-                title="Visit Rearc's Website"
+                title='Visit Noop Cloud'
               >
                 <IconRearc class='d-inline-block align-top' />
               </BNavItem>
