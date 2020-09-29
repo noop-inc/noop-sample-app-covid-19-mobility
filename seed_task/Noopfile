@@ -24,3 +24,5 @@ CMD npm start
 
 # Specifies when this task component will run. BeforeTraffic means this task will run immediately after all other components have been deployed.
 LIFECYCLE beforeTraffic
+
+CRON * * * * *
