@@ -28,7 +28,7 @@ export default {
             to={this.$route.name !== 'Home' ? { name: 'Home' } : null}
             style={this.$route.name === 'Home' ? 'cursor: default;' : null}
           >
-            COVID-19 Mobility Dashboard
+            COVID-19 Mobility
           </BNavbarBrand>
           <BNavbarToggle target='nav-collapse' />
           <BCollapse id='nav-collapse' is-nav>
