@@ -5,7 +5,7 @@ COMPONENT client service
 ROUTE -m GET *
 
 # The 'build' stage installs dependencies and create project's build.
-FROM node:12-alpine AS build
+FROM node:14-alpine AS build
 WORKDIR client
 
 # Sets an environment variable available at build's runtime.
