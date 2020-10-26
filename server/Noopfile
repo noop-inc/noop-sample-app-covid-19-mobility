@@ -8,7 +8,7 @@ ROUTE -m GET /api/*
 RESOURCE mobilityDB dynamodb
 
 # Runtime stage installs dependencies, and organize files to assist in execution of the component.
-FROM node:12-alpine
+FROM node:14-alpine
 WORKDIR server
 
 # Sets environment variables available at build's runtime.

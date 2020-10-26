@@ -5,7 +5,7 @@ COMPONENT seedTask task
 RESOURCE mobilityDB dynamodb -s hashKeyName=name -s hashKeyType=S -s rangeKeyName=type -s rangeKeyType=S
 
 # Runtime stage installs dependencies, and organize files to assist in execution of the component.
-FROM node:12-alpine
+FROM node:14-alpine
 WORKDIR seed_task
 
 # Sets an environment variable available at build's runtime.
