@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/noop-cloud/noop-sample-app-covid-19-mobility#readme",
   "devDependencies": {
-    "husky": "^4.3.6",
+    "husky": "^4.3.8",
     "lint-staged": "^10.5.3",
     "prettier-standard": "^16.4.1"
   },
