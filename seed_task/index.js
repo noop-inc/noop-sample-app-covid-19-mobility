@@ -41,7 +41,7 @@ const formatData = async (data) => {
 };
 
 const getData = () => {
-    const client = http2.connect("https://covid-mobility.noop.app");
+    const client = http2.connect("https://covid-test2.noop.app/data");
     const req = client.request({
         ":path": "/data",
     });
