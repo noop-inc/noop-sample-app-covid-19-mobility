@@ -18,6 +18,7 @@ export default {
           <BLink href='https://noop.app/' target='_blank'>
             Noop
           </BLink>{' '}
+          Platform
         </div>
       </footer>
     )
