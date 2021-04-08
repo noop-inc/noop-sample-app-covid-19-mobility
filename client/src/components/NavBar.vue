@@ -1,6 +1,6 @@
 <script>
 import IconGitHub from './icons/IconGitHub'
-import IconRearc from './icons/IconRearc'
+import IconNoop from './icons/IconNoop'
 import IconInfo from './icons/IconInfo'
 import SelectDataModal from './SelectDataModal'
 import {
@@ -44,8 +44,9 @@ export default {
                 target='_blank'
                 VBTooltip_hover_noFade
                 title='Visit Noop Cloud'
+                class='navbar-icons'
               >
-                <IconRearc class='d-inline-block align-top' />
+                <IconNoop class='d-inline-block align-top' />
               </BNavItem>
               <BNavItem
                 align='center'
@@ -53,6 +54,7 @@ export default {
                 target='_blank'
                 VBTooltip_hover_noFade
                 title='View source code on GitHub'
+                class='navbar-icons'
               >
                 <IconGitHub class='d-inline-block align-top' />
               </BNavItem>
@@ -71,5 +73,11 @@ export default {
 .modal-content {
   box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.25),
     inset 0 -1px 5px rgba(0, 0, 0, 0.25);
+}
+.navbar-dark .navbar-nav .nav-link {
+  &:hover {
+    color: rgb(255, 255, 255) !important;
+  }
+  color: rgb(127, 189, 255) !important;
 }
 </style>
