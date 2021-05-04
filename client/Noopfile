@@ -1,5 +1,5 @@
-# Defines the name (client) and type (service) of this component.
-COMPONENT client service
+# Defines the name (client) and type (static) of this component.
+COMPONENT client static
 
 # Specifies the routes available to access this component within the application's route table. '*' assigns this component as the default route if a location does not match a routes defined in other components.
 ROUTE -m GET *
@@ -9,8 +9,6 @@ FROM node:14-alpine AS build
 WORKDIR client
 
 # Sets an environment variable available at build's runtime.
-ENV NODE_ENV production
-
 COPY package*.json ./
 RUN npm ci
 
@@ -19,12 +17,4 @@ COPY /public ./public
 COPY /src ./src
 RUN npm run build
 
-# The runtime stage recieves the compiled build from build, and hosts the files on an NGINX server.
-FROM nginx:1-alpine
-
-# Quite startup internal NGINX startup logs
-ENV NGINX_ENTRYPOINT_QUIET_LOGS 1
-
-COPY --from=build client/dist /usr/share/nginx/html
-COPY nginx.conf /etc/nginx
-CMD ["nginx","-g","daemon off;"]
+ASSETS /dist
