@@ -1,6 +1,13 @@
+<template>
+  <pre v-if="dataset" class="raw-data-container">
+    <code class="language-json" ref="code" />
+  </pre>
+</template>
+
 <script>
 import Prism from 'prismjs'
 import 'prismjs/components/prism-json.min'
+
 export default {
   name: 'RawData',
   props: {
@@ -22,13 +29,6 @@ export default {
   },
   updated () {
     this.$refs.code.innerHTML = this.formatRawData()
-  },
-  render () {
-    return this.dataset ? (
-      <pre class='raw-data-container'>
-        <code class='language-json' ref='code' />
-      </pre>
-    ) : null
   }
 }
 </script>

@@ -1,9 +1,24 @@
+<template>
+  <section
+    v-if="mobilityLoading || metaLoading"
+    class="loading-spinner-container"
+  >
+    <div class="spinner-backdrop" />
+    <div class="spinner-position">
+      <GridLoader :color="`var(--${color})`" :size="`${size}px`" />
+    </div>
+  </section>
+</template>
+
 <script>
 import GridLoader from 'vue-spinner/src/GridLoader.vue'
 import { mapState } from 'vuex'
 
 export default {
   name: 'LoadingSpinner',
+  components: {
+    GridLoader
+  },
   props: {
     size: {
       type: Number,
@@ -17,16 +32,6 @@ export default {
   computed: {
     ...mapState('mobility', { mobilityLoading: state => state.loading }),
     ...mapState('meta', { metaLoading: state => state.loading })
-  },
-  render () {
-    return this.mobilityLoading || this.metaLoading ? (
-      <section class='loading-spinner-container'>
-        <div class='spinner-backdrop' />
-        <div class='spinner-position'>
-          <GridLoader color={`var(--${this.color})`} size={`${this.size}px`} />
-        </div>
-      </section>
-    ) : null
   }
 }
 </script>

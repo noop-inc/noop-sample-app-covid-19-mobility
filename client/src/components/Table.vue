@@ -1,8 +1,24 @@
+<template>
+  <BTable
+    v-if="dataset"
+    hover
+    head-variant="light"
+    sticky-header="100%"
+    :items="items"
+    :fields="fields"
+    :style="{ marginBottom: 0 }"
+  />
+</template>
+
 <script>
 import { BTable } from 'bootstrap-vue'
 import moment from 'moment'
+
 export default {
   name: 'Table',
+  components: {
+    BTable
+  },
   props: {
     dataset: {
       type: Object,
@@ -66,18 +82,6 @@ export default {
   },
   updated () {
     this.items = this.formatTable()
-  },
-  render () {
-    return this.dataset ? (
-      <BTable
-        hover
-        head-variant='light'
-        sticky-header='100%'
-        items={this.items}
-        fields={this.fields}
-        style='margin-bottom: 0;'
-      />
-    ) : null
   }
 }
 </script>

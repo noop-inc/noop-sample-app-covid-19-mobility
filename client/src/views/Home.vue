@@ -1,8 +1,16 @@
+<template>
+  <DataContainer :dataset="dataset" />
+</template>
+
+<script>
 import { mapActions, mapGetters, mapState } from 'vuex'
 import DataContainer from '../components/DataContainer.vue'
 
 export default {
   name: 'Home',
+  components: {
+    DataContainer
+  },
   computed: {
     ...mapState('home', ['source', 'geo', 'location', 'data']),
     ...mapState('mobility', ['loading', 'error']),
@@ -38,8 +46,6 @@ export default {
   },
   beforeDestroy () {
     this.removeHomeData()
-  },
-  render () {
-    return <DataContainer dataset={this.dataset} />
   }
 }
+</script>
