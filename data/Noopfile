@@ -1,8 +1,8 @@
-# Defines the name (data) and type (service) of this component.
-COMPONENT data service
+# Defines the name (data) and type (static) of this component.
+COMPONENT data static
 
-# Specifies the route ('/data') available to this component within the application's route table.
-ROUTE -m GET /data -p
+# Specifies the route ('/data.json') available to this component within the application's route table.
+ROUTE -m GET /data.json -p
 
 # The 'build' stage processes raw CSV data files to create a JSON seed data file.
 FROM python:3-alpine AS build
@@ -12,12 +12,4 @@ COPY index.py ./
 COPY datasets/*.csv.gz datasets/
 RUN python index.py
 
-# The runtime stage recieves the JSON seed data file from build, and hosts this file on an NGINX server.
-FROM nginx:1-alpine
-
-# Quite startup internal NGINX startup logs
-ENV NGINX_ENTRYPOINT_QUIET_LOGS 1
-
-COPY --from=build data/data.json* /usr/share/nginx/html/
-COPY nginx.conf /etc/nginx
-CMD ["nginx","-g","daemon off;"]
+ASSETS /dist

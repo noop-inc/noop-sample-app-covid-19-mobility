@@ -1,6 +1,5 @@
 .DS_Store
 **/node_modules
-/client/dist
-/data/data*.json*
+**/dist
 */__pycache__
 /data/datasets/**.csv
