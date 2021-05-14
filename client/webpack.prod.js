@@ -7,9 +7,5 @@ module.exports = merge(common, {
   stats: 'errors-only',
   entry: path.resolve(__dirname, 'src', 'main.js'),
   mode: 'production',
-  plugins: [
-    new CompressionPlugin({
-      compressionOptions: { level: 9 }
-    })
-  ]
+  plugins: [new CompressionPlugin()]
 })

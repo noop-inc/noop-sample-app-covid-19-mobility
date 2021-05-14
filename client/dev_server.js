@@ -8,7 +8,7 @@ const { createProxyMiddleware } = require('http-proxy-middleware')
 const devConfig = require('./webpack.dev.js')
 const compiler = webpack(devConfig)
 
-app.use(compression({ level: 9 }))
+app.use(compression())
 app.use(
   webpackDevMiddleware(compiler, {
     publicPath: devConfig.output.publicPath,

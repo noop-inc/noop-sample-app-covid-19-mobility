@@ -4,8 +4,7 @@ const compression = require('compression')
 const morgan = require('morgan')
 const api = require('./routes/api')
 
-app.use(compression({ level: 9 }))
-app.use(express.json())
+app.use(compression())
 app.use(morgan('tiny'))
 
 app.use('/api', api)
