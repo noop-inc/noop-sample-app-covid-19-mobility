@@ -1,5 +1,4 @@
 import csv
-import time
 import json
 import os
 import sys
@@ -145,12 +144,14 @@ def source_dataset():
 
         for datum in apple_data:
             data.append(datum)
+    
+    os.mkdir(os.path.join(sys.path[0], 'dist'))
 
-    with open(os.path.join(sys.path[0], 'data.json'), 'w', encoding='utf-8') as d:
+    with open(os.path.join(sys.path[0], 'dist', 'data.json'), 'w', encoding='utf-8') as d:
         d.write(json.dumps(data, ensure_ascii=False))
 
-    with open(os.path.join(sys.path[0], 'data.json'), 'rb') as d:
-        with gzip.open(os.path.join(sys.path[0], 'data.json.gz'), 'wb', 9) as g:
+    with open(os.path.join(sys.path[0], 'dist', 'data.json'), 'rb') as d:
+        with gzip.open(os.path.join(sys.path[0], 'dist', 'data.json.gz'), 'wb', 9) as g:
             shutil.copyfileobj(d, g)
 
 
