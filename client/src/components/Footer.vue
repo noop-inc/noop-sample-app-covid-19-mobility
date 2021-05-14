@@ -1,27 +1,28 @@
+<template>
+  <footer class="footer-container">
+    <div>
+      Developed by{{ ' ' }}
+      <BLink href="https://noop.app/" target="_blank">
+        Noop Inc.
+      </BLink>
+    </div>
+    <div class="divider" />
+    <div>
+      Leveraging the{{ ' ' }}
+      <BLink href="https://noop.app/" target="_blank">
+        Noop </BLink
+      >{{ ' ' }}
+      Platform
+    </div>
+  </footer>
+</template>
+
 <script>
 import { BLink } from 'bootstrap-vue'
 export default {
   name: 'Footer',
-
-  render () {
-    return (
-      <footer class='footer-container'>
-        <div>
-          Developed by{' '}
-          <BLink href='https://noop.app/' target='_blank'>
-            Noop Inc.
-          </BLink>
-        </div>
-        <div class='divider' />
-        <div>
-          Leveraging the{' '}
-          <BLink href='https://noop.app/' target='_blank'>
-            Noop
-          </BLink>{' '}
-          Platform
-        </div>
-      </footer>
-    )
+  components: {
+    BLink
   }
 }
 </script>

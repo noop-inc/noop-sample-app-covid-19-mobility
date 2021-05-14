@@ -1,8 +1,16 @@
+<template>
+  <DataContainer :dataset="dataset" />
+</template>
+
+<script>
 import { mapActions, mapGetters, mapState } from 'vuex'
 import DataContainer from '../components/DataContainer.vue'
 
 export default {
   name: 'Data',
+  components: {
+    DataContainer
+  },
   computed: {
     ...mapState('mobility', ['loading', 'error']),
     ...mapGetters('mobility', ['getMobilityData']),
@@ -30,8 +38,6 @@ export default {
   },
   updated () {
     this.checkForMobilityData()
-  },
-  render () {
-    return <DataContainer dataset={this.dataset} />
   }
 }
+</script>

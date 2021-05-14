@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home'
-import Data from '../views/Data'
-import PageNotFound from '../views/PageNotFound'
+import Home from '../views/Home.vue'
+import Data from '../views/Data.vue'
+import PageNotFound from '../views/PageNotFound.vue'
 
 Vue.use(VueRouter)
 

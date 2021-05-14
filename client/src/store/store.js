@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import createLogger from 'vuex/dist/logger'
 import meta from './modules/meta'
 import mobility from './modules/moblity'
 import home from './modules/home'
@@ -17,12 +18,6 @@ import {
 Vue.use(Vuex)
 
 const dev = process.env.NODE_ENV !== 'production'
-
-let createLogger
-
-if (dev) {
-  createLogger = require('vuex/dist/logger')
-}
 
 const actions = {
   fetchRandomData ({ commit }) {

@@ -1,3 +1,14 @@
+<template>
+  <div id="app">
+    <NavBar />
+    <BContainer class="router-container" fluid>
+      <router-view />
+    </BContainer>
+    <Spinner />
+    <Footer />
+  </div>
+</template>
+
 <script>
 import NavBar from './components/NavBar.vue'
 import Spinner from './components/Spinner.vue'
@@ -5,24 +16,18 @@ import { BContainer } from 'bootstrap-vue'
 import Footer from './components/Footer.vue'
 export default {
   name: 'App',
-  render () {
-    return (
-      <div id='app'>
-        <NavBar />
-        <BContainer class='router-container' fluid>
-          <router-view />
-        </BContainer>
-        <Spinner />
-        <Footer />
-      </div>
-    )
+  components: {
+    NavBar,
+    Spinner,
+    BContainer,
+    Footer
   }
 }
 </script>
 
 <style lang="scss">
-@import '~bootstrap';
-@import '~bootstrap-vue';
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
+@import '../node_modules/bootstrap-vue/src/index.scss';
 @import '../node_modules/prismjs/themes/prism.css';
 
 body {

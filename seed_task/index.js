@@ -41,7 +41,7 @@ const formatData = async data => {
 }
 
 const getData = () => {
-  axios.defaults.headers.common['Accept-Encoding'] = 'gzip'
+  axios.defaults.headers.common['Accept-Encoding'] = 'gzip, deflate, br'
   axios
     .get('http://localapp/data.json')
     .then(async ({ data }) => {

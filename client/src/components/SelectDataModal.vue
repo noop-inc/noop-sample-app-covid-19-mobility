@@ -1,8 +1,60 @@
+<template>
+  <BModal
+    id="select-data-modal"
+    ref="selectDataModal"
+    title="Select COVID-19 Mobility Data"
+    :ok-disabled="!selectedLocaton || !selectedData"
+    @ok="handleOk"
+    no-fade
+    ok-only
+  >
+    <section class="selected-data-form">
+      <BFormGroup label="Select a Data Source:">
+        <BFormRadioGroup
+          id="select-source-radio-group"
+          v-model="selectedSource"
+          :options="sourceOptions"
+          :disabled="!!loading"
+        />
+      </BFormGroup>
+      <BFormGroup label="Select a Region Type:">
+        <BFormRadioGroup
+          id="select-geo-type-radio-group"
+          v-model="selectedGeoType"
+          :options="geoTypeOptions"
+          :disabled="!!loading"
+        />
+      </BFormGroup>
+      <BFormGroup>
+        <BFormSelect
+          v-model="selectedLocaton"
+          :options="locationOptions()"
+          :disabled="!dataset"
+        />
+      </BFormGroup>
+      <BFormGroup>
+        <BFormSelect
+          v-model="selectedData"
+          :options="dataOptions()"
+          :disabled="!!dataset || !selectedLocaton"
+        />
+      </BFormGroup>
+    </section>
+  </BModal>
+</template>
+
+<script>
 import { BModal, BFormGroup, BFormRadioGroup, BFormSelect } from 'bootstrap-vue'
 import { mapActions, mapGetters, mapState } from 'vuex'
 
 export default {
   name: 'SelectDataModal',
+  components: {
+    BModal,
+    BFormGroup,
+    BFormRadioGroup,
+    BFormSelect
+  },
   computed: {
     ...mapState('home', {
       homeSource: state => state.source,
@@ -155,51 +207,6 @@ export default {
     }
 
     this.checkForMetaData()
-  },
-  render () {
-    return (
-      <BModal
-        id='select-data-modal'
-        ref='selectDataModal'
-        title='Select COVID-19 Mobility Data'
-        ok-disabled={!this.selectedLocaton || !this.selectedData}
-        onOk={this.handleOk}
-        no-fade
-        ok-only
-      >
-        <section class='selected-data-form'>
-          <BFormGroup label='Select a Data Source:'>
-            <BFormRadioGroup
-              id='select-source-radio-group'
-              vModel={this.selectedSource}
-              options={this.sourceOptions}
-              disabled={this.loading}
-            />
-          </BFormGroup>
-          <BFormGroup label='Select a Region Type:'>
-            <BFormRadioGroup
-              id='select-geo-type-radio-group'
-              vModel={this.selectedGeoType}
-              options={this.geoTypeOptions}
-              disabled={this.loading}
-            />
-          </BFormGroup>
-          <BFormGroup>
-            <BFormSelect
-              vModel={this.selectedLocaton}
-              options={this.locationOptions()}
-              disabled={!this.dataset}
-            />
-          </BFormGroup>
-          <BFormGroup>
-            <BFormSelect
-              vModel={this.selectedData}
-              options={this.dataOptions()}
-              disabled={!this.dataset || !this.selectedLocaton}
-            />
-          </BFormGroup>
-        </section>
-      </BModal>
-    )
   }
 }
+</script>
