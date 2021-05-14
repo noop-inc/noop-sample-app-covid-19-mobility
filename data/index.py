@@ -151,7 +151,7 @@ def source_dataset():
         d.write(json.dumps(data, ensure_ascii=False))
 
     with open(os.path.join(sys.path[0], 'dist', 'data.json'), 'rb') as d:
-        with gzip.open(os.path.join(sys.path[0], 'dist', 'data.json.gz'), 'wb', 9) as g:
+        with gzip.open(os.path.join(sys.path[0], 'dist', 'data.json.gz'), 'wb') as g:
             shutil.copyfileobj(d, g)
 
 
