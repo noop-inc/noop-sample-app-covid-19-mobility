@@ -36,7 +36,7 @@
         <BFormSelect
           v-model="selectedData"
           :options="dataOptions()"
-          :disabled="!!dataset || !selectedLocaton"
+          :disabled="!dataset || !selectedLocaton"
         />
       </BFormGroup>
     </section>

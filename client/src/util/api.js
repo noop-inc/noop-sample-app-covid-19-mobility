@@ -1,5 +1,5 @@
-import Axios from 'axios'
+import { get } from 'axios'
 
-export const getData = (name, type) => Axios.get(`/api/${name}/${type}`)
+export const getData = (name, type) => get(`/api/${name}/${type}`)
 
-export const getRandom = () => Axios.get('/api/random')
+export const getRandom = () => get('/api/random')
