@@ -14,14 +14,5 @@ module.exports = {
     minify: false,
     brotliSize: false,
     chunkSizeWarningLimit: 2000
-  },
-  css: {
-    preprocessorOptions: {
-      scss: {
-        sassOptions: {
-          quietDeps: true
-        }
-      }
-    }
   }
 }
