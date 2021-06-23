@@ -25,7 +25,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  mode: process.env.NODE_ENV !== 'production' ? 'hash' : 'history',
+  mode: 'history',
   routes,
   scrollBehavior (to, from, savedPosition) {
     return { x: 0, y: 0 }

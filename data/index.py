@@ -150,10 +150,6 @@ def source_dataset():
     with open(os.path.join(sys.path[0], 'dist', 'data.json'), 'w', encoding='utf-8') as d:
         d.write(json.dumps(data, ensure_ascii=False))
 
-    with open(os.path.join(sys.path[0], 'dist', 'data.json'), 'rb') as d:
-        with gzip.open(os.path.join(sys.path[0], 'dist', 'data.json.gz'), 'wb') as g:
-            shutil.copyfileobj(d, g)
-
 
 if __name__ == "__main__":
     source_dataset()

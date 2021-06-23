@@ -5,7 +5,7 @@
         :to="$route.name !== 'Home' ? { name: 'Home' } : null"
         :style="$route.name === 'Home' ? { cursor: 'default' } : null"
       >
-        HCOVID-19 Mobility
+        COVID-19 Mobility
       </BNavbarBrand>
       <BNavbarToggle target="nav-collapse" />
       <BCollapse id="nav-collapse" is-nav>

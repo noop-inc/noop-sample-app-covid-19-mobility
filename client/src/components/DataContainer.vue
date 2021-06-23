@@ -66,7 +66,6 @@
 
 <script>
 import { mapGetters, mapState } from 'vuex'
-import moment from 'moment'
 import Graph from './Graph.js'
 import Table from './Table.vue'
 import RawData from './RawData.vue'
@@ -185,7 +184,10 @@ export default {
           bodyFontSize: 14,
           titleFontSize: 14,
           callbacks: {
-            title: tooltipItem => moment(tooltipItem[0].xLabel).format('ll'),
+            title: tooltipItem =>
+              new Date(tooltipItem[0].xLabel).toLocaleDateString([], {
+                dateStyle: 'medium'
+              }),
             label: tooltipItem => `${tooltipItem.yLabel}%`
           }
         }

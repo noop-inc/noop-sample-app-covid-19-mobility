@@ -3,9 +3,25 @@ const { createVuePlugin } = require('vite-plugin-vue2')
 module.exports = {
   plugins: [createVuePlugin()],
   server: {
-    port: 8080
+    proxy: {
+      '^/(api|data)': {
+        target: 'https://localnoop.app:1234',
+        secure: false
+      }
+    }
   },
   build: {
-    chunkSizeWarningLimit: 600
+    minify: false,
+    brotliSize: false,
+    chunkSizeWarningLimit: 2000
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        sassOptions: {
+          quietDeps: true
+        }
+      }
+    }
   }
 }
