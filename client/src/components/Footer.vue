@@ -9,9 +9,7 @@
     <div class="divider" />
     <div>
       Leveraging the{{ ' ' }}
-      <BLink href="https://noop.app/" target="_blank">
-        Noop </BLink
-      >{{ ' ' }}
+      <BLink href="https://noop.app/" target="_blank"> Noop </BLink>{{ ' ' }}
       Platform
     </div>
   </footer>
