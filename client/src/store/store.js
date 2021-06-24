@@ -1,6 +1,4 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import createLogger from 'vuex/dist/logger'
+import { createStore, createLogger } from 'vuex'
 import meta from './modules/meta'
 import mobility from './modules/moblity'
 import home from './modules/home'
@@ -14,8 +12,6 @@ import {
   SET_META_ERROR,
   SET_HOME_DATA
 } from '../util/types'
-
-Vue.use(Vuex)
 
 const dev = process.env.NODE_ENV !== 'production'
 
@@ -63,7 +59,7 @@ const actions = {
   }
 }
 
-export default new Vuex.Store({
+export default createStore({
   modules: {
     home,
     meta,

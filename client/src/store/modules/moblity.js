@@ -1,5 +1,4 @@
 import { getData } from '../../util/api'
-import Vue from 'vue'
 import {
   START_MOBILITY_LOADING,
   RECEIVE_MOBILITY_DATA,
@@ -61,10 +60,11 @@ const mutations = {
     state.loading = true
   },
   [RECEIVE_MOBILITY_DATA] (state, data) {
-    if (!(data.name in state.data)) {
-      Vue.set(state.data, data.name, { [data.type]: data })
-    } else if (!(data.type in state.data[data.name])) {
-      Vue.set(state.data[data.name], data.type, data)
+    state.data = {
+      ...state.data,
+      [data.name]: {
+        [data.type]: data
+      }
     }
     state.loading = false
     state.error = null
