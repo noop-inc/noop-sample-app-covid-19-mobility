@@ -23,7 +23,7 @@
     "bootstrap": "^4.6.0",
     "bootstrap-vue": "^2.21.2",
     "chart.js": "^2.9.4",
-    "prismjs": "^1.23.0",
+    "prismjs": "^1.24.0",
     "vue": "^3.1.2",
     "vue-chartjs": "^3.5.1",
     "vue-router": "^4.0.10",

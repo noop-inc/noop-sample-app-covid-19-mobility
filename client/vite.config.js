@@ -17,14 +17,14 @@ export default {
       }
     })
   ],
-  server: {
-    proxy: {
-      '^/(api|data)': {
-        target: 'https://localnoop.app:1234',
-        secure: false
-      }
-    }
-  },
+  // server: {
+  //   proxy: {
+  //     '^/(api|data)': {
+  //       target: 'https://localnoop.app:1234',
+  //       secure: false
+  //     }
+  //   }
+  // },
   build: {
     minify: false,
     brotliSize: false,

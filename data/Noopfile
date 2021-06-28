@@ -6,10 +6,10 @@ ROUTE -m GET /data.json -p
 
 # The 'build' stage processes raw CSV data files to create a JSON seed data file.
 FROM python:3-alpine AS build
-WORKDIR data
+WORKDIR /data
 
 COPY index.py ./
 COPY datasets/*.csv.gz datasets/
 RUN python index.py
 
-ASSETS /dist
+ASSETS /data/dist

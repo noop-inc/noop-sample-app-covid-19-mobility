@@ -6,7 +6,7 @@ ROUTE -m GET *
 
 # The 'build' stage installs dependencies and create project's build.
 FROM node:14-alpine AS build
-WORKDIR client
+WORKDIR /client
 
 # Sets an environment variable available at build's runtime.
 COPY package*.json ./
@@ -18,4 +18,4 @@ COPY /public ./public
 COPY /src ./src
 RUN npm run build
 
-ASSETS /dist -s
+ASSETS /client/dist -s
