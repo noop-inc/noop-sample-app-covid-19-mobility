@@ -1,6 +1,7 @@
+import { defineConfig } from 'vite'
 const { createVuePlugin } = require('vite-plugin-vue2')
 
-module.exports = {
+export default defineConfig({
   plugins: [createVuePlugin()],
   // server: {
   //   proxy: {
@@ -15,4 +16,4 @@ module.exports = {
     brotliSize: false,
     chunkSizeWarningLimit: 2000
   }
-}
+})
