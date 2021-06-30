@@ -119,4 +119,4 @@ When for the status of your deploy to be listed as **Completed**, the sample app
 
 Now that you've gotten hands-on experience with Noop Local and Noop Cloud, you're ready to start using Noop on your own! Visit the documentation at [noop.app/learn](https://noop.app/learn) to learn how to create your own Noop application.
 
-If you have any questions, concerns or feedback, contact us through email. You can reach us at hello@noop.app.
+If you have any questions, concerns or feedback, contact us through email. You can reach us at hello@noop.dev.
