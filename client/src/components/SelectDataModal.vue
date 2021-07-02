@@ -81,7 +81,8 @@ export default {
   },
   data () {
     return {
-      sourceOptions: ['Apple', 'Google'],
+      // sourceOptions: ['Apple', 'Google'],
+      sourceOptions: ['Apple'],
       selectedSource: null,
       geoTypeOptions: ['Countries', { value: 'States', text: 'United States' }],
       selectedGeoType: null,
