@@ -11,7 +11,8 @@ const documentClient = new AWS.DynamoDB.DocumentClient({
   service: dynamodb
 })
 router.get('/random', (req, res) => {
-  const name = ['Apple', 'Google'][Math.floor(Math.random() * 2)]
+  // const name = ['Apple', 'Google'][Math.floor(Math.random() * 2)]
+  const name = 'Apple'
   const type = ['Countries', 'States'][Math.floor(Math.random() * 2)]
   const params = {
     TableName,
