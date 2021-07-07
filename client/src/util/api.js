@@ -1,5 +1,9 @@
-import { get } from 'axios'
+export const getData = async (name, type) => {
+  const res = await window.fetch(`/api/${name}/${type}`)
+  return await res.json()
+}
 
-export const getData = (name, type) => get(`/api/${name}/${type}`)
-
-export const getRandom = () => get('/api/random')
+export const getRandom = async () => {
+  const res = await window.fetch('/api/random')
+  return await res.json()
+}

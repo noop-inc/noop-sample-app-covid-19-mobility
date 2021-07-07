@@ -33,29 +33,30 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style>
 .raw-data-container {
   margin-bottom: 0;
   padding: 12px;
 }
 
-.language-json {
-  .token {
-    text-shadow: 0 -0.1em 0.2em white;
-    background: none;
-  }
-  .token.punctuation,
-  .token.operator {
-    color: var(--secondary);
-  }
-  .token.property {
-    color: var(--cyan);
-  }
-  .token.string {
-    color: var(--orange);
-  }
-  .token.number {
-    color: var(--green);
-  }
+.language-json .token {
+  text-shadow: 0 -0.1em 0.2em white;
+  background: none;
+}
+
+.language-json .token.punctuation, .language-json .token.operator {
+  color: var(--secondary);
+}
+
+.language-json .token.property {
+  color: var(--cyan);
+}
+
+.language-json .token.string {
+  color: var(--orange);
+}
+
+.language-json .token.number {
+  color: var(--green);
 }
 </style>

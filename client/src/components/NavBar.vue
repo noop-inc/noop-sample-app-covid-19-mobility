@@ -77,16 +77,17 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style>
 .navbar,
 .modal-content {
   box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.25),
     inset 0 -1px 5px rgba(0, 0, 0, 0.25);
 }
 .navbar-dark .navbar-nav .nav-link {
-  &:hover {
-    color: rgb(255, 255, 255) !important;
-  }
   color: rgb(127, 189, 255) !important;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: rgb(255, 255, 255) !important;
 }
 </style>

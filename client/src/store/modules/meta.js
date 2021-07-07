@@ -6,8 +6,6 @@ import {
   SET_META_ERROR
 } from '../../util/types'
 
-const dev = process.env.NODE_ENV !== 'production'
-
 const state = () => ({
   data: {},
   loading: false,
@@ -24,18 +22,14 @@ const getters = {
 }
 
 const actions = {
-  fetchMetaData ({ commit }, { name, type }) {
+  async fetchMetaData ({ commit }, { name, type }) {
     commit(START_META_LOADING)
-    getData(name, type)
-      .then(res =>
-        setTimeout(() => commit(RECEIVE_META_DATA, res.data), dev ? 200 : 0)
-      )
-      .catch(err =>
-        setTimeout(
-          () => commit(SET_META_ERROR, err.response.data),
-          dev ? 200 : 0
-        )
-      )
+    try {
+      const data = await getData(name, type)
+      commit(RECEIVE_META_DATA, data)
+    } catch (err) {
+      commit(SET_META_ERROR, err.response.data)
+    }
   }
 }
 

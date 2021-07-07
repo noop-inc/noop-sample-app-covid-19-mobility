@@ -197,7 +197,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style>
 .tab-content {
   overflow: hidden;
   height: calc(100vh - 103px);
@@ -205,10 +205,10 @@ export default {
 .card {
   box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.25),
     inset 0 -1px 5px rgba(0, 0, 0, 0.25);
-  .nav-link.active {
-    box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.25),
-      inset 0 -1px 5px rgba(0, 0, 0, 0.25);
-  }
+}
+.card .nav-link.active {
+  box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.25),
+    inset 0 -1px 5px rgba(0, 0, 0, 0.25);
 }
 .card-header {
   padding: 12px 8px;

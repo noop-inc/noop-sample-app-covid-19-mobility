@@ -29,17 +29,19 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style>
 .data-error-container {
   height: calc(100vh - 88px);
   overflow-y: scroll;
 
-  > .jumbotron {
-    padding-bottom: 20px;
-    margin: 0;
-    > .container-fluid {
-      padding: 0 20px;
-    }
-  }
+  
+}
+.data-error-container > .jumbotron {
+  padding-bottom: 20px;
+  margin: 0;
+}
+
+.data-error-container > .jumbotron  > .container-fluid {
+  padding: 0 20px;
 }
 </style>

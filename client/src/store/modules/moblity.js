@@ -7,8 +7,6 @@ import {
   CLEAR_MOBILITY_ERROR
 } from '../../util/types'
 
-const dev = process.env.NODE_ENV !== 'production'
-
 const state = () => ({
   data: {},
   loading: false,
@@ -41,18 +39,14 @@ const getters = {
 }
 
 const actions = {
-  fetchMobilityData ({ commit }, { name, type }) {
+  async fetchMobilityData ({ commit }, { name, type }) {
     commit(START_MOBILITY_LOADING)
-    getData(name, type)
-      .then(res =>
-        setTimeout(() => commit(RECEIVE_MOBILITY_DATA, res.data), dev ? 200 : 0)
-      )
-      .catch(err =>
-        setTimeout(
-          () => commit(SET_MOBILITY_ERROR, err.response.data),
-          dev ? 200 : 0
-        )
-      )
+    try {
+      const data = await getData(name, type)
+      commit(RECEIVE_MOBILITY_DATA, data)
+    } catch (err) {
+      commit(SET_MOBILITY_ERROR, err.response.data)
+    }
   }
 }
 

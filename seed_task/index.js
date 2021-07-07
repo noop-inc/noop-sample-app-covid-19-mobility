@@ -1,5 +1,5 @@
 const AWS = require('aws-sdk')
-const axios = require('axios')
+const fetch = require('node-fetch')
 
 const TableName = process.env.DYNAMO_TABLE
 const Endpoint = process.env.DYNAMO_ENDPOINT
@@ -40,17 +40,16 @@ const formatData = async data => {
   return true
 }
 
-const getData = () => {
-  axios.defaults.headers.common['Accept-Encoding'] = 'gzip, deflate, br'
-  axios
-    .get('http://localapp/data.json')
-    .then(async ({ data }) => {
-      await formatData(data)
-      return true
-    })
-    .catch(err => {
-      console.error(`Error: ${err.message}`)
-    })
+const getData = async () => {
+  try {
+    console.log('Start Fetching Data')
+    const res = await fetch('http://localapp/data.json')
+    const data = await res.json()
+    console.log('End Fetching Data')
+    await formatData(data)
+  } catch (err) {
+    console.error(`Error: ${err.message}`)
+  }
 }
 
 const init = () => {

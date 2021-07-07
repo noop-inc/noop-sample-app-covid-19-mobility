@@ -89,7 +89,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style>
 .b-table-sticky-header > .table.b-table > thead > tr > th {
   border-top: 0;
 }

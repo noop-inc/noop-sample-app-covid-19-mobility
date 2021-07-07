@@ -25,9 +25,9 @@ export default {
 }
 </script>
 
-<style lang="scss">
-@import '../node_modules/bootstrap/scss/bootstrap.scss';
-@import '../node_modules/bootstrap-vue/src/index.scss';
+<style>
+@import '../node_modules/bootstrap/dist/css/bootstrap.css';
+@import '../node_modules/bootstrap-vue/dist/bootstrap-vue.css';
 @import '../node_modules/prismjs/themes/prism.css';
 
 body {

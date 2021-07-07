@@ -36,7 +36,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style>
 .loading-spinner-container {
   position: fixed;
   top: 0;
@@ -44,21 +44,22 @@ export default {
   right: 0;
   bottom: 0;
   z-index: 2000;
-  .spinner-backdrop {
-    opacity: 0.5;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #000;
-  }
-  > .spinner-position {
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+}
+
+.loading-spinner-container .spinner-backdrop {
+  opacity: 0.5;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #000;
+}
+.loading-spinner-container > .spinner-position {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
