@@ -5,67 +5,53 @@ const TableName = process.env.DYNAMO_TABLE
 const Endpoint = process.env.DYNAMO_ENDPOINT
 
 AWS.config.update({ endpoint: Endpoint })
-
 const dynamodb = new AWS.DynamoDB()
-
 const documentClient = new AWS.DynamoDB.DocumentClient({
   service: dynamodb
 })
 
-const uploadData = async params => {
-  await documentClient.put(params, (err, data) => {
-    if (err) {
-      console.error(
-        'Unable to add data',
-        params.Item.name,
-        params.Item.type,
-        '. Error JSON:',
-        JSON.stringify(err, null, 2)
-      )
-    }
-  })
-  return true
-}
+let data
 
-const formatData = async data => {
-  console.log('Start Seeding Data')
-  for (const Item of data) {
-    const params = {
-      TableName,
-      Item
-    }
-    await uploadData(params)
-  }
-  console.log('End Seeding Data')
-  return true
-}
-
-const getData = async () => {
+const insertData = async () => {
+  console.log('Start inserting data')
   try {
-    console.log('Start Fetching Data')
-    const res = await fetch('http://localapp/data.json')
-    const data = await res.json()
-    console.log('End Fetching Data')
-    await formatData(data)
+    await Promise.all(data.map(async Item => (
+      await documentClient.put({ Item, TableName }).promise()
+    )))
+    console.log('End inserting data')
   } catch (err) {
     console.error(`Error: ${err.message}`)
+    process.exit(1)
   }
 }
 
-const init = () => {
-  dynamodb.describeTable({ TableName }, async (err, data) => {
-    if (err) {
-      console.error(
-        'Unable to check items in table.',
-        'Error JSON:',
-        JSON.stringify(err, null, 2)
-      )
-    } else if (data.Table.ItemCount === 0) {
-      await getData()
-    } else {
-      console.log('Data is already seeded.')
-    }
-  })
+const fetchData = async () => {
+  try {
+    console.log('Start fetching data')
+    const res = await fetch('http://localapp/data.json')
+    data = await res.json()
+    console.log('End fetching data')
+    await insertData()
+  } catch (err) {
+    console.error(`Error: ${err.message}`)
+    process.exit(1)
+  }
 }
 
-init()
+const start = async () => {
+  console.log('Start seedTask')
+  try {
+    const data = await dynamodb.describeTable({ TableName }).promise()
+    if (data.Table.ItemCount === 0) {
+      await fetchData()
+    } else {
+      console.log('Data previously seeded')
+    }
+    console.log('End seedTask')
+  } catch (err) {
+    console.error(`Error: ${err.message}`)
+    process.exit(1)
+  }
+}
+
+start()

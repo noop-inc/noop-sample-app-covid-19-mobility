@@ -4,14 +4,14 @@
   "description": "Vue Frontend",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "NODE_ENV=production vite build",
     "serve": "vite preview"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/noop-cloud/noop-sample-app-covid-19-mobility.git"
   },
-  "author": "Noop",
+  "author": "Derek Wolpert",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/noop-cloud/noop-sample-app-covid-19-mobility/issues"
