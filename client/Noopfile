@@ -1,10 +1,7 @@
-# Defines the name (client) and type (static) of this component.
-COMPONENT client static
+COMPONENT WebsiteStatic static
 
-# Specifies the routes available to access this component within the application's route table. '*' assigns this component as the default route if a location does not match a routes defined in other components.
 ROUTE -m GET *
 
-# The 'build' stage installs dependencies and create project's build.
 FROM node:14-alpine AS build
 WORKDIR /client
 

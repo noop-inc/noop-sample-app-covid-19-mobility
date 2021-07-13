@@ -6,12 +6,14 @@ export default defineConfig({
   // server: {
   //   proxy: {
   //     '^/(api|data)': {
-  //       target: 'https://localnoop.app:1234',
+  //       target: 'https://covid.local.noop.app',
+  //       changeOrigin: true,
   //       secure: false
   //     }
   //   }
   // },
   build: {
+    target: 'esnext',
     minify: false,
     brotliSize: false,
     chunkSizeWarningLimit: 2000

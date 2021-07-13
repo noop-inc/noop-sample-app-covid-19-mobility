@@ -1,25 +1,19 @@
-# Defines the name (server) and type (service) of this component.
-COMPONENT server service
+COMPONENT APIService service
 
-# Specifies the route ('/api/*') available to access this component within the application's route table. Since the route ends with a '*', any location beginning with '/api/' will be directed to this component.
 ROUTE -m GET /api/*
 
-# Describes a database resource used by the components in this application. Hash and Range key settings do not need to be included, since they are already defined within the seedTask's Noopfile.
-RESOURCE mobilityDB dynamodb
+RESOURCE ApplicationDatabase dynamodb
 
-# Runtime stage installs dependencies, and organize files to assist in execution of the component.
 FROM node:14-alpine
 WORKDIR server
 
-# Sets environment variables available at build's runtime.
 ENV NODE_ENV production
 COPY package*.json ./
 RUN npm ci
 
-# Sets environment variables. The variables available from a defined resource vary depending on the type of the resource.
 ENV NODE_ENV production
-ENV DYNAMO_TABLE $.resources.mobilityDB.tableName
-ENV DYNAMO_ENDPOINT $.resources.mobilityDB.endpoint
+ENV DYNAMO_TABLE $.resources.ApplicationDatabase.tableName
+ENV DYNAMO_ENDPOINT $.resources.ApplicationDatabase.endpoint
 
 COPY server.js .
 COPY /routes ./routes

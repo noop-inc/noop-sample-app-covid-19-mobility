@@ -1,26 +1,20 @@
-# Defines the name (seedTask) and type (task) of this component.
-COMPONENT seedTask task
+COMPONENT SeedingTask task
 
-# Describes a database resource used by the component defined within this file.
-RESOURCE mobilityDB dynamodb -s hashKeyName=name -s hashKeyType=S -s rangeKeyName=type -s rangeKeyType=S
+RESOURCE ApplicationDatabase dynamodb -s hashKeyName=name -s hashKeyType=S -s rangeKeyName=type -s rangeKeyType=S
 
-# Runtime stage installs dependencies, and organize files to assist in execution of the component.
 FROM node:14-alpine
 WORKDIR seed_task
 
-# Sets an environment variable available at build's runtime.
 ENV NODE_ENV production
 
 COPY package*.json ./
 RUN npm ci
 
-# Sets environment variables for runtime. The variables available from a defined resource vary depending on the type of the resource.
 ENV NODE_ENV production
-ENV DYNAMO_TABLE $.resources.mobilityDB.tableName
-ENV DYNAMO_ENDPOINT $.resources.mobilityDB.endpoint
+ENV DYNAMO_TABLE $.resources.ApplicationDatabase.tableName
+ENV DYNAMO_ENDPOINT $.resources.ApplicationDatabase.endpoint
 
 COPY index.js .
 CMD npm start
 
-# Specifies when this task component will run. BeforeTraffic means this task will run immediately after all other components have been deployed.
 LIFECYCLE beforeTraffic

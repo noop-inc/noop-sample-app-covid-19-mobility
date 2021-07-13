@@ -1,10 +1,7 @@
-# Defines the name (data) and type (static) of this component.
-COMPONENT data static
+COMPONENT DataStatic static
 
-# Specifies the route ('/data.json') available to this component within the application's route table.
 ROUTE -m GET /data.json -p
 
-# The 'build' stage processes raw CSV data files to create a JSON seed data file.
 FROM python:3-alpine AS build
 WORKDIR /data
 

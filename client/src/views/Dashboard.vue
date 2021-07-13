@@ -16,17 +16,22 @@ export default {
     ...mapState('mobility', ['loading', 'error']),
     ...mapGetters('mobility', ['getMobilityData', 'getRandomData']),
     dataset () {
-      return this.getMobilityData({
-        name: this.location,
-        type: this.data
-      })
+      return this.getMobilityData(
+        this.$route.name === 'Home'
+          ? {
+            name: this.location,
+            type: this.data
+          }
+          : this.$route.params
+      )
     }
   },
   methods: {
     ...mapActions('home', ['assignHomeData', 'removeHomeData']),
     ...mapActions(['fetchRandomData']),
+    ...mapActions('mobility', ['fetchMobilityData']),
     checkForRandomData () {
-      if (!this.loading) {
+      if (!this.loading && this.$route.name === 'Home') {
         if (!this.source || !this.geo || !this.location || !this.data) {
           const homeDataParams = this.getRandomData()
           if (homeDataParams !== null) {
@@ -36,16 +41,34 @@ export default {
           }
         }
       }
+    },
+    checkForMobilityData () {
+      const { name, type } = this.$route.params
+      if (!this.loading && this.$route.name === 'Data') {
+        if (
+          !this.dataset ||
+          this.dataset.name !== name ||
+          this.dataset.type !== type
+        ) {
+          this.fetchMobilityData(this.$route.params)
+        }
+      }
     }
   },
   created () {
-    this.checkForRandomData()
+    this.$route.name === 'Home'
+      ? this.checkForRandomData()
+      : this.checkForMobilityData()
   },
   updated () {
-    this.checkForRandomData()
+    this.$route.name === 'Home'
+      ? this.checkForRandomData()
+      : this.checkForMobilityData()
   },
-  beforeDestroy () {
-    this.removeHomeData()
+  watch: {
+    $route (to){
+      if (to.name !== 'Home') this.removeHomeData()
+    }
   }
 }
 </script>
