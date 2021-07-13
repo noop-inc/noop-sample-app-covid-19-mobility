@@ -4,9 +4,9 @@
 
 - [What is Noop?](#what-is-noop)
 - [The Sample Application](#the-sample-application)
-- [Noop Local Quick Start](#noop-local-quick-start)
-  - [Prerequisites for running Noop Local](#prerequisites-for-running-noop-local)
-  - [Launch Sample Application in Noop Local Environment](#launch-sample-application-in-noop-local-environment)
+- [Noop Desktop Quick Start](#noop-desktop-quick-start)
+  - [Prerequisites for running Noop Desktop](#prerequisites-for-running-noop-desktop)
+  - [Launch Sample Application in Noop Desktop](#launch-sample-application-in-noop-desktop)
 - [Noop Cloud Quick Start](#noop-cloud-quick-start)
   - [Prerequisites for deploying on Noop Cloud](#prerequisites-for-deploying-on-noop-cloud)
   - [Launch Sample Application on Noop Cloud](#launch-sample-application-on-noop-cloud)
@@ -15,7 +15,7 @@
 
 Noop is a platform which makes it easy to develop, build, run, and deploy your applications. In essence, Noop streamlines setting up and maintaining a cloud-based infrastructure for hosting your application. All you need to do is provide a Noopfile(s) to explain the configuration of your application, and Noop will take care of the rest.
 
-Noop currently provides two distinct runtime environments, Noop Local and Noop Cloud. Noop Local helps facilitate local development of Noop applications, while Noop Cloud is a platform to run Noop applications in the cloud.
+Noop currently provides two distinct runtime environments, Noop Desktop and Noop Cloud. Noop Desktop helps facilitate local development of Noop project, while Noop Cloud is a platform to run Noop applications in the cloud.
 
 With that said - let's get started!
 
@@ -23,55 +23,51 @@ With that said - let's get started!
 
 To an end-user, the sample application featured in this repository delivers a data visualization dashboard offering insight into mobility during the COVID-19 pandemic. Moreover, the application serves as away to illustrate how simple it is to create complex relationships between disparate portions of a project using the **Noop App Model**.
 
-Source code for the sample application is divided into four subdirectories at the root of the project. These four subdirectories each contain source code for an individual Noop component. Each component is defined by a **Noopfile** located at its own root level. The sample application's Noopfiles also define a **DynamoDB database resource**, `mobilityDB`, which serves as a dependency accessible to the application's components.
+Source code for the sample application is divided into four subdirectories at the root of the project. These four subdirectories each contain source code for an individual Noop component. Each component is defined by a **Noopfile** located at its own root level. The sample application's Noopfiles also define a **DynamoDB database resource**, `AppDB`, which serves as a dependency accessible to the application's components.
 
 The sample application's Noop components include:
 
-1. `client`, a Vue.js **service component**, which manages the client-side user interface.
+1. `DataStatic`, a Python **static component**, which processes raw data files into a seed data file.
 
-2. `data`, a Python **service component**, which processes raw data files into a seed data file.
+2. `SeedingTask`, a Node.js **task component**, which checks valid entries in `AppDB`, and seeds data if needed.
 
-3. `seedTask`, a Node.js **task component**, which checks valid entries in `mobilityDB`, and seeds data if needed.
+3. `APIService`, an Express.js API **service component**, which facilitates communication between `AppDB` and `WebsiteStatic`.
 
-4. `server`, an Express.js **service component**, which facilitates communication between `mobilityDB` and `client`.
+4. `WebsiteStatic`, a Vue.js SPA **static component**, which manages the client-side user interface.
 
-[![Noop App Model](https://www.noop.app/img/docs/quickstart-noop-app-model.png)](https://www.noop.app/img/docs/quickstart-noop-app-model.png)
+[![Noop App Model](./sample-app-model.png)](./sample-app-model.png)
 
 Examining the source code of the sample application will be helpful for familiarizing yourself with Noop specific development practices. Otherwise interacting directly with the source code is not necessary to proceed with running it on Noop.
 
-## Noop Local Quick Start
+## Noop Desktop Quick Start
 
-[Noop Local](https://github.com/noop-cloud/noop-local) is a local development server, which assists with running a Noop application on your local machine. Features include a command line interface for interacting with a Noop application, and auto-reloading of individual components upon changes to source code.
+Noop Desktop is an all-encompassing local development application, which assists with running projects in their production state on your local machine. Features include a dashboard interface for easy inspection of a running project, and auto-rebuilding of individual components in a project upon source code changes.
 
-#### Prerequisites for running Noop Local
+#### Prerequisites for running Noop Desktop
 
-In order to run the sample application with Noop Local, the following development tools are required: [Git](https://git-scm.com), [Docker](https://www.docker.com), [Node.js](https://nodejs.org/en/) (current LTS release recommended).
+In order to run the sample application with Noop Desktop, [Docker](https://www.docker.com) needs to be installed and running on your local machine. **Note:** At this time Noop Desktop is only compatible with macOS. 
 
-**Windows Specific Instructions**
+#### Launch Sample Application in Noop Desktop
 
-A GNU/Linux environment is required to run Noop Local on a Windows machine. This can be achieved by using [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/about). Refer to Microsoft's [installation guide for WSL 2](https://docs.microsoft.com/en-us/windows/wsl/install-win10) along with Docker's [setup guide for using Docker with WSL 2](https://docs.docker.com/docker-for-windows/wsl/) to o create a development environment compatible with Noop Local.
+**1) Install Noop Desktop**
 
-#### Launch Sample Application in Noop Local Environment
-
-**1) Install Noop Local**
-
-If Noop Local has yet to be be installed on your local machine, run `npm install -g noop-local` into a terminal window. You can confirm Noop Local has been properly installed by entering `noop` into a terminal window. This command will output the current version of Noop Local installed on your local machine (e.g. `noop-local v1.0.15`).
+If Noop Desktop has yet to be be installed on your local machine, [click here](https://noop.app/download).
 
 **2) Git Clone the Sample Application**
 
 Clone the sample application's git repository onto your local machine by running `git clone https://github.com/noop-cloud/noop-sample-app-covid-19-mobility.git`.
 
-Note: Noop Local searches for a `.git` folder to identify a root of a Noop application. If you download the source code of the sample application instead of cloning its git repository, you will need to initialize a git repo in the project's root directory with `git init` for Noop Local to function properly.
-
 **3) Run Docker**
 
 Make sure Docker is running on your local machine. You can confirm by entering `docker ps` into your terminal window.
 
-**4) Run Noop Local**
+**4) Run Noop Desktop**
 
-Open a terminal window in the root directory of the sample application, and enter `noop run`. This command will build, and thereafter run, all the defined Noop components.
+Open Noop Desktop, and click to icon labeled "Local Development" in the bottom section of the left-hand sidebar. Press "New Project", provide a name for your project, and select the folder containing the sample application on your local machine. Upon being directed to the project's Overview page, click the "Start" button to build and run the sample application.
 
-When all the Noop components are running, you can access your application endpoint by pressing `o` (or by visiting [localnoop.app:1234](https://localnoop.app:1234) in a web browser) and the `Noop Local Inspector` by pressing `i` (or by visiting [localhost:1235](http://localhost:1235) in a web browser). You can press `q` to close all running Noop components.
+In order to access a running project in an external client, an associated endpoint is needed. On the project's Overview page press "New Endpoint", and enter in a domain name. The newly created endpoint now be used to access the running project on your local machine.
+
+To stop a running project, click the "Stop" button on the project's Overview page.
 
 ## Noop Cloud Quick Start
 
@@ -101,13 +97,13 @@ Click **Resources** on the Environments page. Under the **Launch a New Resource*
 
 | Field         | Value      |
 | ------------- | ---------- |
-| Resource Name | mobilityDB |
+| Resource Name | AppDB |
 | hashKeyName   | name       |
 | hashKeyType   | S          |
 | rangeKeyName  | type       |
 | rangeKeyType  | S          |
 
-Click "Launch" to continue. You should see **mobilityDB** show up instantly in the `Resources` section.
+Click "Launch" to continue. You should see **AppDB** show up instantly in the `Resources` section.
 
 **5) Deploy Build**
 
@@ -117,6 +113,6 @@ When for the status of your deploy to be listed as **Completed**, the sample app
 
 ## Additional Resource
 
-Now that you've gotten hands-on experience with Noop Local and Noop Cloud, you're ready to start using Noop on your own! Visit the documentation at [noop.app/learn](https://noop.app/learn) to learn how to create your own Noop application.
+Now that you've gotten hands-on experience with Noop Desktop and Noop Cloud, you're ready to start using Noop on your own! Visit the documentation at [noop.app/learn](https://noop.app/learn) to learn how to create your own Noop application.
 
-If you have any questions, concerns or feedback, contact us through email. You can reach us at hello@noop.app.
+If you have any questions, concerns or feedback, contact us through email. You can reach us at hello@noop.dev.
