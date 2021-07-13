@@ -1,9 +1,9 @@
 COMPONENT SeedingTask task
 
-RESOURCE ApplicationDatabase dynamodb -s hashKeyName=name -s hashKeyType=S -s rangeKeyName=type -s rangeKeyType=S
+RESOURCE AppDB dynamodb -s hashKeyName=name -s hashKeyType=S -s rangeKeyName=type -s rangeKeyType=S
 
 FROM node:14-alpine
-WORKDIR seed_task
+WORKDIR seeding-task
 
 ENV NODE_ENV production
 
@@ -11,8 +11,8 @@ COPY package*.json ./
 RUN npm ci
 
 ENV NODE_ENV production
-ENV DYNAMO_TABLE $.resources.ApplicationDatabase.tableName
-ENV DYNAMO_ENDPOINT $.resources.ApplicationDatabase.endpoint
+ENV DYNAMO_TABLE $.resources.AppDB.tableName
+ENV DYNAMO_ENDPOINT $.resources.AppDB.endpoint
 
 COPY index.js .
 CMD npm start

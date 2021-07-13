@@ -3,7 +3,7 @@ COMPONENT WebsiteStatic static
 ROUTE -m GET *
 
 FROM node:14-alpine AS build
-WORKDIR /client
+WORKDIR /website-static
 
 COPY package*.json ./
 RUN npm ci
@@ -14,4 +14,4 @@ COPY /public ./public
 COPY /src ./src
 RUN npm run build
 
-ASSETS /client/dist -s
+ASSETS /website-static/dist -s
