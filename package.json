@@ -3,16 +3,8 @@
   "version": "1.0.0",
   "description": "Root of Sample App",
   "scripts": {
-    "client-install": "npm install --prefix client",
-    "client-update": "npm update --prefix client",
-    "install-all": "npm install && npm run client-install && npm run server-install && npm run seed_task-install",
     "lint": "standard --fix --verbose | snazzy",
-    "prepare": "husky install",
-    "seed_task-install": "npm install --prefix seed_task",
-    "seed_task-update": "npm update --prefix seed_task",
-    "server-install": "npm install --prefix server",
-    "server-update": "npm update --prefix server",
-    "update-all": "npm update && npm run client-update && npm run server-update && npm run seed_task-update"
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
