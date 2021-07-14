@@ -13,7 +13,7 @@
 
 ## What is Noop?
 
-Noop is a platform which makes it easy to develop, build, run, and deploy your applications. In essence, Noop streamlines setting up and maintaining a cloud-based infrastructure for hosting your application. All you need to do is provide a Noopfile(s) to explain the configuration of your application, and Noop will take care of the rest.
+Noop is a platform which makes it easy to develop, build, run, and deploy your applications. In essence, Noop streamlines setting up and maintaining a cloud-based infrastructure for hosting your applications. All you need to do is provide a Noopfile(s) to explain the configuration of your application, and Noop will take care of the rest.
 
 Noop currently provides two distinct runtime environments, Noop Desktop and Noop Cloud. Noop Desktop helps facilitate local development of Noop project, while Noop Cloud is a platform to run Noop applications in the cloud.
 
@@ -51,7 +51,7 @@ In order to run the sample application with Noop Desktop, [Docker](https://www.d
 
 **1) Install Noop Desktop**
 
-If Noop Desktop has yet to be be installed on your local machine, [click here](https://noop.app/download).
+If Noop Desktop has yet to be installed on your local machine, [click here](https://noop.app/download).
 
 **2) Git Clone the Sample Application**
 
@@ -63,9 +63,9 @@ Make sure Docker is running on your local machine. You can confirm by entering `
 
 **4) Run Noop Desktop**
 
-Open Noop Desktop, and click to icon labeled "Local Development" in the bottom section of the left-hand sidebar. Press "New Project", provide a name for your project, and select the folder containing the sample application on your local machine. Upon being directed to the project's Overview page, click the "Start" button to build and run the sample application.
+Open Noop Desktop, and click the icon labeled "Local Development" in the bottom section of the left-hand sidebar. Press "New Project", provide a name for your project, and select the folder containing the sample application on your local machine. Upon being directed to the project's Overview page, click the "Start" button to build and run the sample application.
 
-In order to access a running project in an external client, an associated endpoint is needed. On the project's Overview page press "New Endpoint", and enter in a domain name. The newly created endpoint now be used to access the running project on your local machine.
+In order to access a running project in an external client, an associated endpoint needs to be created. On the project's Overview page press "New Endpoint", and enter in a domain name. The newly created endpoint can now be used to access the running project on your local machine.
 
 To stop a running project, click the "Stop" button on the project's Overview page.
 
@@ -85,7 +85,7 @@ Visit [Noop Cloud](https://noop.app/), and click on the **Applications** icon in
 
 **2) Create Build**
 
-Select the "Builds" tab. Under the **Initiate Manual Build** section enter in a **Git Reference** (e.g. `master`) to create a build of the sample application. Click **Build** and you will be directed to this specific Build's page. Wait for your build status to be listed as **Completed** before launching an environment.
+Select the "Builds" tab. Under the **Initiate Manual Build** section enter in a **Git Reference** (e.g. `main`) to create a build of the sample application. Click **Build** and you will be directed to this specific Build's page. Wait for your build status to be listed as **Completed** before launching an environment.
 
 **3) Launch Environment**
 
