@@ -1,5 +1,5 @@
 {
-  "name": "seed_task",
+  "name": "seeding-task",
   "version": "1.0.0",
   "description": "Seeding Data to DynamoDB",
   "main": "index.js",
@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/noop-cloud/noop-sample-app-covid-19-mobility#readme",
   "dependencies": {
-    "aws-sdk": "^2.944.0",
+    "aws-sdk": "^2.947.0",
     "node-fetch": "^2.6.1"
   }
 }

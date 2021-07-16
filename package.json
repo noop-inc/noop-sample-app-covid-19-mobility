@@ -1,7 +1,7 @@
 {
-  "name": "root",
+  "name": "noop-sample-app",
   "version": "1.0.0",
-  "description": "Root of Sample App",
+  "description": "Root of Noop Sample App",
   "scripts": {
     "lint": "standard --fix --verbose | snazzy",
     "prepare": "husky install"

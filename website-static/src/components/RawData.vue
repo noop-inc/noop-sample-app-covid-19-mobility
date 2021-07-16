@@ -5,9 +5,6 @@
 </template>
 
 <script>
-import Prism from 'prismjs'
-import 'prismjs/components/prism-json.min'
-
 export default {
   name: 'RawData',
   props: {
@@ -18,10 +15,7 @@ export default {
   },
   methods: {
     formatRawData () {
-      return Prism.highlight(
-        JSON.stringify(this.dataset, null, 4),
-        Prism.languages.json
-      )
+      return JSON.stringify(this.dataset, null, 4)
     }
   },
   mounted () {
@@ -37,26 +31,5 @@ export default {
 .raw-data-container {
   margin-bottom: 0;
   padding: 12px;
-}
-
-.language-json .token {
-  text-shadow: 0 -0.1em 0.2em white;
-  background: none;
-}
-
-.language-json .token.punctuation, .language-json .token.operator {
-  color: var(--secondary);
-}
-
-.language-json .token.property {
-  color: var(--cyan);
-}
-
-.language-json .token.string {
-  color: var(--orange);
-}
-
-.language-json .token.number {
-  color: var(--green);
 }
 </style>

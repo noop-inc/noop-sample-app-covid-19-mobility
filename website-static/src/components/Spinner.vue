@@ -5,29 +5,22 @@
   >
     <div class="spinner-backdrop" />
     <div class="spinner-position">
-      <GridLoader :color="`var(--${color})`" :size="`${size}px`" />
+      <BSpinner
+        style="width: 4rem; height: 4rem;"
+        variant="light"
+      />
     </div>
   </section>
 </template>
 
 <script>
-import GridLoader from 'vue-spinner/src/GridLoader.vue'
+import { BSpinner } from 'bootstrap-vue'
 import { mapState } from 'vuex'
 
 export default {
   name: 'LoadingSpinner',
   components: {
-    GridLoader
-  },
-  props: {
-    size: {
-      type: Number,
-      default: 48
-    },
-    color: {
-      type: String,
-      default: 'light'
-    }
+    BSpinner
   },
   computed: {
     ...mapState('mobility', { mobilityLoading: state => state.loading }),

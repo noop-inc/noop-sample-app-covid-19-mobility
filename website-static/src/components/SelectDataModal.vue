@@ -5,7 +5,6 @@
     title="Select COVID-19 Mobility Data"
     :ok-disabled="!selectedLocaton || !selectedData"
     @ok="handleOk"
-    no-fade
     ok-only
   >
     <section class="selected-data-form">
