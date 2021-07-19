@@ -3,10 +3,10 @@ COMPONENT DataStatic static
 ROUTE -m GET /data.json -p
 
 FROM python:3-alpine AS build
-WORKDIR /data-static
+WORKDIR data-static
 
 COPY index.py ./
 COPY datasets/*.csv.gz datasets/
 RUN python index.py
 
-ASSETS /data-static/dist
+ASSETS dist
