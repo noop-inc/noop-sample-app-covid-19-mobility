@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Root of Noop Sample App",
   "scripts": {
-    "lint": "standard --fix --verbose | snazzy",
+    "lint": "standard $1 --fix --verbose | snazzy",
     "prepare": "husky install"
   },
   "repository": {
@@ -22,7 +22,7 @@
     "standard": "^16.0.3"
   },
   "engines": {
-    "node": ">= 12.0.0",
+    "node": ">= 14.0.0",
     "npm": ">= 7.0.0"
   }
 }
