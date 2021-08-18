@@ -3,7 +3,7 @@
 #########################################################################
 COMPONENT WebsiteStatic static
 
-ROUTE *
+ROUTE * -m GET
 
 FROM node:14-alpine
 
