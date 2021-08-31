@@ -181,6 +181,8 @@ export default {
         },
         legend: false,
         tooltips: {
+          mode: 'index',
+          intersect: false,
           xPadding: 8,
           yPadding: 8,
           bodyFontSize: 14,
