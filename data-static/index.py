@@ -80,7 +80,7 @@ def source_dataset():
     #         for sub_key in google_data[key]:
     #             data.append(google_data[key][sub_key])
 
-    apple_filename = 'datasets/applemobilitytrends-2021-03-31.csv'
+    apple_filename = 'datasets/applemobilitytrends-2021-08-29.csv'
     apple_non_date_fields = {
         'geo_type',
         'region',
