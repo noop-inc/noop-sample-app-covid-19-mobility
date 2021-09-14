@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import meta from './modules/meta'
-import mobility from './modules/moblity'
+import mobility from './modules/mobility'
 import home from './modules/home'
 import { getRandom } from '../util/api'
 import {
