@@ -10,7 +10,7 @@ def source_dataset():
 
     data = []
 
-    # google_filename = 'datasets/Global_Mobility_Report.csv'
+    # google_filename = 'datasets/google.csv'
     # google_types = {
     #     'retail_and_recreation_percent_change_from_baseline': 'Retail and Recreation',
     #     'grocery_and_pharmacy_percent_change_from_baseline': 'Grocery and Pharmacy',
@@ -80,7 +80,7 @@ def source_dataset():
     #         for sub_key in google_data[key]:
     #             data.append(google_data[key][sub_key])
 
-    apple_filename = 'datasets/applemobilitytrends-2021-08-29.csv'
+    apple_filename = 'datasets/apple.csv'
     apple_non_date_fields = {
         'geo_type',
         'region',
