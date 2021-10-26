@@ -1,4 +1,5 @@
 import { Line, mixins } from 'vue-chartjs'
+import 'chartjs-adapter-moment'
 export default {
   name: 'Graph',
   extends: Line,

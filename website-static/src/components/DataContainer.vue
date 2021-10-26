@@ -145,7 +145,9 @@ export default {
             pointHoverRadius: 6,
             pointHoverBorderColor: pointHover,
             pointBackgroundColor: pointColor,
-            fill: 'start'
+            fill: 'start',
+            lineTension: 0,
+            spanGaps: true
           }
         ]
       }
@@ -160,6 +162,9 @@ export default {
               type: 'time',
               time: {
                 unit: 'month'
+              },
+              ticks: {
+                maxRotation: 0
               }
             }
           ],
