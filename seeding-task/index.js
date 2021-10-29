@@ -1,5 +1,5 @@
-const AWS = require('aws-sdk')
-const fetch = require('node-fetch')
+import AWS from 'aws-sdk'
+import fetch from 'node-fetch'
 
 const TableName = process.env.DYNAMO_TABLE
 const Endpoint = process.env.DYNAMO_ENDPOINT

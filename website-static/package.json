@@ -2,33 +2,35 @@
   "name": "website-static",
   "version": "1.0.0",
   "description": "Vue Frontend",
+  "author": "Derek Wolpert",
   "scripts": {
     "dev": "vite",
-    "build": "NODE_ENV=production vite build",
+    "build": "vite build",
     "serve": "vite preview"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/noop-cloud/noop-sample-app-covid-19-mobility.git"
   },
-  "author": "Derek Wolpert",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/noop-cloud/noop-sample-app-covid-19-mobility/issues"
   },
   "homepage": "https://github.com/noop-cloud/noop-sample-app-covid-19-mobility#readme",
   "dependencies": {
-    "bootstrap": "^4.6.0",
+    "bootstrap": "^4.6.1",
     "bootstrap-vue": "^2.21.2",
     "chart.js": "^2.9.4",
+    "chartjs-adapter-moment": "^0.1.2",
+    "moment": "^2.29.1",
     "vue": "^2.6.14",
     "vue-chartjs": "^3.5.1",
     "vue-router": "^3.5.2",
     "vuex": "^3.6.2"
   },
   "devDependencies": {
-    "vite": "^2.5.2",
-    "vite-plugin-vue2": "^1.8.1",
+    "vite": "^2.6.13",
+    "vite-plugin-vue2": "^1.9.0",
     "vue-template-compiler": "^2.6.14"
   }
 }

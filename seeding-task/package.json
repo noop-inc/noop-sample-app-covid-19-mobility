@@ -2,6 +2,7 @@
   "name": "seeding-task",
   "version": "1.0.0",
   "description": "Seeding Data to DynamoDB",
+  "author": "Derek Wolpert",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
@@ -10,14 +11,14 @@
     "type": "git",
     "url": "git+https://github.com/noop-cloud/noop-sample-app-covid-19-mobility.git"
   },
-  "author": "Derek Wolpert",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/noop-cloud/noop-sample-app-covid-19-mobility/issues"
   },
   "homepage": "https://github.com/noop-cloud/noop-sample-app-covid-19-mobility#readme",
   "dependencies": {
-    "aws-sdk": "^2.979.0",
-    "node-fetch": "^2.6.1"
-  }
+    "aws-sdk": "^2.1017.0",
+    "node-fetch": "^3.0.0"
+  },
+  "type": "module"
 }
