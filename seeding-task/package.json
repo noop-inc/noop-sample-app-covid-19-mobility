@@ -17,8 +17,8 @@
   },
   "homepage": "https://github.com/noop-cloud/noop-sample-app-covid-19-mobility#readme",
   "dependencies": {
-    "aws-sdk": "^2.1014.0",
-    "node-fetch": "^3.0.0"
+    "aws-sdk": "^2.1046.0",
+    "node-fetch": "^3.1.0"
   },
   "type": "module"
 }

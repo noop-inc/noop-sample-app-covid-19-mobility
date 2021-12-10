@@ -4,7 +4,7 @@
   "description": "Root of Noop Sample App",
   "author": "Derek Wolpert",
   "scripts": {
-    "lint": "standard $1 --fix --verbose | snazzy",
+    "lint": "run () { standard --fix --verbose $1 | snazzy; }; run",
     "prepare": "husky install"
   },
   "repository": {
