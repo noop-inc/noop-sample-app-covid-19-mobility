@@ -22,7 +22,7 @@ COPY --from=build website-static/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx
 
 EXPOSE 80
-CMD ["nginx", "-s", "quit", "-g", "daemon off;"]
+CMD ["nginx", "-g", "daemon off;"]
 
 ENV NODE_ENV production
 ENV NGINX_ENTRYPOINT_QUIET_LOGS 1

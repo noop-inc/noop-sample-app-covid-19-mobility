@@ -18,6 +18,6 @@ COPY --from=build data-static/dist/data.json /usr/share/nginx/html/
 COPY nginx.conf /etc/nginx
 
 EXPOSE 80
-CMD ["nginx", "-s", "quit", "-g", "daemon off;"]
+CMD ["nginx", "-g", "daemon off;"]
 
 ENV NGINX_ENTRYPOINT_QUIET_LOGS 1
