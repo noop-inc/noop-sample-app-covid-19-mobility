@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import meta from './modules/meta'
-import mobility from './modules/mobility'
-import home from './modules/home'
-import { getRandom } from '../util/api'
+import meta from './modules/meta.js'
+import mobility from './modules/mobility.js'
+import home from './modules/home.js'
+import { getRandom } from '../util/api.js'
 import {
   START_MOBILITY_LOADING,
   START_META_LOADING,
@@ -12,7 +12,7 @@ import {
   SET_MOBILITY_ERROR,
   SET_META_ERROR,
   SET_HOME_DATA
-} from '../util/types'
+} from '../util/types.js'
 
 Vue.use(Vuex)
 

@@ -1,8 +1,20 @@
 <template>
   <BCard no-body>
-    <BTabs card vertical pills no-fade>
-      <BTab title="Chart" active :disabled="!!error">
-        <section v-if="chartData && chartOptions" class="tab-content-container">
+    <BTabs
+      card
+      vertical
+      pills
+      no-fade
+    >
+      <BTab
+        title="Chart"
+        active
+        :disabled="!!error"
+      >
+        <section
+          v-if="chartData && chartOptions"
+          class="tab-content-container"
+        >
           <BLink
             v-if="$route.name !== 'Data'"
             class="data-content-link"
@@ -11,9 +23,16 @@
               params: currentParams
             }"
           >
-            <h6 class="data-content-header">{{ headerText }}</h6>
+            <h6 class="data-content-header">
+              {{ headerText }}
+            </h6>
           </BLink>
-          <h6 v-else class="data-content-header">{{ headerText }}</h6>
+          <h6
+            v-else
+            class="data-content-header"
+          >
+            {{ headerText }}
+          </h6>
           <section class="data-content-container border rounded">
             <Graph
               :styles="{ height: '100%' }"
@@ -23,8 +42,14 @@
           </section>
         </section>
       </BTab>
-      <BTab title="Table" :disabled="!!error">
-        <section v-if="dataset" class="tab-content-container">
+      <BTab
+        title="Table"
+        :disabled="!!error"
+      >
+        <section
+          v-if="dataset"
+          class="tab-content-container"
+        >
           <BLink
             v-if="$route.name !== 'Data'"
             class="data-content-link"
@@ -33,16 +58,29 @@
               params: currentParams
             }"
           >
-            <h6 class="data-content-header">{{ headerText }}</h6>
+            <h6 class="data-content-header">
+              {{ headerText }}
+            </h6>
           </BLink>
-          <h6 v-else class="data-content-header">{{ headerText }}</h6>
+          <h6
+            v-else
+            class="data-content-header"
+          >
+            {{ headerText }}
+          </h6>
           <section class="data-content-container border rounded">
-            <Table :dataset="dataset" />
+            <TableContainer :dataset="dataset" />
           </section>
         </section>
       </BTab>
-      <BTab title="JSON" :disabled="!!error">
-        <section v-if="dataset" class="tab-content-container">
+      <BTab
+        title="JSON"
+        :disabled="!!error"
+      >
+        <section
+          v-if="dataset"
+          class="tab-content-container"
+        >
           <BLink
             v-if="$route.name !== 'Data'"
             class="data-content-link"
@@ -51,9 +89,16 @@
               params: currentParams
             }"
           >
-            <h6 class="data-content-header">{{ headerText }}</h6>
+            <h6 class="data-content-header">
+              {{ headerText }}
+            </h6>
           </BLink>
-          <h6 v-else class="data-content-header">{{ headerText }}</h6>
+          <h6
+            v-else
+            class="data-content-header"
+          >
+            {{ headerText }}
+          </h6>
           <section class="data-content-container border rounded">
             <RawData :dataset="dataset" />
           </section>
@@ -67,7 +112,7 @@
 <script>
 import { mapGetters, mapState } from 'vuex'
 import Graph from './Graph.js'
-import Table from './Table.vue'
+import TableContainer from './TableContainer.vue'
 import RawData from './RawData.vue'
 import ErrorMessage from './ErrorMessage.vue'
 import colors from '../util/colors.js'
@@ -77,7 +122,7 @@ export default {
   name: 'DataContainer',
   components: {
     Graph,
-    Table,
+    TableContainer,
     RawData,
     ErrorMessage,
     BTab,
@@ -91,6 +136,13 @@ export default {
       default: null
     }
   },
+  data () {
+    return {
+      chartData: null,
+      chartOptions: null,
+      currentParams: null
+    }
+  },
   computed: {
     ...mapState('mobility', ['loading', 'error']),
     ...mapGetters('mobility', ['getMobilityData']),
@@ -100,17 +152,21 @@ export default {
         : null
     }
   },
-  data () {
-    return {
-      chartData: null,
-      chartOptions: null,
-      currentParams: null
+  watch: {
+    dataset: {
+      handler () {
+        if (this.dataset) {
+          this.formatData()
+          this.formatOptions()
+          this.currentParams = {
+            name: this.dataset.name,
+            type: this.dataset.type
+          }
+        }
+      }
     }
   },
   methods: {
-    createdGradient () {
-      return gradient
-    },
     formatData () {
       const data = [
         {
@@ -118,8 +174,8 @@ export default {
           y: this.dataset.data[0].value
         }
       ]
-      const pointColor = [colors.yellow + '80']
-      const pointHover = [colors.yellow + 'FF']
+      const pointColor = [`${colors.yellow}80`]
+      const pointHover = [`${colors.yellow}FF`]
       for (let i = 1; i < this.dataset.data.length; i++) {
         const datum = this.dataset.data[i]
         data.push({ x: datum.date, y: datum.value })
@@ -131,15 +187,15 @@ export default {
         } else {
           color = colors.yellow
         }
-        pointColor.push(color + '80')
-        pointHover.push(color + 'FF')
+        pointColor.push(`${color}80`)
+        pointHover.push(`${color}FF`)
       }
       this.chartData = {
         datasets: [
           {
             data,
-            borderColor: colors.primary + '40',
-            backgroundColor: colors.primary + '40',
+            borderColor: `${colors.primary}40`,
+            backgroundColor: `${colors.primary}40`,
             pointBorderColor: pointColor,
             pointRadius: 3,
             pointHoverRadius: 6,
@@ -198,20 +254,6 @@ export default {
                 dateStyle: 'medium'
               }),
             label: tooltipItem => `${tooltipItem.yLabel}%`
-          }
-        }
-      }
-    }
-  },
-  watch: {
-    dataset: {
-      handler () {
-        if (this.dataset) {
-          this.formatData()
-          this.formatOptions()
-          this.currentParams = {
-            name: this.dataset.name,
-            type: this.dataset.type
           }
         }
       }

@@ -1,13 +1,27 @@
 <template>
   <BCard no-body>
-    <BTabs card vertical pills no-fade>
-      <BTab title="Chart" disabled>
+    <BTabs
+      card
+      vertical
+      pills
+      no-fade
+    >
+      <BTab
+        title="Chart"
+        disabled
+      >
         <section class="tab-content-container" />
       </BTab>
-      <BTab title="Table" disabled>
+      <BTab
+        title="Table"
+        disabled
+      >
         <section class="tab-content-container" />
       </BTab>
-      <BTab title="JSON" disabled>
+      <BTab
+        title="JSON"
+        disabled
+      >
         <section class="tab-content-container" />
       </BTab>
       <ErrorMessage />

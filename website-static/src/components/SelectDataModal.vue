@@ -4,8 +4,8 @@
     ref="selectDataModal"
     title="Select COVID-19 Mobility Data"
     :ok-disabled="!selectedLocaton || !selectedData"
-    @ok="handleOk"
     ok-only
+    @ok="handleOk"
   >
     <section class="selected-data-form">
       <BFormGroup label="Select a Data Source:">
@@ -54,6 +54,17 @@ export default {
     BFormRadioGroup,
     BFormSelect
   },
+  data () {
+    return {
+      // sourceOptions: ['Apple', 'Google'],
+      sourceOptions: ['Apple'],
+      selectedSource: null,
+      geoTypeOptions: ['Countries', { value: 'States', text: 'United States' }],
+      selectedGeoType: null,
+      selectedLocaton: null,
+      selectedData: null
+    }
+  },
   computed: {
     ...mapState('home', {
       homeSource: state => state.source,
@@ -66,9 +77,9 @@ export default {
     dataset () {
       return this.selectedSource && this.selectedGeoType
         ? this.getMetaData({
-            name: this.selectedSource,
-            type: this.selectedGeoType
-          })
+          name: this.selectedSource,
+          type: this.selectedGeoType
+        })
         : null
     },
     ...mapGetters('mobility', ['getMobilityData']),
@@ -78,16 +89,52 @@ export default {
         : null
     }
   },
-  data () {
-    return {
-      // sourceOptions: ['Apple', 'Google'],
-      sourceOptions: ['Apple'],
-      selectedSource: null,
-      geoTypeOptions: ['Countries', { value: 'States', text: 'United States' }],
-      selectedGeoType: null,
-      selectedLocaton: null,
-      selectedData: null
+  created () {
+    this.checkForMetaData()
+  },
+  mounted () {
+    this.$refs.selectDataModal.$on('show', () => {
+      this.$emit('modal-visible')
+    })
+    this.$on('modal-visible', () => {
+      if (this.$route.name === 'Home') {
+        [
+          this.selectedSource,
+          this.selectedGeoType,
+          this.selectedLocaton,
+          this.selectedData
+        ] = [this.homeSource, this.homeGeo, this.homeLocation, this.homeData]
+      } else if (this.currentMobility) {
+        const { source, geo, name, type } = this.currentMobility
+        ;[
+          this.selectedSource,
+          this.selectedGeoType,
+          this.selectedLocaton,
+          this.selectedData
+        ] = [source, geo, name, type]
+      } else {
+        [
+          this.selectedSource,
+          this.selectedGeoType,
+          this.selectedLocaton,
+          this.selectedData
+        ] = [null, null, null, null]
+      }
+    })
+  },
+  updated () {
+    if (this.dataset) {
+      if (!(this.selectedLocaton in this.dataset.data)) {
+        this.selectedLocaton = null
+        this.selectedData = null
+      } else if (
+        !this.dataset.data[this.selectedLocaton].includes(this.selectedData)
+      ) {
+        this.selectedData = null
+      }
     }
+
+    this.checkForMetaData()
   },
   methods: {
     ...mapActions('meta', ['fetchMetaData']),
@@ -160,53 +207,6 @@ export default {
         })
       }
     }
-  },
-  created () {
-    this.checkForMetaData()
-  },
-  mounted () {
-    this.$refs.selectDataModal.$on('show', () => {
-      this.$emit('modal-visible')
-    })
-    this.$on('modal-visible', () => {
-      if (this.$route.name === 'Home') {
-        ;[
-          this.selectedSource,
-          this.selectedGeoType,
-          this.selectedLocaton,
-          this.selectedData
-        ] = [this.homeSource, this.homeGeo, this.homeLocation, this.homeData]
-      } else if (this.currentMobility) {
-        const { source, geo, name, type } = this.currentMobility
-        ;[
-          this.selectedSource,
-          this.selectedGeoType,
-          this.selectedLocaton,
-          this.selectedData
-        ] = [source, geo, name, type]
-      } else {
-        ;[
-          this.selectedSource,
-          this.selectedGeoType,
-          this.selectedLocaton,
-          this.selectedData
-        ] = [null, null, null, null]
-      }
-    })
-  },
-  updated () {
-    if (this.dataset) {
-      if (!(this.selectedLocaton in this.dataset.data)) {
-        this.selectedLocaton = null
-        this.selectedData = null
-      } else if (
-        !this.dataset.data[this.selectedLocaton].includes(this.selectedData)
-      ) {
-        this.selectedData = null
-      }
-    }
-
-    this.checkForMetaData()
   }
 }
 </script>

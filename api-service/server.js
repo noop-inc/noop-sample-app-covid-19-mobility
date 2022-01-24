@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const morgan = require('morgan')
-const api = require('./routes/api')
+const api = require('./routes/api.js')
 
 app.use(express.json())
 app.use(morgan('tiny'))

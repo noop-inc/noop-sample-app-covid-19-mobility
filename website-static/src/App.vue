@@ -1,11 +1,14 @@
 <template>
   <div id="app">
     <NavBar />
-    <BContainer class="router-container" fluid>
+    <BContainer
+      class="router-container"
+      fluid
+    >
       <router-view />
     </BContainer>
     <Spinner />
-    <Footer />
+    <FooterNav />
   </div>
 </template>
 
@@ -13,14 +16,14 @@
 import NavBar from './components/NavBar.vue'
 import Spinner from './components/Spinner.vue'
 import { BContainer } from 'bootstrap-vue'
-import Footer from './components/Footer.vue'
+import FooterNav from './components/FooterNav.vue'
 export default {
   name: 'App',
   components: {
     NavBar,
     Spinner,
     BContainer,
-    Footer
+    FooterNav
   }
 }
 </script>

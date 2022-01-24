@@ -2,7 +2,7 @@ import {
   SET_HOME_DATA,
   CLEAR_HOME_DATA,
   CLEAR_MOBILITY_ERROR
-} from '../../util/types'
+} from '../../util/types.js'
 
 const state = () => ({
   source: null,

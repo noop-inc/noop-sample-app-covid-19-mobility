@@ -1,4 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-git diff --name-only --cached | grep ".*\.js$" | while read file ; do npm run lint -- "$file" && git add "$file" ; done
+npx lint-staged

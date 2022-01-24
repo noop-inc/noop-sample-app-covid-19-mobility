@@ -7,7 +7,7 @@ import { mapActions, mapGetters, mapState } from 'vuex'
 import DataContainer from '../components/DataContainer.vue'
 
 export default {
-  name: 'Home',
+  name: 'HomeView',
   components: {
     DataContainer
   },
@@ -19,12 +19,27 @@ export default {
       return this.getMobilityData(
         this.$route.name === 'Home'
           ? {
-            name: this.location,
-            type: this.data
-          }
+              name: this.location,
+              type: this.data
+            }
           : this.$route.params
       )
     }
+  },
+  watch: {
+    $route (to) {
+      if (to.name !== 'Home') this.removeHomeData()
+    }
+  },
+  created () {
+    this.$route.name === 'Home'
+      ? this.checkForRandomData()
+      : this.checkForMobilityData()
+  },
+  updated () {
+    this.$route.name === 'Home'
+      ? this.checkForRandomData()
+      : this.checkForMobilityData()
   },
   methods: {
     ...mapActions('home', ['assignHomeData', 'removeHomeData']),
@@ -53,21 +68,6 @@ export default {
           this.fetchMobilityData(this.$route.params)
         }
       }
-    }
-  },
-  created () {
-    this.$route.name === 'Home'
-      ? this.checkForRandomData()
-      : this.checkForMobilityData()
-  },
-  updated () {
-    this.$route.name === 'Home'
-      ? this.checkForRandomData()
-      : this.checkForMobilityData()
-  },
-  watch: {
-    $route (to){
-      if (to.name !== 'Home') this.removeHomeData()
     }
   }
 }

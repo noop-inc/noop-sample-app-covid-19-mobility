@@ -1,6 +1,11 @@
 <template>
   <header class="navbar-container">
-    <BNavbar fixed="top" toggleable="sm" type="dark" variant="primary">
+    <BNavbar
+      fixed="top"
+      toggleable="sm"
+      type="dark"
+      variant="primary"
+    >
       <BNavbarBrand
         :to="$route.name !== 'Home' ? { name: 'Home' } : null"
         :style="$route.name === 'Home' ? { cursor: 'default' } : null"
@@ -8,28 +13,34 @@
         COVID-19 Mobility
       </BNavbarBrand>
       <BNavbarToggle target="nav-collapse" />
-      <BCollapse id="nav-collapse" is-nav>
+      <BCollapse
+        id="nav-collapse"
+        is-nav
+      >
         <BNavbarNav>
-          <BNavItem align="center" v-b-modal.select-data-modal>
+          <BNavItem
+            v-b-modal.select-data-modal
+            align="center"
+          >
             Select Data
           </BNavItem>
         </BNavbarNav>
         <BNavbarNav class="ml-auto">
           <BNavItem
+            v-b-tooltip.hover.noFade
             align="center"
             href="https://noop.app/"
             target="_blank"
-            v-b-tooltip.hover.noFade
             title="Visit Noop Cloud"
             class="navbar-icons"
           >
             <IconNoop class="d-inline-block align-top" />
           </BNavItem>
           <BNavItem
-            align="center"
-            href="https://github.com/noop-cloud/noop-sample-app-covid-19-mobility"
-            target="_blank"
             v-b-tooltip.hover.noFade
+            align="center"
+            href="https://github.com/noop-inc/noop-sample-app-covid-19-mobility"
+            target="_blank"
             title="View source code on GitHub"
             class="navbar-icons"
           >

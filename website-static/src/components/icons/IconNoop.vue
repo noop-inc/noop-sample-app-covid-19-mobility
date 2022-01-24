@@ -10,7 +10,10 @@
     version="1.1"
     viewBox="0 0 185 185"
   >
-    <g id="Icon" vectornator:layerName="Icon">
+    <g
+      id="Icon"
+      vectornator:layerName="Icon"
+    >
       <path
         stroke="currentColor"
         fill-rule="evenodd"
@@ -82,7 +85,10 @@
         stroke-linejoin="round"
       />
     </g>
-    <g id="Lantern" vectornator:layerName="Lantern">
+    <g
+      id="Lantern"
+      vectornator:layerName="Lantern"
+    >
       <path
         stroke="currentColor"
         fill-rule="evenodd"

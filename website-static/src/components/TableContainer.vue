@@ -14,7 +14,7 @@
 import { BTable } from 'bootstrap-vue'
 
 export default {
-  name: 'Table',
+  name: 'TableContainer',
   components: {
     BTable
   },
@@ -42,6 +42,12 @@ export default {
         }
       ]
     }
+  },
+  created () {
+    this.items = this.formatTable()
+  },
+  updated () {
+    this.items = this.formatTable()
   },
   methods: {
     formatTable () {
@@ -79,12 +85,6 @@ export default {
         return null
       }
     }
-  },
-  created () {
-    this.items = this.formatTable()
-  },
-  updated () {
-    this.items = this.formatTable()
   }
 }
 </script>

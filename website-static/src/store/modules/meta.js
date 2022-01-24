@@ -1,10 +1,10 @@
-import { getData } from '../../util/api'
+import { getData } from '../../util/api.js'
 import Vue from 'vue'
 import {
   START_META_LOADING,
   RECEIVE_META_DATA,
   SET_META_ERROR
-} from '../../util/types'
+} from '../../util/types.js'
 
 const state = () => ({
   data: {},

@@ -1,6 +1,12 @@
 <template>
-  <pre v-if="dataset" class="raw-data-container">
-    <code class="language-json" ref="code" />
+  <pre
+    v-if="dataset"
+    class="raw-data-container"
+  >
+    <code
+ref="code"
+class="language-json"
+/>
   </pre>
 </template>
 
@@ -13,16 +19,16 @@ export default {
       default: null
     }
   },
-  methods: {
-    formatRawData () {
-      return JSON.stringify(this.dataset, null, 4)
-    }
-  },
   mounted () {
     this.$refs.code.innerHTML = this.formatRawData()
   },
   updated () {
     this.$refs.code.innerHTML = this.formatRawData()
+  },
+  methods: {
+    formatRawData () {
+      return JSON.stringify(this.dataset, null, 4)
+    }
   }
 }
 </script>

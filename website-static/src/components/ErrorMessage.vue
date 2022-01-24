@@ -34,7 +34,6 @@ export default {
   height: calc(100vh - 88px);
   overflow-y: scroll;
 
-  
 }
 .data-error-container > .jumbotron {
   padding-bottom: 20px;

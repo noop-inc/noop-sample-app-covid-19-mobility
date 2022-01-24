@@ -1,11 +1,11 @@
-import { getData } from '../../util/api'
+import { getData } from '../../util/api.js'
 import Vue from 'vue'
 import {
   START_MOBILITY_LOADING,
   RECEIVE_MOBILITY_DATA,
   SET_MOBILITY_ERROR,
   CLEAR_MOBILITY_ERROR
-} from '../../util/types'
+} from '../../util/types.js'
 
 const state = () => ({
   data: {},

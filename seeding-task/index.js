@@ -15,9 +15,9 @@ let data
 const insertData = async () => {
   console.log('Start inserting data')
   try {
-    await Promise.all(data.map(async Item => (
+    await Promise.all(data.map(async Item =>
       await documentClient.put({ Item, TableName }).promise()
-    )))
+    ))
     console.log('End inserting data')
   } catch (err) {
     console.error(`Error: ${err.message}`)

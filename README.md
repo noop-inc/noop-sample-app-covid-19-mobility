@@ -55,7 +55,7 @@ If Noop Desktop has yet to be installed on your local machine, [click here](http
 
 **2) Git Clone the Sample Application**
 
-Clone the sample application's git repository onto your local machine by running `git clone https://github.com/noop-cloud/noop-sample-app-covid-19-mobility.git`.
+Clone the sample application's git repository onto your local machine by running `git clone https://github.com/noop-inc/noop-sample-app-covid-19-mobility.git`.
 
 **3) Run Docker**
 
