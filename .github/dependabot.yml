@@ -10,8 +10,6 @@ updates:
       timezone: 'America/New_York'
     labels:
       - 'dependencies'
-      - 'npm'
-      - 'root'
     versioning-strategy: 'increase'
     open-pull-requests-limit: 50
 
@@ -23,8 +21,6 @@ updates:
       timezone: 'America/New_York'
     labels:
       - 'dependencies'
-      - 'npm'
-      - 'api-service'
     versioning-strategy: 'increase'
     open-pull-requests-limit: 50
 
@@ -36,11 +32,8 @@ updates:
       timezone: 'America/New_York'
     labels:
       - 'dependencies'
-      - 'npm'
-      - 'seeding-task'
     versioning-strategy: 'increase'
     open-pull-requests-limit: 50
-
 
   - package-ecosystem: 'npm'
     directory: '/website-static'
@@ -55,7 +48,5 @@ updates:
         versions: ['>=3.0.0']
     labels:
       - 'dependencies'
-      - 'npm'
-      - 'website-static'
     versioning-strategy: 'increase'
     open-pull-requests-limit: 50
