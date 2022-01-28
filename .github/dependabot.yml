@@ -1,0 +1,56 @@
+version: 2
+updates:
+
+  # Maintain dependencies for npm
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+      time: '08:00'
+      timezone: 'America/New_York'
+    labels:
+      - 'dependencies'
+      - 'npm'
+      - 'root'
+    versioning-strategy: 'increase'
+    open-pull-requests-limit: 50
+
+  - package-ecosystem: 'npm'
+    directory: '/api-service'
+    schedule:
+      interval: 'daily'
+      time: '08:00'
+      timezone: 'America/New_York'
+    labels:
+      - 'dependencies'
+      - 'npm'
+      - 'api-service'
+    versioning-strategy: 'increase'
+    open-pull-requests-limit: 50
+
+  - package-ecosystem: 'npm'
+    directory: '/seeding-task'
+    schedule:
+      interval: 'daily'
+      time: '08:00'
+      timezone: 'America/New_York'
+    labels:
+      - 'dependencies'
+      - 'npm'
+      - 'seeding-task'
+    versioning-strategy: 'increase'
+    open-pull-requests-limit: 50
+
+
+  - package-ecosystem: 'npm'
+    directory: '/website-static'
+    schedule:
+      interval: 'daily'
+      time: '08:00'
+      timezone: 'America/New_York'
+    labels:
+      - 'dependencies'
+      - 'npm'
+      - 'website-static'
+    versioning-strategy: 'increase'
+    open-pull-requests-limit: 50
