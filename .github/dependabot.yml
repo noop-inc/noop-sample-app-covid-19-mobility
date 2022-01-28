@@ -48,6 +48,11 @@ updates:
       interval: 'daily'
       time: '08:00'
       timezone: 'America/New_York'
+    ignore:
+      - dependency-name: 'bootstrap'
+        versions: ['>=5.0.0']
+      - dependency-name: 'chart.js'
+        versions: ['>=3.0.0']
     labels:
       - 'dependencies'
       - 'npm'
