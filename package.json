@@ -18,7 +18,7 @@
   "homepage": "https://github.com/noop-inc/noop-sample-app-covid-19-mobility#readme",
   "devDependencies": {
     "@babel/eslint-parser": "^7.16.5",
-    "eslint": "^8.7.0",
+    "eslint": "^8.8.0",
     "eslint-config-standard": "^17.0.0-0",
     "eslint-plugin-vue": "^8.4.0",
     "husky": "^7.0.4",
