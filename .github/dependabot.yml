@@ -6,6 +6,8 @@ updates:
       interval: 'weekly'
       day: 'monday'
       time: '12:00'
+    labels:
+      - 'dependabot'
     open-pull-requests-limit: 50
     versioning-strategy: 'increase'
 
@@ -15,6 +17,8 @@ updates:
       interval: 'weekly'
       day: 'monday'
       time: '12:00'
+    labels:
+      - 'dependabot'
     open-pull-requests-limit: 50
     versioning-strategy: 'increase'
 
@@ -24,6 +28,8 @@ updates:
       interval: 'weekly'
       day: 'monday'
       time: '12:00'
+    labels:
+      - 'dependabot'
     open-pull-requests-limit: 50
     versioning-strategy: 'increase'
 
@@ -33,6 +39,8 @@ updates:
       interval: 'weekly'
       day: 'monday'
       time: '12:00'
+    labels:
+      - 'dependabot'
     ignore:
       - dependency-name: 'bootstrap'
         versions: ['>=5.0.0']
