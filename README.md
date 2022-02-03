@@ -45,7 +45,7 @@ Noop Desktop is an all-encompassing local development application, which assists
 
 #### Prerequisites for running Noop Desktop
 
-In order to run the sample application with Noop Desktop, [Docker](https://www.docker.com) needs to be installed and running on your local machine. **Note:** At this time Noop Desktop is only compatible with macOS. 
+In order to run the sample application with Noop Desktop, [Docker](https://www.docker.com) needs to be installed and running on your local machine. **Note:** At this time Noop Desktop is only compatible with macOS.
 
 #### Launch Sample Application in Noop Desktop
 
@@ -95,13 +95,13 @@ Return to the management page for the application, select the **Environment** ta
 
 Click **Resources** on the Environments page. Under the **Launch a New Resource** section click **DynamoDB Table**. Enter values into the fields to match the DynamoDB resource defined within the sample application's Noopfiles. Use the table below as a reference:
 
-| Field         | Value      |
-| ------------- | ---------- |
+| Field         | Value |
+| ------------- | ----- |
 | Resource Name | AppDB |
-| hashKeyName   | name       |
-| hashKeyType   | S          |
-| rangeKeyName  | type       |
-| rangeKeyType  | S          |
+| hashKeyName   | name  |
+| hashKeyType   | S     |
+| rangeKeyName  | type  |
+| rangeKeyType  | S     |
 
 Click "Launch" to continue. You should see **AppDB** show up instantly in the `Resources` section.
 
