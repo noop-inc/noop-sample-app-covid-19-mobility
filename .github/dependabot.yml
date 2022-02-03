@@ -1,52 +1,42 @@
 version: 2
 updates:
-
-  # Maintain dependencies for npm
   - package-ecosystem: 'npm'
     directory: '/'
     schedule:
-      interval: 'daily'
-      time: '08:00'
-      timezone: 'America/New_York'
-    labels:
-      - 'dependencies'
-    versioning-strategy: 'increase'
+      interval: 'weekly'
+      day: 'monday'
+      time: '12:00'
     open-pull-requests-limit: 50
+    versioning-strategy: 'increase'
 
   - package-ecosystem: 'npm'
     directory: '/api-service'
     schedule:
-      interval: 'daily'
-      time: '08:00'
-      timezone: 'America/New_York'
-    labels:
-      - 'dependencies'
-    versioning-strategy: 'increase'
+      interval: 'weekly'
+      day: 'monday'
+      time: '12:00'
     open-pull-requests-limit: 50
+    versioning-strategy: 'increase'
 
   - package-ecosystem: 'npm'
     directory: '/seeding-task'
     schedule:
-      interval: 'daily'
-      time: '08:00'
-      timezone: 'America/New_York'
-    labels:
-      - 'dependencies'
-    versioning-strategy: 'increase'
+      interval: 'weekly'
+      day: 'monday'
+      time: '12:00'
     open-pull-requests-limit: 50
+    versioning-strategy: 'increase'
 
   - package-ecosystem: 'npm'
     directory: '/website-static'
     schedule:
-      interval: 'daily'
-      time: '08:00'
-      timezone: 'America/New_York'
+      interval: 'weekly'
+      day: 'monday'
+      time: '12:00'
     ignore:
       - dependency-name: 'bootstrap'
         versions: ['>=5.0.0']
       - dependency-name: 'chart.js'
         versions: ['>=3.0.0']
-    labels:
-      - 'dependencies'
-    versioning-strategy: 'increase'
     open-pull-requests-limit: 50
+    versioning-strategy: 'increase'
