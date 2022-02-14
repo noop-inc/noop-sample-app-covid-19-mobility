@@ -36,8 +36,8 @@
           <section class="data-content-container border rounded">
             <Graph
               :styles="{ height: '100%' }"
-              :chartData="chartData"
-              :chartOptions="chartOptions"
+              :chart-data="chartData"
+              :chart-options="chartOptions"
             />
           </section>
         </section>
