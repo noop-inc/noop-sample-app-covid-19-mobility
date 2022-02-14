@@ -25,11 +25,11 @@
     "moment": "^2.29.1",
     "vue": "^2.6.14",
     "vue-chartjs": "^3.5.1",
-    "vue-router": "^3.5.2",
+    "vue-router": "^3.5.3",
     "vuex": "^3.6.2"
   },
   "devDependencies": {
-    "vite": "^2.8.0",
+    "vite": "^2.8.2",
     "vite-plugin-vue2": "^1.9.3",
     "vue-template-compiler": "^2.6.14"
   }

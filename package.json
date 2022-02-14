@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "concurrently npm:lint-* --raw --max-processes 1",
     "lint-eslint": "eslint . --ext .js,.vue --fix --cache --cache-location node_modules/.cache/.eslintcache --ignore-path .gitignore",
-    "lint-prettier": "prettier \"**/*.{md,json,yaml,yml,html}\" --write --loglevel warn --ignore-path .gitignore",
+    "lint-prettier": "prettier . \"!**/*.{js,cjs,mjs,vue}\" --write --ignore-path .gitignore",
     "prepare": "husky install"
   },
   "repository": {
@@ -21,11 +21,11 @@
   "devDependencies": {
     "@babel/eslint-parser": "^7.17.0",
     "concurrently": "^7.0.0",
-    "eslint": "^8.8.0",
+    "eslint": "^8.9.0",
     "eslint-config-standard": "^17.0.0-1",
     "eslint-plugin-vue": "^8.4.1",
     "husky": "^7.0.4",
-    "lint-staged": "^12.3.3",
+    "lint-staged": "^12.3.4",
     "prettier": "^2.5.1",
     "snazzy": "^9.0.0",
     "standard": "^16.0.4"
@@ -34,12 +34,36 @@
     "node": ">= 14.0.0",
     "npm": ">= 7.0.0"
   },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "mocha": true,
+      "vue/setup-compiler-macros": true
+    },
+    "extends": [
+      "plugin:vue/recommended",
+      "eslint:recommended",
+      "standard"
+    ],
+    "rules": {
+      "vue/attribute-hyphenation": "off",
+      "vue/require-prop-types": "off",
+      "vue/require-default-prop": "off",
+      "vue/no-v-html": "off"
+    }
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "none",
+    "arrowParens": "avoid"
+  },
   "lint-staged": {
-    "**/*.{js,vue}": [
+    "**/*.{js,cjs,mjs,vue}": [
       "eslint --fix --cache --cache-location node_modules/.cache/.eslintcache --ignore-path .gitignore --no-error-on-unmatched-pattern"
     ],
-    "**/*.{md,json,yaml,yml,html}": [
-      "prettier --write --loglevel warn --ignore-path .gitignore --no-error-on-unmatched-pattern"
+    "!**/*.{js,cjs,mjs,vue}": [
+      "prettier --write --ignore-path .gitignore --no-error-on-unmatched-pattern"
     ]
   }
 }

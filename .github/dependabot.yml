@@ -46,9 +46,13 @@ updates:
         versions: ['>=5.0.0']
       - dependency-name: 'chart.js'
         versions: ['>=3.0.0']
+      - dependency-name: 'chartjs-adapter-moment'
+        versions: ['>=1.0.0']
       - dependency-name: 'vue'
         versions: ['>=3.0.0']
       - dependency-name: 'vue-router'
+        versions: ['>=4.0.0']
+      - dependency-name: 'vuex'
         versions: ['>=4.0.0']
     open-pull-requests-limit: 50
     versioning-strategy: 'increase'
