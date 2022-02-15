@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "concurrently npm:lint-* --raw --max-processes 1",
     "lint-eslint": "eslint . --ext .js,.vue --fix --cache --cache-location node_modules/.cache/.eslintcache --ignore-path .gitignore",
-    "lint-prettier": "prettier . \"!**/*.{js,cjs,mjs,vue}\" --write --ignore-path .gitignore",
+    "lint-prettier": "prettier \"**/*.{htm,html,json,md,markdown,yml,yaml}\" --write --ignore-path .gitignore",
     "prepare": "husky install"
   },
   "repository": {
@@ -49,10 +49,10 @@
   },
   "lint-staged": {
     "**/*.{js,cjs,mjs,vue}": [
-      "eslint --fix --cache --cache-location node_modules/.cache/.eslintcache --ignore-path .gitignore --no-error-on-unmatched-pattern"
+      "eslint --fix --cache --cache-location node_modules/.cache/.eslintcache --ignore-path .gitignore"
     ],
-    "!**/*.{js,cjs,mjs,vue}": [
-      "prettier --write --ignore-path .gitignore --no-error-on-unmatched-pattern"
+    "**/*.{htm,html,json,md,markdown,yml,yaml}": [
+      "prettier --write --ignore-path .gitignore"
     ]
   }
 }
