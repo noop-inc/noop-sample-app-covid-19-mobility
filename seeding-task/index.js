@@ -1,5 +1,4 @@
 import AWS from 'aws-sdk'
-import fetch from 'node-fetch'
 
 const TableName = process.env.DYNAMO_TABLE
 const Endpoint = process.env.DYNAMO_ENDPOINT

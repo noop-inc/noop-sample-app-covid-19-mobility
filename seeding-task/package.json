@@ -5,7 +5,7 @@
   "author": "Derek Wolpert",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node --experimental-fetch index.js"
   },
   "repository": {
     "type": "git",
@@ -17,8 +17,7 @@
   },
   "homepage": "https://github.com/noop-inc/noop-sample-app-covid-19-mobility#readme",
   "dependencies": {
-    "aws-sdk": "^2.1120.0",
-    "node-fetch": "^3.2.3"
+    "aws-sdk": "^2.1127.0"
   },
   "type": "module"
 }
