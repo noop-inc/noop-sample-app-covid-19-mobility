@@ -96,7 +96,7 @@ components:
         NGINX_ENTRYPOINT_QUIET_LOGS: '1'
 
 lifecycles:
-  - event: beforeTraffic
+  - event: BeforeTraffic
     components: [SeedingTask]
 
 routes:
