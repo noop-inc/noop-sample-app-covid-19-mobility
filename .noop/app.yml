@@ -50,8 +50,6 @@ components:
     type: task
     image: node:16-alpine
     root: seeding-task/
-    lifecycles:
-      - beforeTraffic
     build:
       steps:
         - directory: /seeding-task
@@ -96,6 +94,10 @@ components:
       command: 'nginx -g "daemon off;"'
       variables:
         NGINX_ENTRYPOINT_QUIET_LOGS: '1'
+
+lifecycles:
+  - event: beforeTraffic
+    components: [SeedingTask]
 
 routes:
   - pattern: '/api/**'
