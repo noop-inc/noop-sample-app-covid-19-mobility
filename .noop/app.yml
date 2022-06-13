@@ -1,0 +1,117 @@
+---
+components:
+  - name: APIService
+    type: service
+    image: node:16-alpine
+    root: api-service/
+    build:
+      steps:
+        - directory: /api-service
+        - copy: package*.json
+          destination: ./
+        - run: npm ci
+        - copy: server.js
+        - copy: routes/
+    runtime:
+      command: npm start
+      resources:
+        - AppDB
+      variables:
+        NODE_ENV: production
+        DYNAMO_TABLE:
+          $env: resources.AppDB.tableName
+        DYNAMO_ENDPOINT:
+          $env: resources.AppDB.endpoint
+
+  - name: DataStatic
+    type: service
+    image: python:3-alpine
+    root: data-static/
+    build:
+      steps:
+        - directory: /data-static
+        - copy: index.py
+        - copy: datasets/*.csv.gz
+          destination: datasets/
+        - run: python index.py
+        - image: nginx:1-alpine
+          stage: nginx
+        - copy: data-static/dist/data.json
+          destination: /usr/share/nginx/html/
+          from: main
+        - copy: nginx.conf
+          destination: /etc/nginx
+    runtime:
+      command: 'nginx -g "daemon off;"'
+      variables:
+        NGINX_ENTRYPOINT_QUIET_LOGS: '1'
+
+  - name: SeedingTask
+    type: task
+    image: node:16-alpine
+    root: seeding-task/
+    lifecycles:
+      - beforeTraffic
+    build:
+      steps:
+        - directory: /seeding-task
+        - copy: package*.json
+          destination: ./
+        - run: npm ci
+        - copy: index.js
+    runtime:
+      command: npm start
+      resources:
+        - AppDB
+      variables:
+        NODE_ENV: production
+        DYNAMO_TABLE:
+          $env: resources.AppDB.tableName
+        DYNAMO_ENDPOINT:
+          $env: resources.AppDB.endpoint
+
+  - name: WebsiteStatic
+    type: service
+    image: node:16-alpine
+    root: website-static/
+    build:
+      steps:
+        - directory: /website-static
+        - copy: package*.json
+          destination: ./
+        - run: npm ci
+        - copy: index.html
+        - copy: vite.config.js
+        - copy: public/
+        - copy: src/
+        - run: npm run build
+        - image: nginx:1-alpine
+          stage: nginx
+        - copy: website-static/dist
+          destination: /usr/share/nginx/html/
+          from: main
+        - copy: nginx.conf
+          destination: /etc/nginx
+    runtime:
+      command: 'nginx -g "daemon off;"'
+      variables:
+        NGINX_ENTRYPOINT_QUIET_LOGS: '1'
+
+routes:
+  - pattern: '/api/**'
+    target:
+      component: APIService
+  - pattern: '/data.json'
+    target:
+      component: DataStatic
+  - pattern: '/**'
+    target:
+      component: WebsiteStatic
+
+resources:
+  - name: AppDB
+    type: dynamodb
+    hashKeyName: name
+    hashKeyType: S
+    rangeKeyName: type
+    rangeKeyType: S
