@@ -23,14 +23,13 @@
     "chart.js": "^2.9.4",
     "chartjs-adapter-moment": "^0.1.2",
     "moment": "^2.29.3",
-    "vue": "^2.6.14",
+    "vue": "^2.7.0",
     "vue-chartjs": "^3.5.1",
     "vue-router": "^3.5.4",
     "vuex": "^3.6.2"
   },
   "devDependencies": {
-    "vite": "^2.9.12",
-    "vite-plugin-vue2": "^2.0.1",
-    "vue-template-compiler": "^2.6.14"
+    "vite": "^2.9.13",
+    "vite-plugin-vue2": "^2.0.1"
   }
 }
