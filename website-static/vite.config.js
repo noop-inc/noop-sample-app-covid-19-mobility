@@ -7,13 +7,13 @@ export default defineConfig({
     hmr: {
       protocol: 'ws',
       host: 'localhost',
-      port: 3000
+      port: 5173
     }
   },
   build: {
     target: 'esnext',
     minify: false,
-    brotliSize: false,
+    reportCompressedSize: false,
     chunkSizeWarningLimit: 2000
   }
 })
