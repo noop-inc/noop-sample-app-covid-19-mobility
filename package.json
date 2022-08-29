@@ -5,15 +5,14 @@
   "author": "Derek Wolpert",
   "scripts": {
     "common-eslint": "eslint . --ext .js,.jsx,.cjs,.mjs --cache --cache-location node_modules/.cache/.eslintcache --ignore-path .gitignore",
-    "common-prettier": "prettier \"**/*.{htm,html,json,md,markdown,yml,yaml}\" --ignore-path .gitignore",
+    "common-prettier": "prettier \"**/*.{htm,html,json,md,markdown,yml,yaml}\" --cache --ignore-path .gitignore",
     "common-sequential": "concurrently --raw --max-processes 1",
     "fix": "npm run common-sequential -- npm:fix-*",
     "fix-eslint": "npm run common-eslint -- --fix",
     "fix-prettier": "npm run common-prettier -- --write",
     "lint": "npm run common-sequential -- npm:lint-*",
     "lint-eslint": "npm run common-eslint",
-    "lint-prettier": "npm run common-prettier -- --check",
-    "prepare": "husky install"
+    "lint-prettier": "npm run common-prettier -- --check"
   },
   "repository": {
     "type": "git",
@@ -26,16 +25,14 @@
   "homepage": "https://github.com/noop-inc/noop-sample-app-covid-19-mobility#readme",
   "devDependencies": {
     "concurrently": "^7.3.0",
-    "eslint": "^8.21.0",
+    "eslint": "^8.23.0",
     "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-vue": "^9.3.0",
-    "husky": "^8.0.1",
-    "lint-staged": "^13.0.3",
+    "eslint-plugin-vue": "^9.4.0",
     "prettier": "^2.7.1"
   },
   "engines": {
-    "node": ">= 14.0.0",
-    "npm": ">= 7.0.0"
+    "node": ">= 16.0.0",
+    "npm": ">= 8.0.0"
   },
   "eslintConfig": {
     "root": true,
@@ -50,13 +47,5 @@
     "singleQuote": true,
     "trailingComma": "none",
     "arrowParens": "avoid"
-  },
-  "lint-staged": {
-    "**/*.{js,cjs,mjs,vue}": [
-      "eslint --fix --cache --cache-location node_modules/.cache/.eslintcache --ignore-path .gitignore"
-    ],
-    "**/*.{htm,html,json,md,markdown,yml,yaml}": [
-      "prettier --write --ignore-path .gitignore"
-    ]
   }
 }

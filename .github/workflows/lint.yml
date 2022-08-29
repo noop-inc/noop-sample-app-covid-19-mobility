@@ -1,0 +1,50 @@
+name: Lint
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  linting:
+    name: Linting Code
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Code Checkout
+        uses: actions/checkout@v3
+
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Cache NPM
+        id: cache-npm
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.npm
+            ./node_modules
+          key: ${{ runner.os }}-npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: ${{ runner.os }}-npm-
+
+      - name: Install Dependencies
+        if: steps.cache-npm.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: Cache Lint
+        id: cache-lint
+        uses: actions/cache@v3
+        with:
+          path: |
+            ./node_modules/.cache/prettier
+            ./node_modules/.cache/.eslintcache
+          key: ${{ runner.os }}-lint-${{ github.sha }}
+          restore-keys: ${{ runner.os }}-lint-
+
+      - name: Code Linting
+        if: steps.cache-lint.outputs.cache-hit != 'true'
+        run: npm run lint
