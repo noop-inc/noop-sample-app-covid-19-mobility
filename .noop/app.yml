@@ -19,9 +19,9 @@ components:
       variables:
         NODE_ENV: production
         DYNAMO_TABLE:
-          $env: resources.AppDB.tableName
+          $resources: AppDB.tableName
         DYNAMO_ENDPOINT:
-          $env: resources.AppDB.endpoint
+          $resources: AppDB.endpoint
 
   - name: DataStatic
     type: service
@@ -64,9 +64,9 @@ components:
       variables:
         NODE_ENV: production
         DYNAMO_TABLE:
-          $env: resources.AppDB.tableName
+          $resources: AppDB.tableName
         DYNAMO_ENDPOINT:
-          $env: resources.AppDB.endpoint
+          $resources: AppDB.endpoint
 
   - name: WebsiteStatic
     type: service

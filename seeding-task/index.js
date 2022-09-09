@@ -1,4 +1,5 @@
 import AWS from 'aws-sdk'
+import data from './data.json' assert { type: `json` }
 
 const TableName = process.env.DYNAMO_TABLE
 const Endpoint = process.env.DYNAMO_ENDPOINT
@@ -9,7 +10,7 @@ const documentClient = new AWS.DynamoDB.DocumentClient({
   service: dynamodb
 })
 
-let data
+// let data
 
 const insertData = async () => {
   console.log('Start inserting data')
@@ -26,10 +27,10 @@ const insertData = async () => {
 
 const fetchData = async () => {
   try {
-    console.log('Start fetching data')
-    const res = await fetch('http://localapp/data.json')
-    data = await res.json()
-    console.log('End fetching data')
+    // console.log('Start fetching data')
+    // const res = await fetch('http://localapp/data.json')
+    // data = await res.json()
+    // console.log('End fetching data')
     await insertData()
   } catch (err) {
     console.error(`Error: ${err.message}`)
