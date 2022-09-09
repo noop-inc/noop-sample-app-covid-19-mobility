@@ -57,6 +57,7 @@ components:
           destination: ./
         - run: npm ci
         - copy: index.js
+        - copy: data.json
     runtime:
       command: npm start
       resources:
