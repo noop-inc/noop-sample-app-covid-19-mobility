@@ -1,5 +1,5 @@
 import AWS from 'aws-sdk'
-import data from './data.json' assert { type: `json` }
+import data from './data.json' assert { type: 'json' }
 
 const TableName = process.env.DYNAMO_TABLE
 const Endpoint = process.env.DYNAMO_ENDPOINT
@@ -54,4 +54,4 @@ const start = async () => {
   }
 }
 
-start()
+await start()
