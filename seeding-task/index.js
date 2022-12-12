@@ -27,7 +27,7 @@ const insertData = async () => {
 const fetchData = async () => {
   try {
     console.log('Start fetching data')
-    const res = await fetch('http://localapp/data.json')
+    const res = await fetch('http://localstack/data.json')
     data = await res.json()
     console.log('End fetching data')
     await insertData()
