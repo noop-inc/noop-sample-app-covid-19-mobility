@@ -2,7 +2,7 @@
 components:
   - name: APIService
     type: service
-    image: node:16-alpine
+    image: node:18-alpine
     root: api-service/
     build:
       steps:
@@ -50,7 +50,7 @@ components:
 
   - name: SeedingTask
     type: task
-    image: node:16-alpine
+    image: node:18-alpine
     root: seeding-task/
     build:
       steps:
@@ -75,7 +75,7 @@ components:
 
   - name: WebsiteStatic
     type: service
-    image: node:16-alpine
+    image: node:18-alpine
     root: website-static/
     build:
       steps:

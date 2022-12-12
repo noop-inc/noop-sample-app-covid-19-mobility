@@ -7,7 +7,7 @@ ROUTE /api/* -m GET
 
 RESOURCE AppDB dynamodb -s hashKeyName=name -s hashKeyType=S -s rangeKeyName=type -s rangeKeyType=S
 
-FROM node:16-alpine
+FROM node:18-alpine
 
 WORKDIR api-service
 COPY package*.json ./

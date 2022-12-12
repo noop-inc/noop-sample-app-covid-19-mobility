@@ -19,17 +19,17 @@
   "homepage": "https://github.com/noop-inc/noop-sample-app-covid-19-mobility#readme",
   "dependencies": {
     "bootstrap": "^4.6.2",
-    "bootstrap-vue": "^2.22.0",
+    "bootstrap-vue": "^2.23.1",
     "chart.js": "^2.9.4",
     "chartjs-adapter-moment": "^0.1.2",
     "moment": "^2.29.4",
-    "vue": "^2.7.13",
+    "vue": "^2.7.14",
     "vue-chartjs": "^3.5.1",
     "vue-router": "^3.6.5",
     "vuex": "^3.6.2"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue2": "^2.0.0",
-    "vite": "^3.1.8"
+    "@vitejs/plugin-vue2": "^2.2.0",
+    "vite": "^3.2.5"
   }
 }
