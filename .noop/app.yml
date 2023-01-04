@@ -81,9 +81,9 @@ components:
         - run: npm run build
         - directory: dist/
 
-# lifecycles:
-#   - event: BeforeTraffic
-#     components: [SeedingTask]
+lifecycles:
+  - event: BeforeTraffic
+    components: [SeedingTask]
 
 routes:
   - pattern: '/api/**'
