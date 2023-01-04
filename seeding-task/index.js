@@ -14,8 +14,6 @@ let data
 const insertData = async () => {
   console.log('Start inserting data')
   try {
-    console.log('data:', JSON.stringify(data))
-    console.log(typeof data, Array.isArray(data), data?.[0])
     await Promise.all(data.map(async Item =>
       await documentClient.put({ Item, TableName }).promise()
     ))

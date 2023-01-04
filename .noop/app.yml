@@ -90,7 +90,7 @@ routes:
     target:
       component: APIService
   - pattern: '/data.json'
-    # internal: true
+    internal: true
     target:
       component: DataStatic
   - target:
