@@ -19,9 +19,9 @@ components:
       variables:
         NODE_ENV: production
         DYNAMO_TABLE:
-          $env: resources.AppDB.tableName
+          $resources: AppDB.tableName
         DYNAMO_ENDPOINT:
-          $env: resources.AppDB.endpoint
+          $resources: AppDB.endpoint
 
   - name: DataStatic
     type: static
@@ -54,9 +54,9 @@ components:
       variables:
         NODE_ENV: production
         DYNAMO_TABLE:
-          $env: resources.AppDB.tableName
+          $resources: AppDB.tableName
         DYNAMO_ENDPOINT:
-          $env: resources.AppDB.endpoint
+          $resources: AppDB.endpoint
 
   - name: WebsiteStatic
     type: static
@@ -86,6 +86,7 @@ routes:
     target:
       component: APIService
   - pattern: '/data.json'
+    internal: true
     target:
       component: DataStatic
   - target:
