@@ -18,6 +18,8 @@ components:
         - AppDB
       variables:
         NODE_ENV: production
+        AWS_REGION:
+          $env: region
         DYNAMO_TABLE:
           $resources: AppDB.tableName
         DYNAMO_ENDPOINT:
@@ -53,6 +55,8 @@ components:
         - AppDB
       variables:
         NODE_ENV: production
+        AWS_REGION:
+          $env: region
         DYNAMO_TABLE:
           $resources: AppDB.tableName
         DYNAMO_ENDPOINT:
