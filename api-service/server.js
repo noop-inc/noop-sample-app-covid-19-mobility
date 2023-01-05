@@ -4,7 +4,15 @@ const morgan = require('morgan')
 const api = require('./routes/api.js')
 
 app.use(express.json())
-app.use(morgan('tiny'))
+app.use(morgan((tokens, req, res) =>
+  JSON.stringify({
+    method: tokens.method(req, res),
+    url: tokens.url(req, res),
+    status: tokens.status(req, res),
+    'content-length': tokens.res(req, res, 'content-length'),
+    'response-time': `${tokens['response-time'](req, res)} ms`
+  })
+))
 
 app.use('/api', api)
 

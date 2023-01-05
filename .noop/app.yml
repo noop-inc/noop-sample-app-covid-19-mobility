@@ -18,13 +18,15 @@ components:
         - AppDB
       variables:
         NODE_ENV: production
+        AWS_REGION:
+          $env: region
         DYNAMO_TABLE:
-          $env: resources.AppDB.tableName
+          $resources: AppDB.tableName
         DYNAMO_ENDPOINT:
-          $env: resources.AppDB.endpoint
+          $resources: AppDB.endpoint
 
   - name: DataStatic
-    type: service
+    type: static
     image: python:3-alpine
     root: data-static/
     build:
@@ -34,17 +36,7 @@ components:
         - copy: datasets/*.csv.gz
           destination: datasets/
         - run: python index.py
-        - image: nginx:1-alpine
-          stage: nginx
-        - copy: data-static/dist/data.json
-          destination: /usr/share/nginx/html/
-          from: main
-        - copy: nginx.conf
-          destination: /etc/nginx
-    runtime:
-      command: 'nginx -g "daemon off;"'
-      variables:
-        NGINX_ENTRYPOINT_QUIET_LOGS: '1'
+        - directory: dist/
 
   - name: SeedingTask
     type: task
@@ -63,15 +55,19 @@ components:
         - AppDB
       variables:
         NODE_ENV: production
+        AWS_REGION:
+          $env: region
         DYNAMO_TABLE:
-          $env: resources.AppDB.tableName
+          $resources: AppDB.tableName
         DYNAMO_ENDPOINT:
-          $env: resources.AppDB.endpoint
+          $resources: AppDB.endpoint
 
   - name: WebsiteStatic
-    type: service
+    type: static
     image: node:18-alpine
     root: website-static/
+    hosting:
+      spa: true
     build:
       steps:
         - directory: /website-static
@@ -83,17 +79,7 @@ components:
         - copy: public/
         - copy: src/
         - run: npm run build
-        - image: nginx:1-alpine
-          stage: nginx
-        - copy: website-static/dist
-          destination: /usr/share/nginx/html/
-          from: main
-        - copy: nginx.conf
-          destination: /etc/nginx
-    runtime:
-      command: 'nginx -g "daemon off;"'
-      variables:
-        NGINX_ENTRYPOINT_QUIET_LOGS: '1'
+        - directory: dist/
 
 lifecycles:
   - event: BeforeTraffic
@@ -104,10 +90,10 @@ routes:
     target:
       component: APIService
   - pattern: '/data.json'
+    internal: true
     target:
       component: DataStatic
-  - pattern: '/**'
-    target:
+  - target:
       component: WebsiteStatic
 
 resources:
